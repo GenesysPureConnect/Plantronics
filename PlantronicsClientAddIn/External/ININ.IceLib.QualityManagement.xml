@@ -1,0 +1,1290 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ININ.IceLib.QualityManagement</name>
+    </assembly>
+    <members>
+        <member name="T:ININ.IceLib.QualityManagement.ArchivePath">
+            <summary>
+            Archive path info for existing archive paths.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.ArchivePath.#ctor(System.String,System.String,System.String,System.Int64)">
+            <summary>
+            Initialize a new instance of ArchivePath.
+            </summary>
+            <param name="policyName">Policy name related to these values.</param>
+            <param name="volumePrefix">Prefix of the volume folder names</param>
+            <param name="archivePath">Uri of this archive base path.</param>
+            <param name="maxSize">Maximum size of data archived in each volume.</param>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.ArchivePath.PolicyName">
+            <summary>
+            Policy name.
+            </summary>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.ArchivePath.VolumePrefix">
+            <summary>
+            Prefix of the volume folder names.
+            </summary>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.ArchivePath.ArchPath">
+            <summary>
+            Uri of this archive base path.
+            </summary>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.ArchivePath.MaxSize">
+            <summary>
+            Maximum size of data archived in each volume.
+            </summary>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.GetExportUriCompletedEventArgs">
+            <summary>
+            Class to encapsulate the recording export URI returned from Recorder server.
+            </summary>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.GetExportUriCompletedEventArgs.#ctor(System.Uri,System.Exception,System.Boolean,System.Object)">
+            <summary>
+            Creates an instance of <see cref="T:ININ.IceLib.QualityManagement.GetExportUriCompletedEventArgs"/>.
+            </summary>
+            <param name="uri">The requested URI.</param>
+            <param name="error">The error, if one occurred.</param>
+            <param name="cancelled">If set to <see langword="true"/> the operation was cancelled.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>   
+            <doctask/>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.GetExportUriCompletedEventArgs.Uri">
+            <summary>
+            Gets the URI of a recording exported from the IC system.
+            </summary>
+            <value>The URI.</value>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.GetPlaybackUriCompletedEventArgs">
+            <summary>
+            Provides data for asynchronous completed events of <see cref="M:ININ.IceLib.QualityManagement.RecordingsManager.GetPlaybackUriAsync(System.String,ININ.IceLib.QualityManagement.RecordingMediaType,System.String,System.Int32,System.Boolean,System.EventHandler{ININ.IceLib.QualityManagement.GetPlaybackUriCompletedEventArgs},System.Object)"/> and
+            <see cref="M:ININ.IceLib.QualityManagement.RecordingsManager.GetExportUriAsync(System.String,ININ.IceLib.QualityManagement.RecordingMediaType,System.String,System.Int32,System.EventHandler{ININ.IceLib.QualityManagement.GetExportUriCompletedEventArgs},System.Object)"/>.
+            </summary>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.GetPlaybackUriCompletedEventArgs.#ctor(ININ.IceLib.QualityManagement.RecordingUriData,System.Exception,System.Boolean,System.Object)">
+            <summary>
+            Creates an instance of <see cref="T:ININ.IceLib.QualityManagement.GetPlaybackUriCompletedEventArgs"/>.
+            </summary>
+            <param name="uriData">The requested URI and key buffer.</param>
+            <param name="error">The error, if one occurred.</param>
+            <param name="cancelled">If set to <see langword="true"/> the operation was cancelled.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+            <doctask/>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.GetPlaybackUriCompletedEventArgs.UriData">
+            <summary>
+            Gets the requested recording URI data.
+            </summary>
+            <value>The recording URI data.</value>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.Localization.LoadString(ININ.IceLib.Connection.Session,System.String)">
+            <summary>
+            Loads a string resource, localized according to the cultureInfo associated with <paramref name="session"/>.
+            </summary>
+            <param name="session">The session for which to load the resource.</param>
+            <param name="resourceId">The resource ID.</param>
+            <returns>The localized string resource.</returns>
+            <seealso cref="T:ININ.IceLib.Connection.Session"/>
+            <seealso cref="P:ININ.IceLib.Connection.SessionSettings.IsoLanguage"/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.Localization.LoadString(System.Globalization.CultureInfo,System.String)">
+            <summary>
+            Loads a string resource, localized according to <paramref name="cultureInfo"/>.
+            </summary>
+            <param name="cultureInfo">The culture info.</param>
+            <param name="resourceId">The resource ID.</param>
+            <returns>The localized string resource.</returns>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.Localization.LoadStringWithThreadCulture(System.String)">
+            <summary>
+            Don't use this if LoadString can be used instead!
+            </summary>
+            <param name="resourceId">The resource ID.</param>
+            <returns>The localized string resource.</returns>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.NamespaceDoc">
+            <summary>
+            <para>The <b>ININ.IceLib.QualityManagement</b> namespace contains classes for implementing
+            quality management related features using the IceLib API and Interaction Center.</para>
+            </summary>
+            <icversion>3.0 SU 8</icversion>
+            <doccompleted/>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.QualityManagementManager">
+            <summary>
+            Provides access to Quality Management functionality, such as recordings and surveys.
+            </summary>
+            <br/>
+            <example>
+            All "manager" classes found in the IceLib library are designed as
+            singletons. To begin working with any of the functionality provided in
+            the <see cref="T:ININ.IceLib.QualityManagement.QualityManagementManager"/> you must obtain the instance
+            through a call to <see cref="M:ININ.IceLib.QualityManagement.QualityManagementManager.GetInstance(ININ.IceLib.Connection.Session)"/>.<br/><br/>
+            <code lang="C#">
+            Session session = new Session();
+            session.Connect(...);
+            QualityManagementManager qualityManagementManager = QualityManagementManager.GetInstance(session);
+            </code>
+            </example>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.QualityManagementManager.GetInstance(ININ.IceLib.Connection.Session)">
+            <summary>
+            Gets the <see cref="T:ININ.IceLib.QualityManagement.QualityManagementManager"/> for the specified session.
+            </summary>
+            <param name="session">The Session with which it is associated.</param>
+            <returns>The <see cref="T:ININ.IceLib.QualityManagement.QualityManagementManager"/> for the specified session.</returns>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.QualityManagementManager.Session">
+            <summary>
+            Gets the Session with which this <see cref="T:ININ.IceLib.QualityManagement.QualityManagementManager"/> is associated.
+            </summary>
+            <value>The Session.</value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.QualityManagementManager.RecordingsManager">
+            <summary>
+            Gets a reference to the Recordings Manager, which performs operations related to the Recorder subsystem.
+            </summary>
+            <value>The recordings manager.</value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.QualityManagementManager.SurveysManager">
+            <summary>
+            Gets a reference to the Surveys Manager, which performs operations related to the Feedback subsystem.
+            </summary>
+            <value>The surveys manager.</value>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType">
+            <summary>
+            Represents the recorder database notification type.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.None">
+            <summary>
+            No notification type.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.RecordingChanged">
+            <summary>
+            Recording Changed.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.CategoryChanged">
+            <summary>
+            Category Changed.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.ArchiveChanged">
+            <summary>
+            Archive Changed.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.ImportRuleChanged">
+            <summary>
+            Import Rule Changed.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.QuestionnaireGroupChanged">
+            <summary>
+            Questionnaire Group Changed.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.QuestionnaireChanged">
+            <summary>
+            Questionnaire Changed.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.QuestionnaireDirectoryChanged">
+            <summary>
+            Questionnaire Directory Changed.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.QuestionChanged">
+            <summary>
+            Question Changed.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.QuestionnaireFormChanged">
+            <summary>
+            Questionnaire Form Changed.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.AnswerChanged">
+            <summary>
+            Answer Changed.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.CategoryDeleted">
+            <summary>
+            Category Deleted.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.ArchiveDeleted">
+            <summary>
+            Archive Deleted.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.QuestionnaireGroupDeleted">
+            <summary>
+            Questionnaire Group Deleted.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.QuestionnaireDeleted">
+            <summary>
+            Questionnaire Deleted.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.QuestionnaireDirectoryDeleted">
+            <summary>
+            Questionnaire Directory Deleted.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.QuestionDeleted">
+            <summary>
+            Question Deleted.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.QuestionnaireFormDeleted">
+            <summary>
+            Questionnaire Form Deleted.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.AnswerDeleted">
+            <summary>
+            Answer Deleted.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.NewRecording">
+            <summary>
+            New Recording.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.RecordingDeleted">
+            <summary>
+            Recording Deleted.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.TagChanged">
+            <summary>
+            Tag Changed.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.TagDeleted">
+            <summary>
+            Tag Deleted.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.CustomAttributeChanged">
+            <summary>
+            Custom Attribute Changed.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.CustomAttributeDeleted">
+            <summary>
+            Custom Attribute Deleted.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.ArchiveCompleted">
+            <summary> 
+            Archive Completed.
+            </summary> 
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.RecordingTagAdded">
+            <summary> 
+            Tag added to a recording.
+            </summary> 
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.RecordingTagDeleted">
+            <summary> 
+            Tag deleted from a recording.
+            </summary> 
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.RecordingCustomAttributeChanged">
+            <summary> 
+            Recording Custom Attribute Added/Changed.
+            </summary> 
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.RecordingCustomAttributeDeleted">
+            <summary> 
+            Recording Custom Attribute Deleted.
+            </summary> 
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType.RecordingAccessControlChanged">
+            <summary>
+            Recording Access Control Changed.
+            </summary>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.RecorderDatabaseUpdateEventArgs">
+            <summary>
+            Data for the <see cref="E:ININ.IceLib.QualityManagement.RecordingsManager.HandleRecorderDatabaseUpdate"/> event.
+            </summary>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderDatabaseUpdateEventArgs.#ctor(ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType,System.Int32,System.String,System.String,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Creates an instance of <see cref="T:ININ.IceLib.QualityManagement.RecorderDatabaseUpdateEventArgs"/> class.
+            </summary>
+            <param name="notificationClass">The <see cref="T:ININ.IceLib.QualityManagement.RecorderDatabaseNotificationType"/> of this change.</param>
+            <param name="objectId">The object ID of the Recorder server database change.</param>
+            <param name="recordingId">The recording ID affected by this database update.</param>
+            <param name="qnId">The questionnaire-related ID affected by this database update.</param>
+            <param name="tagAttrName">The tag or custom attribute name (if applicable, use null if not).</param>
+            <param name="attrValue">The custom attribute value (if applicable, use null if not).</param>
+            <param name="version">The version of the recording or object related to the update.</param>
+            <param name="callerICUid">The IC User Id of the entity that caused this update.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+            <doctask/>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RecorderDatabaseUpdateEventArgs.RecordingId">
+            <summary>
+            Gets the recording ID associated with this database update.
+            </summary>
+            <value>The recording ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RecorderDatabaseUpdateEventArgs.NotificationClass">
+            <summary>
+            Gets the notification class of the Recorder server database change.
+            </summary>
+            <value>The notification class.</value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RecorderDatabaseUpdateEventArgs.ObjectId">
+            <summary>
+            Gets the object ID of the Recorder server database change.
+            </summary>
+            <value>The object ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RecorderDatabaseUpdateEventArgs.QnId">
+            <summary>
+            Gets the questionnaire-related ID associated with this database update.
+            </summary>
+            <value>The questionnaire-related ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RecorderDatabaseUpdateEventArgs.TagAttrName">
+            <summary>
+            Gets the tag or custom attribute name related to the Recorder server database change.
+            </summary>
+            <value>The tag or custom attribute name.</value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RecorderDatabaseUpdateEventArgs.AttrValue">
+            <summary>
+            Gets the custom attribute value related to the Recorder server database change.
+            </summary>
+            <value>The custom attribute value.</value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RecorderDatabaseUpdateEventArgs.Version">
+            <summary>
+            Gets the version of the object in the Recorder server database change.
+            </summary>
+            <value>The version.</value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RecorderDatabaseUpdateEventArgs.CallerICUid">
+            <summary>
+            Gets the IC User Id of the entity that caused the update.
+            </summary>
+            <value>The caller IC User Id.</value>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.RecorderPolicy">
+            <summary>
+            This class serves as the main interface for accessing and setting recorder policies.
+            </summary>
+            <remarks>
+            A RecorderPolicy object can be used to retrieve a dictionary of all recorder policies,
+            set policies, and to be notified when a recorder policy has changed.  To retrieve a
+            dictionary of recorder policies, call <see cref="M:ININ.IceLib.QualityManagement.RecorderPolicy.GetRecorderPolicies"/>.  To register
+            for notification of changes to recorder policies add an event handler to
+            <see cref="E:ININ.IceLib.QualityManagement.RecorderPolicy.RecorderPolicyChanged"/> and then call <see cref="M:ININ.IceLib.QualityManagement.RecorderPolicy.StartWatching"/>.  To
+            set recorder policies call <see cref="M:ININ.IceLib.QualityManagement.RecorderPolicy.SetRecorderPolicies(System.Collections.Generic.IDictionary{System.String,System.String})"/>.
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicy.#ctor(ININ.IceLib.QualityManagement.QualityManagementManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.QualityManagement.RecorderPolicy"/> class.
+            </summary>
+            <param name="qualityManagementManager">The quality management manager.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicy.StartWatching">
+            <summary>
+            Starts watching for recorder policy changes.
+            </summary>
+            <remarks>
+            <note>All event handlers should be added before calling
+            <see cref="M:ININ.IceLib.QualityManagement.RecorderPolicy.StartWatching"/> or <see cref="M:ININ.IceLib.QualityManagement.RecorderPolicy.StartWatchingAsync(System.ComponentModel.AsyncCompletedEventHandler,System.Object)"/>.</note>
+            <ininHowWatchesWork/>
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">The object is already being watched.</exception>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicy.StartWatchingAsync(System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously starts watching for recorder policy changes.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks>
+            <ininAsyncMethodNote/>
+            <note>All event handlers should be added before calling
+            <see cref="M:ININ.IceLib.QualityManagement.RecorderPolicy.StartWatching"/> or <see cref="M:ININ.IceLib.QualityManagement.RecorderPolicy.StartWatchingAsync(System.ComponentModel.AsyncCompletedEventHandler,System.Object)"/>.</note>
+            <ininHowWatchesWork/>
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicy.IsWatching">
+            <summary>
+            Determines whether a recorder policy watch is active.
+            </summary>
+            <returns>
+            	<see langword="true"/> if a recorder policy watch is active; otherwise, <see langword="false"/>.
+            </returns>
+            <remarks>
+            This method determines whether a recorder policy watch is in place.
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicy.StopWatching">
+            <summary>
+            Stops watching for recorder policy changes.
+            </summary>
+            <remarks>
+            <ininHowWatchesWork/>
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">The object is not being watched.</exception>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicy.StopWatchingAsync(System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously stops watching for recorder policy changes.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam /></param>
+            <remarks>
+            <ininAsyncMethodNote />
+            <ininHowWatchesWork />
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicy.GetRecorderPolicies">
+            <summary>
+            Retrieves a read only dictionary of all recorder policies.
+            </summary>
+            <returns>A read only dictionary of all recorder policies.</returns>
+            <remarks>
+            This dictionary that this function returns is read only.  It 
+            will silently fail upon editing.
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicy.SetRecorderPoliciesImpl(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Implementation of SetRecorderPolicies.
+            </summary>
+            <param name="recorderPolicies">The recorder policies to set.</param>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicy.SetRecorderPolicies(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Based on the given values, sets the recorder policies.
+            </summary>
+            <param name="recorderPolicies">The recorder policies to set.</param>
+            <remarks>
+            <ininHowWatchesWork/>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">The parameter array is empty.</exception>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicy.SetRecorderPoliciesAsync(System.Collections.Generic.IDictionary{System.String,System.String},System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously sets recorder policies to the given values.
+            </summary>
+            <param name="recorderPolicies">The recorder policies to set.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">The parameter array is empty.</exception>
+            <remarks>
+            <ininAsyncMethodNote/>
+            <ininHowWatchesWork/>
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicy.SetRecorderPoliciesAsyncPerformTask(ININ.IceLib.QualityManagement.RecorderPolicy.AsyncRecorderPolicyState)">
+            <summary>
+            This callback performs the actual async operation (called on an arbitrary worker thread).
+            </summary>
+            <param name="asyncState">State of the async.</param>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicy.SetRecorderPoliciesAsyncCompleted(ININ.IceLib.QualityManagement.RecorderPolicy.AsyncRecorderPolicyState)">
+            <summary>
+            This callback performs the actual async completion (called on the UI thread).
+            </summary>
+            <param name="asyncState">State of the async.</param>
+        </member>
+        <member name="E:ININ.IceLib.QualityManagement.RecorderPolicy.RecorderPolicyChanged">
+            <summary>
+            Occurs when a recorder policy is changed.
+            </summary>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.RecorderPolicyCache">
+            <summary>
+            Handles caching recorder policy watcher connections.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicyCache.#ctor(ININ.IceLib.Connection.Session)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.QualityManagement.RecorderPolicyCache"/> class.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicyCache.StartWatching(ININ.IceLib.QualityManagement.RecorderPolicy)">
+            <summary>
+            Adds a <see cref="T:ININ.IceLib.QualityManagement.RecorderPolicy"/> to the watch list.
+            </summary>
+            <param name="recorderPolicy">The recorder policy that is watching.</param>
+            <exception cref="T:System.InvalidOperationException"><c>InvalidOperationException</c>.</exception>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicyCache.IsWatching(ININ.IceLib.QualityManagement.RecorderPolicy)">
+            <summary>
+            Determines whether a recorder policy watch is active.
+            </summary>
+            <param name="recorderPolicy">The recorder policy that is watching.</param>
+            <returns>
+            	<see langword="true"/> if the recorder policy watch is active; otherwise, <see langword="false"/>.
+            </returns>
+            <remarks>
+            This method determines whether a recorder policy watch is in place.
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicyCache.StopWatching(ININ.IceLib.QualityManagement.RecorderPolicy)">
+            <summary>
+            Removes a recorder policy from the watch list.
+            </summary>
+            <param name="recorderPolicy">The recorder policy to remove from watchers.</param>
+            <exception cref="T:System.InvalidOperationException"><c>InvalidOperationException</c>.</exception>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicyCache.SetRecorderPolicies(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Sets the recorder policies to the values given.
+            </summary>
+            <param name="recorderPolicies">List of recorder policies to set.</param>
+            <exception cref="T:System.InvalidOperationException"><c>InvalidOperationException</c>.</exception>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicyCache.HandleRecorderPolicyChanged(ININ.ThinBridge.Message)">
+            <summary>
+            Handles a change to a recorder policy.
+            </summary>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RecorderPolicyCache.Session">
+            <summary>
+            Session this object belongs to.
+            </summary>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.RecorderPolicyEventArgs">
+            <summary>
+            Provides data for the recorder policy events of <see cref="T:ININ.IceLib.QualityManagement.RecorderPolicy"/>.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecorderPolicyEventArgs.#ctor(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.QualityManagement.RecorderPolicyEventArgs"/> class.
+            </summary>
+            <param name="recorderPolicies">The recorder policies.</param>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RecorderPolicyEventArgs.RecorderPolicies">
+            <summary>
+            Gets or sets the recorder policies.
+            </summary>
+            <value>The recorder policies.</value>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.RecordingMediaType">
+            <summary>
+            Enumeration of recording media types.
+            </summary>
+            <remarks>
+            Values dictated by IR Server.
+            </remarks>
+            <doctask/>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecordingMediaType.None">
+            <summary>
+            No media type.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecordingMediaType.PrimaryMedia">
+            <summary>
+            Primary Media.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecordingMediaType.ScreenRecording">
+            <summary>
+            Screen Recording.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.QualityManagement.RecordingMediaType.EmailAttachment">
+            <summary>
+            E-mail Attachment.
+            </summary>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.RecordingsManager">
+            <summary>
+            Provides methods for accessing and managing IC recordings.
+            </summary>
+            <remarks>Use <see cref="P:ININ.IceLib.QualityManagement.QualityManagementManager.RecordingsManager"/> to get an instance of the <c>RecordingsManager</c> for a <see cref="T:ININ.IceLib.Connection.Session"/>.</remarks>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.RegisterUserAsync(System.EventHandler{ININ.IceLib.QualityManagement.RegisterUserCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously registers the current session user with the Recorder server. This must be called before issuing requests to Recorder server.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <remarks>
+            <para>When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs</see> - derived object passed to the delegate will contain any exceptions thrown while executing the asynchronous task.  See the synchronous version of this method for more detailed error information.</para>
+            </remarks>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.RegisterUser">
+            <summary>
+            Registers the current session user with the Recorder server.This must be called before issuing requests to Recorder server.
+            </summary>
+            <remarks>A <see cref="T:ININ.IceLib.QualityManagement.RegisterUserData"/> object with data returned from Recorder server.</remarks>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.DeregisterUser">
+            <summary>
+            Deregisters a user from Recorder server.
+            </summary>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.DeregisterUserAsync(System.EventHandler{System.ComponentModel.AsyncCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously deregisters a user from Recorder server.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <remarks>
+            <para>When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs</see> - derived object passed to the delegate will contain any exceptions thrown while executing the asynchronous task.  See the synchronous version of this method for more detailed error information.</para>
+            </remarks>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.encrypt_password(System.Byte[],System.Int32,System.String,System.Byte[],System.Int32@)">
+            <summary>
+            Encrypt a master key password with the given password exchange key.
+            </summary>
+            <param name="key">The password exchange key.</param>
+            <param name="keyLength">The password exchange key length.</param>
+            <param name="password">The password to encrypt.</param>
+            <param name="encryptedPasswordBuffer">A buffer to encrypt the password into. Must be at least 4k in size.</param>
+            <param name="encryptedPasswordBufferLength">Pass in the length of the buffer, and then returns the actual length of the encrypted password.</param>
+            <returns>TRUE if the password was encrypted. FALSE means the buffer was not big enough or the password was too long.</returns>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.GetPlaybackUriAsync(System.String,ININ.IceLib.QualityManagement.RecordingMediaType,System.String,System.Int32,System.Boolean,System.EventHandler{ININ.IceLib.QualityManagement.GetPlaybackUriCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously gets the playback URI for a recording.
+            </summary>
+            <param name="recordingId">The recording ID.</param>
+            <param name="mediaType">The media type of the recording.</param>
+            <param name="screenRecordingParticipantId">The name of the screen recording participant.</param>
+            <param name="attachmentId">The ID of the recording attachment.</param>
+            <param name="allowFileAccessForAttributes">bool that tells the server to access the file to get the required attributes</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <remarks>
+            <para>When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs</see> - derived object passed to the delegate will contain any exceptions thrown while executing the asynchronous task.  See the synchronous version of this method for more detailed error information.</para>
+            </remarks>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.GetPlaybackUriAsync(System.String,ININ.IceLib.QualityManagement.RecordingMediaType,System.String,System.Int32,System.EventHandler{ININ.IceLib.QualityManagement.GetPlaybackUriCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously gets the playback URI for a recording.
+            </summary>
+            <param name="recordingId">The recording ID.</param>
+            <param name="mediaType">The media type of the recording.</param>
+            <param name="screenRecordingParticipantId">The name of the screen recording participant.</param>
+            <param name="attachmentId">The ID of the recording attachment.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <remarks>
+            <para>When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs</see> - derived object passed to the delegate will contain any exceptions thrown while executing the asynchronous task.  See the synchronous version of this method for more detailed error information.</para>
+            </remarks>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.GetPlaybackUri(System.String,ININ.IceLib.QualityManagement.RecordingMediaType,System.String,System.Int32)">
+            <summary>
+            Gets the playback URI for a recording.
+            </summary>
+            <param name="recordingId">The recording ID.</param>
+            <param name="mediaType">The media type of the requested recording.</param>
+            <param name="screenRecordingParticipantId">The name of the screen recording participant.</param>
+            <param name="attachmentId">The ID of the recording attachment.</param>
+            <returns>A <see cref="T:ININ.IceLib.QualityManagement.RecordingUriData"/> object that can be used to access the recording for playback purposes.</returns>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.GetPlaybackUri(System.String,ININ.IceLib.QualityManagement.RecordingMediaType,System.String,System.Int32,System.Boolean)">
+            <summary>
+            Gets the playback URI for a recording.
+            </summary>
+            <param name="recordingId">The recording ID.</param>
+            <param name="mediaType">The media type of the requested recording.</param>
+            <param name="screenRecordingParticipantId">The name of the screen recording participant.</param>
+            <param name="attachmentId">The ID of the recording attachment.</param>
+            <param name="allowFileAccessForAttributes">Allow the server to access the file to get the requried attributes.</param>
+            <returns>A <see cref="T:ININ.IceLib.QualityManagement.RecordingUriData"/> object that can be used to access the recording for playback purposes.</returns>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.GetExportUri(System.String,ININ.IceLib.QualityManagement.RecordingMediaType,System.String,System.Int32)">
+            <summary>
+            Gets the export URI for a recording.
+            </summary>
+            <param name="recordingId">The recording ID.</param>
+            <param name="mediaType">The recording media type.</param>
+            <param name="screenRecordingParticipantId">The name of the screen recording participant.</param>
+            <param name="attachmentId">The ID of the recording attachment, ranging from 0...n.</param>
+            <returns>A <see cref="T:System.Uri"/> object that can be used to access the recording when exporting it from the IC system.</returns>
+            <remarks>
+            <note>
+                <paramref name="attachmentId"/> is only used when <paramref name="mediaType"/> is set to <see cref="F:ININ.IceLib.QualityManagement.RecordingMediaType.EmailAttachment"/>.
+            </note>
+            </remarks>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.GetExportUriAsync(System.String,ININ.IceLib.QualityManagement.RecordingMediaType,System.String,System.Int32,System.EventHandler{ININ.IceLib.QualityManagement.GetExportUriCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously gets the export URI for a recording.
+            </summary>
+            <param name="recordingId">The recording ID.</param>
+            <param name="mediaType">The recording media type.</param>
+            <param name="screenRecordingParticipantId">The name of the screen recording participant.</param>
+            <param name="attachmentId">The ID of the recording attachment.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <remarks>
+            <para>When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs</see> - derived object passed to the delegate will contain any exceptions thrown while executing the asynchronous task.  See the synchronous version of this method for more detailed error information.</para>
+            </remarks>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.StartWatch">
+            <summary>
+            Issues a request to start watching for Recorder database changes.
+            </summary>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.StartWatchAsync(System.EventHandler{System.ComponentModel.AsyncCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously issues a request to start watching for Recorder database changes.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <remarks>
+            <para>When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs-derived object</see> passed to the delegate will contain any exceptions thrown while executing the asynchronous task.  See the synchronous version of this method for more detailed error information.</para>
+            </remarks>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.StopWatch">
+            <summary>
+            Issues a request to stop watching for Recorder database changes.
+            </summary>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.StopWatchAsync(System.EventHandler{System.ComponentModel.AsyncCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously issues a request to stop watching for Recorder database changes.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <remarks>
+            <para>When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs-derived object</see> passed to the delegate will contain any exceptions thrown while executing the asynchronous task.  See the synchronous version of this method for more detailed error information.</para>
+            </remarks>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.SendRecordingsEmailAsync(System.Collections.Generic.IEnumerable{ININ.IceLib.Interactions.EmailAddress},System.Collections.Generic.IEnumerable{ININ.IceLib.Interactions.EmailAddress},System.String,System.String,System.Collections.Generic.IEnumerable{System.String},ININ.IceLib.Interactions.EmailPriority,System.EventHandler{System.ComponentModel.AsyncCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously sends an email containing a list of recording IDs to Recorder server.
+            </summary>
+            <param name="toRecipients">The recipients in the "To:" address of the e-mail.</param>
+            <param name="ccRecipients">The recipients in the "Cc:" address of the e-mail.(Or <see langword="null"/> for none.)</param>
+            <param name="subject">The e-mail subject.</param>
+            <param name="bodyText">The e-mail body text.</param>
+            <param name="recordingIds">This list of recording Ids attached to the e-mail.</param>
+            <param name="importance">The importance of the e-mail.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <remarks>
+            <para>When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs</see> - derived object passed to the delegate will contain any exceptions thrown while executing the asynchronous task.  See the synchronous version of this method for more detailed error information.</para>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+            <exception cref="T:System.ArgumentException">If <paramref name="toRecipients"/> or <paramref name="recordingIds"/> is empty.</exception>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.SendRecordingsEmail(System.Collections.Generic.IEnumerable{ININ.IceLib.Interactions.EmailAddress},System.Collections.Generic.IEnumerable{ININ.IceLib.Interactions.EmailAddress},System.String,System.String,System.Collections.Generic.IEnumerable{System.String},ININ.IceLib.Interactions.EmailPriority)">
+            <summary>
+            Sends an email containing a list of recording Ids to Recorder server.
+            </summary>
+            <param name="toRecipients">The recipients in the "To:" address of the e-mail. (Note: There must be at least one recipient.)</param>
+            <param name="ccRecipients">The recipients in the "Cc:" address of the e-mail.(Or <see langword="null"/> for none.)</param>
+            <param name="subject">The e-mail subject.</param>
+            <param name="bodyText">The e-mail body text.</param>
+            <param name="recordingIds">This list of recording Ids attached to the e-mail.</param>
+            <param name="importance">The importance of the e-mail.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+            <exception cref="T:System.ArgumentException">If <paramref name="toRecipients"/> or <paramref name="recordingIds"/> is empty.</exception>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.ArchiveRecording(System.Guid,System.Int32,System.String,System.String,ININ.IceLib.Interactions.InteractionId,System.DateTime,System.Int32,System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.Collections.Generic.List{System.String},System.Int32,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String[]},System.Uri,System.Int64)">
+            <summary>
+            Archives the recording.
+            </summary>
+            <param name="recordingId">Recording ID to archive.</param>
+            <param name="mediaType">Media type.</param>
+            <param name="mediaUri">URI of the recording.</param>
+            <param name="mediaKey">Encryption Key of the recording.</param>
+            <param name="callId">Interaction ID.</param>
+            <param name="dateTime">Date time of the recording.</param>
+            <param name="attachmentId">Number of attachments.</param>
+            <param name="size">Size of the recording.</param>
+            <param name="duration">Duration of the recording.</param>
+            <param name="ani">ANI of the recording.</param>
+            <param name="dnis">DNIS of the recording.</param>
+            <param name="localParticipant">Local participant of the recording.</param>
+            <param name="localGroup">Local group of the recording.</param>
+            <param name="participants">All participants of the recording.</param>
+            <param name="direction">Direction of the interaction.</param>
+            <param name="tags">All tags of the recording.</param>
+            <param name="customAttributes">All custom attributes of the recording.</param>
+            <param name="archiveDirNVolPrefix">URI of the archiving folder, appended with the optional volume prefix.</param>
+            <param name="maxSize">Maximum size of each volume where to archive.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a <see langword="null"/> reference (<see langword="Nothing"/> in Visual Basic).</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="recordingIds"/> is empty.</exception>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.GetArchivePaths">
+            <summary>
+            Get Archive Paths.
+            </summary>
+            <exception cref="T:System.ArgumentNullException">A parameter is a <see langword="null"/> reference (<see langword="Nothing"/> in Visual Basic).</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="recordingIds"/> is empty.</exception>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.EncryptS3Key(System.String)">
+            <summary>
+            Encrypt Amazon S3 SecretKey.
+            </summary>
+            <param name="secretKey">Secret key to encrypt.</param>
+            <returns>Encrypted secret key.</returns>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.TestS3BucketsAccess(System.String,System.String,System.String)">
+            <summary>
+            Test Amazon S3 Bucket/AccountId/SecretKey combination access.
+            </summary>
+            <param name="bucket">Bucket to access.</param>
+            <param name="accountId">Account ID to use.</param>
+            <param name="secretKey">Secret key to use.</param>
+            <returns>Successful access level. 0 = no access allowed. 1 = able to read but not write. 2 = able to read/write but not to delete. 3 = able to do all.</returns>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.SetS3BucketsConfig(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Set Amazon S3 buckets to configuration.
+            </summary>
+            <param name="buckets">Bucket|AccountID|EncryptedSecretKey list.</param>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.GetS3BucketsConfig">
+            <summary>
+            Get Amazon S3 buckets from configuration.
+            </summary>
+            <returns>List of buckets.</returns>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.GetS3BucketsFromConfigString(System.String)">
+            <summary>
+            Get Amazon S3 buckets from configuration string.
+            </summary>
+            <param name="configStr">Configuration string.</param>
+            <returns>List of buckets.</returns>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.DeleteRecordingsAsync(System.Collections.Generic.IEnumerable{System.String},System.EventHandler{System.ComponentModel.AsyncCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously deletes a list of recordings based on the given list of recording IDs.
+            </summary>
+            <param name="recordingIds">List of recording IDs to delete.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a <see langword="null"/> reference (<see langword="Nothing"/> in Visual Basic).</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="recordingIds"/> is empty.</exception>
+            <remarks>
+            <para>When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs</see> - derived object passed to the delegate will contain any exceptions thrown while executing the asynchronous task.  See the synchronous version of this method for more detailed error information.</para>
+            </remarks>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.DeleteRecordings(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Deletes a list of recordings based on the given list of recording IDs.
+            </summary>
+            <param name="recordingIds">List of recording IDs to delete.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a <see langword="null"/> reference (<see langword="Nothing"/> in Visual Basic).</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="recordingIds"/> is empty.</exception>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.StartStationAudioPlayback(System.String,System.String)">
+            <summary>
+            Starts playback of a recording to a station.
+            </summary>
+            <param name="playbackUri">Playback URI of a recording.</param>
+            <param name="station">Name of the station with the handset to play on.</param>
+            <returns>ID of the call made to the station.</returns>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.StartStationAudioPlaybackAsync(System.String,System.String,System.EventHandler{ININ.IceLib.QualityManagement.StartStationAudioPlaybackCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously starts playback of a recording to a station.
+            </summary>
+            <param name="playbackUri">Playback URI of a recording.</param>
+            <param name="station">Name of the station with the handset to play on.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <remarks>
+            <para>When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs</see> - derived object passed to the delegate will contain any exceptions thrown while executing the asynchronous task.  See the synchronous version of this method for more detailed error information.</para>
+            </remarks>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.StopStationAudioPlayback(ININ.IceLib.Interactions.InteractionId)">
+            <summary>
+            Stops playback of a recording over station audio.
+            </summary>
+            <param name="callId">ID of the station audio call interaction.</param>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingsManager.StopStationAudioPlaybackAsync(ININ.IceLib.Interactions.InteractionId,System.EventHandler{System.ComponentModel.AsyncCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously stops playback of a recording over station audio.
+            </summary>
+            <param name="callId">ID of the station audio call interaction.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <remarks>
+            <para>When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs-derived object</see> passed to the delegate will contain any exceptions thrown while executing the asynchronous task.  See the synchronous version of this method for more detailed error information.</para>
+            </remarks>
+            <doctask/>
+        </member>
+        <member name="E:ININ.IceLib.QualityManagement.RecordingsManager.HandleRecorderDatabaseUpdate">
+            <summary>
+            Event fired when there is an update on the Recorder database.
+            </summary>
+            <doctask/>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.RecordingUriData">
+            <summary>
+            Class to encapsulate the recording URI data returned from Recorder server.
+            </summary>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingUriData.#ctor(System.Uri,System.Byte[])">
+            <exclude/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RecordingUriData.#ctor(System.Uri,System.Byte[],System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.QualityManagement.RecordingUriData"/>.
+            </summary>
+            <param name="uri">The URI.</param>
+            <param name="keyBuffer">The key buffer.</param>
+            <param name="timelineXml">The timeline XML.</param>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RecordingUriData.Uri">
+            <summary>
+            Gets the recording URI.
+            </summary>
+            <value>The URI.</value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RecordingUriData.KeyBuffer">
+            <summary>
+            Gets the key buffer for accessing the recording media.
+            </summary>
+            <value>The key buffer.</value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RecordingUriData.TimelineXml">
+            <summary>
+            Gets the playback timeline XML for synchronizing audio playback.
+            </summary>
+            <value>The timeline XML.</value>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.RegisterUserCompletedEventArgs">
+            <summary>
+            Provides data for the asynchronous completed event of <see cref="M:ININ.IceLib.QualityManagement.RecordingsManager.RegisterUserAsync(System.EventHandler{ININ.IceLib.QualityManagement.RegisterUserCompletedEventArgs},System.Object)"/>.
+            </summary>
+            <doctask/>
+            <exclude/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RegisterUserCompletedEventArgs.#ctor(ININ.IceLib.QualityManagement.RegisterUserData,System.Exception,System.Boolean,System.Object)">
+            <summary>
+            Creates an instance of <see cref="T:ININ.IceLib.QualityManagement.RegisterUserCompletedEventArgs"/>.
+            </summary>
+            <param name="userData">Registration data returned from Recorder server.</param>
+            <param name="error">The error, if one occurred.</param>
+            <param name="cancelled">If set to <see langword="true"/> the operation was cancelled.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+            <doctask/>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RegisterUserCompletedEventArgs.RegisterUserData">
+            <summary>
+            Gets the data returned from Recorder server.
+            </summary>
+            <value>The register user data.</value>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.RegisterUserData">
+            <summary>
+            Class containing user registration data from Recorder server.
+            </summary>
+            <doctask/>
+            <exclude/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.RegisterUserData.#ctor(System.Int32,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Creates an instance of <see cref="T:ININ.IceLib.QualityManagement.RegisterUserData"/>.
+            </summary>
+            <param name="uniqueId">The unique ID returned from Recorder server.</param>
+            <param name="individualId">The individual ID returned from Recorder server.</param>
+            <param name="isIRAdmin">User is an Interaction Recorder administrator.</param>
+            <param name="canSearch">User can execute searches.</param>
+            <param name="canUseQuestionnaires">User can use questionnaires.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+            <doctask/>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RegisterUserData.IsIRAdmin">
+            <summary>
+            Gets a value indicating whether this user is an IR administrator.
+            </summary>
+            <value>
+            	<see langword="true"/> if this user is IR administrator; otherwise, <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RegisterUserData.CanSearch">
+            <summary>
+            Gets a value indicating whether this user can search for recordings.
+            </summary>
+            <value>
+            	<see langword="true"/> if this user can search recordings; otherwise, <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RegisterUserData.CanUseQuestionnaires">
+            <summary>
+            Gets a value indicating whether this user can use questionnaires.
+            </summary>
+            <value>
+            	<see langword="true"/> if this user can use questionnaires; otherwise, <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RegisterUserData.UniqueId">
+            <summary>
+            Gets the unique ID returned from Recorder server.
+            </summary>
+            <value>The unique ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.RegisterUserData.IndividualId">
+            <summary>
+            Gets the individual ID returned from Recorder server.
+            </summary>
+            <value>The individual ID.</value>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.ScrRecManager">
+            <summary>
+            Provides methods for managing the screen recorder client.
+            </summary>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.ScreenRecorder">
+            <summary>
+            This class provides the interface for creating screen recordings.
+            </summary>
+            <remarks>
+            A ScreenRecorder object is used to initiate and control screen
+            recording on a target user.  Recordings that run for
+            a specified length of time are initiated with <see cref="M:ININ.IceLib.QualityManagement.ScreenRecorder.StartTimedRecording(System.String,System.TimeSpan)"/>.
+            </remarks>
+            <icversion>4.0</icversion>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.ScreenRecorder.#ctor(ININ.IceLib.QualityManagement.QualityManagementManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.QualityManagement.ScreenRecorder"/> class.
+            </summary>
+            <param name="qualityManagementManager">The quality management manager.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.ScreenRecorder.StartTimedRecording(System.String,System.TimeSpan)">
+            <summary>
+            Starts a new recording that will run for a predetermined amount of time.
+            </summary>
+            <param name="userIdToRecord">The user whose screen will be recorded.</param>
+            <param name="recordingDuration">The length of time that the recording will run.
+            Note that the recording duration will be rounded up to the nearest second.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="userIdToRecord"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="userIdToRecord"/> length is zero.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">The value of <paramref name="recordingDuration"/> is negative.</exception>
+            <ConnectionExceptions/>
+            <returns>The timed recording ID.</returns>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.ScreenRecorder.StartTimedRecordingAsync(System.String,System.TimeSpan,System.EventHandler{ININ.IceLib.QualityManagement.StartTimedRecordingCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously starts a new recording that will run for a predetermined amount of time.
+            </summary>
+            <param name="userIdToRecord">The user whose screen will be recorded.</param>
+            <param name="recordingDuration">The length of time that the recording will run.
+            Note that the recording duration will be rounded up to the nearest second.
+            </param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks>
+            <ininAsyncMethodNote/>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException"><paramref name="userIdToRecord"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="userIdToRecord"/> length is zero.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">The value of <paramref name="recordingDuration"/> is negative.</exception>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.ScreenRecorder.PauseRecordings(System.String)">
+            <summary>
+            Pauses all screen recordings being made for the given user.
+            </summary>
+            <param name="userId">The user whose screen recordings will be paused.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/> or <see cref="F:System.String.Empty"/>.</exception>
+            <returns>IDs of all recordings that were paused.</returns>
+            <icversion>4.0 SU 3</icversion>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.ScreenRecorder.PauseRecordingsAsync(System.String,System.EventHandler{ININ.IceLib.QualityManagement.ScreenPauseCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously pauses all screen recordings being made for the given user.
+            </summary>
+            <param name="userId">The user whose screen recordings will be paused.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks>
+            <ininAsyncMethodNote/>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/> or <see cref="F:System.String.Empty"/>.</exception>
+            <icversion>4.0 SU 3</icversion>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.ScreenRecorder.ResumeRecordings(System.String)">
+            <summary>
+            Resumes all screen recordings being made for the given user.
+            </summary>
+            <param name="userId">The user whose screen recordings will be paused.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/> or <see cref="F:System.String.Empty"/>.</exception>
+            <returns>IDs of all recordings that were paused.</returns>
+            <icversion>4.0 SU 3</icversion>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.ScreenRecorder.ResumeRecordingsAsync(System.String,System.EventHandler{ININ.IceLib.QualityManagement.ScreenPauseCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously resumes all screen recordings being made for the given user.
+            </summary>
+            <param name="userId">The user whose screen recordings will be paused.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks>
+            <ininAsyncMethodNote/>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/> or <see cref="F:System.String.Empty"/>.</exception>
+            <icversion>4.0 SU 3</icversion>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.ScreenPauseCompletedEventArgs">
+            <summary>
+            Provides data for the <see cref="M:ININ.IceLib.QualityManagement.ScreenRecorder.PauseRecordingsAsync(System.String,System.EventHandler{ININ.IceLib.QualityManagement.ScreenPauseCompletedEventArgs},System.Object)"/><c>completedCallback</c> delegate of <see cref="T:ININ.IceLib.QualityManagement.ScreenRecorder"/>.
+            </summary>
+            <icversion>4.0 SU 3</icversion>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.ScreenPauseCompletedEventArgs.#ctor(System.Collections.Generic.IList{System.String},System.Exception,System.Boolean,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.QualityManagement.ScreenPauseCompletedEventArgs"/> class with the specified values.
+            </summary>
+            <param name="recordingIds">IDs of recordings that were paused.</param>
+            <param name="error">The error, if one occurred.</param>
+            <param name="cancelled">If set to <see langword="true"/> the operation was cancelled.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/>.</exception>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.ScreenPauseCompletedEventArgs.RecordingIds">
+            <summary>
+            Gets the IDs of recordings that were paused.
+            </summary>
+            <value>Array of recording IDs.</value>
+            <exception cref="T:System.Reflection.TargetInvocationException">The <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error">Error</see> 
+            property has been set by the asynchronous operation. The <see cref="P:System.Exception.InnerException">InnerException</see> 
+            property holds a reference to Error.</exception>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.StartTimedRecordingCompletedEventArgs">
+            <summary>
+            Provides data for the <see cref="M:ININ.IceLib.QualityManagement.ScreenRecorder.StartTimedRecordingAsync(System.String,System.TimeSpan,System.EventHandler{ININ.IceLib.QualityManagement.StartTimedRecordingCompletedEventArgs},System.Object)"/><c>completedCallback</c> delegate of <see cref="T:ININ.IceLib.QualityManagement.ScreenRecorder"/>.
+            </summary>
+            <icversion>4.0</icversion>
+            <doccompleted/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.StartTimedRecordingCompletedEventArgs.#ctor(System.String,System.Exception,System.Boolean,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.QualityManagement.StartTimedRecordingCompletedEventArgs"/> class with the specified values.
+            </summary>
+            <param name="timedRecordingId">The timed recording ID.</param>
+            <param name="error">The error, if one occurred.</param>
+            <param name="cancelled">If set to <see langword="true"/> the operation was cancelled.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/>.</exception>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.StartTimedRecordingCompletedEventArgs.TimedRecordingId">
+            <summary>
+            Gets the Timed Recording ID associated with the event.
+            </summary>
+            <value>The timed recording ID.</value>
+            <exception cref="T:System.Reflection.TargetInvocationException">The <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error">Error</see> 
+            property has been set by the asynchronous operation. The <see cref="P:System.Exception.InnerException">InnerException</see> 
+            property holds a reference to Error.</exception>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.StartStationAudioPlaybackCompletedEventArgs">
+            <summary>
+            Class to encapsulate the call ID returned from Recorder server.
+            </summary>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.StartStationAudioPlaybackCompletedEventArgs.#ctor(ININ.IceLib.Interactions.InteractionId,System.Exception,System.Boolean,System.Object)">
+            <summary>
+            Creates an instance of <see cref="T:ININ.IceLib.QualityManagement.StartStationAudioPlaybackCompletedEventArgs"/>.
+            </summary>
+            <param name="callId">The ID of the call made to the station.</param>
+            <param name="error">The error, if one occurred.</param>
+            <param name="cancelled">If set to <see langword="true"/> the operation was cancelled.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/>.</exception>   
+            <doctask/>
+        </member>
+        <member name="P:ININ.IceLib.QualityManagement.StartStationAudioPlaybackCompletedEventArgs.CallId">
+            <summary>
+            Gets the ID of the call made to the station.
+            </summary>
+            <value>The call ID.</value>
+        </member>
+        <member name="T:ININ.IceLib.QualityManagement.SurveysManager">
+            <summary>
+            Provides methods for accessing and managing IC surveys.
+            </summary>
+            <remarks>Use <see cref="P:ININ.IceLib.QualityManagement.QualityManagementManager.SurveysManager"/> to get an instance of the <c>SurveysManager</c> for a <see cref="T:ININ.IceLib.Connection.Session"/>.</remarks>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.SurveysManager.ActivateSurvey(System.String,System.Boolean)">
+            <summary>
+            Activates or deactivates a survey.
+            </summary>
+            <param name="surveyId">ID of the survey to activate.</param>
+            <param name="activate">True to activate the survey else false.</param>
+            <doctask/>
+        </member>
+        <member name="M:ININ.IceLib.QualityManagement.SurveysManager.ActivateSurveyAsync(System.String,System.Boolean,System.EventHandler{System.ComponentModel.AsyncCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously activates or deactivates a survey.
+            </summary>
+            <param name="surveyId">ID of the survey to activate.</param>
+            <param name="activate">True to activate the survey else false.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks>
+            <ininAsyncMethodNote/>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/> or <see cref="F:System.String.Empty"/>.</exception>
+        </member>
+    </members>
+</doc>

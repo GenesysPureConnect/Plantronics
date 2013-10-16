@@ -1,0 +1,2558 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ININ.IceLib.ProcessAutomation</name>
+    </assembly>
+    <members>
+        <member name="T:ININ.IceLib.ProcessAutomation.AssociatedInteraction">
+            <summary>
+            Defines an interaction that was associated to <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> by <see cref="M:ININ.IceLib.ProcessAutomation.ProcessInstance.AssociateInteraction(ININ.IceLib.Interactions.InteractionId)"/> or <see cref="M:ININ.IceLib.ProcessAutomation.ProcessInstance.AssociateInteraction(ININ.IceLib.Interactions.InteractionId,System.String)"/>.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.AssociatedInteraction.ConvertFromNotifierDateTime(System.String)">
+            <summary>
+            This method converts the string obtained from the NotifierReader into
+            a System.DateTime.
+            </summary>
+            <param name="dateTimeString">A string representation of a date/time that has been encoded in a Notifier messages.</param>
+            <returns>The System.DateTime value to which the string was converted.</returns>
+            <remarks>
+            Null, empty, whitespace or the special EmptyNotifierDateTime string will all return
+            DateTime.MinValue.  Other conversion issue will throw a FormatException.
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.AssociatedInteraction.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.AssociatedInteraction.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.AssociatedInteraction.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.UserId">
+            <summary>
+            Gets the user ID of the user that associated <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> with interaction.
+            </summary>
+            <value>The user ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.InteractionId">
+            <summary>
+            Gets the interaction ID.
+            </summary>
+            <value>The Interaction ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.TimeOfAssociation">
+            <summary>
+            Gets the date time when this entry was associated with <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.
+            </summary>
+            <value>The date time.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.InteractionType">
+            <summary>
+            Gets the type of the interaction.
+            </summary>
+            <value>The type of the interaction.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.InteractionDirection">
+            <summary>
+            Gets the interaction direction.
+            </summary>
+            <value>The interaction direction.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.CallType">
+            <summary>
+            Gets the type of the call.
+            </summary>
+            <value>The type of the call.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.LocalUserId">
+            <summary>
+            Gets the local user ID.
+            </summary>
+            <value>The local user ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.LocalNumber">
+            <summary>
+            Gets the local number.
+            </summary>
+            <value>The local number.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.LocalName">
+            <summary>
+            Gets the name of the local.
+            </summary>
+            <value>The name of the local.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.RemoteNumber">
+            <summary>
+            Gets the remote number.
+            </summary>
+            <value>The remote number.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.RemoteNumberFormat">
+            <summary>
+            Gets the remote number format.
+            </summary>
+            <value>The remote number format.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.RemoteName">
+            <summary>
+            Gets the name of the remote.
+            </summary>
+            <value>The name of the remote.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.BeginTime">
+            <summary>
+            Gets the begin time.
+            </summary>
+            <value>The begin time.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.EndTime">
+            <summary>
+            Gets the end time.
+            </summary>
+            <value>The end time.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.InteractionLog">
+            <summary>
+            Gets the interaction log.
+            </summary>
+            <value>The interaction log.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AssociatedInteraction.Notes">
+            <summary>
+            Gets the notes.
+            </summary>
+            <value>The notes.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.AsyncGetLaunchableProcessesCompletedEventArgs">
+            <summary> 
+            Provides data for the asynchronous completed events of <see cref="M:ININ.IceLib.ProcessAutomation.ProcessManager.GetLaunchableProcessesAsync(System.EventHandler{ININ.IceLib.ProcessAutomation.AsyncGetLaunchableProcessesCompletedEventArgs},System.Object)"/>.
+            </summary> 
+            <doccompleted/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AsyncGetLaunchableProcessesCompletedEventArgs.ProcessDefinitions">
+            <summary> 
+            Gets the list of launchable processes for the currently logged in user.
+            </summary> 
+            <value>The process definitions.</value>
+            <ininAsyncCompletedParamException/>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.AsyncGetProcessDefinitionsCompletedEventArgs">
+            <summary> 
+            Provides data for the asynchronous completed events of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessDefinitionList"/>.
+            </summary> 
+            <doccompleted/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.AsyncGetProcessDefinitionsCompletedEventArgs.ProcessDefinitions">
+            <summary> 
+            Gets the list of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessDefinition"/> instances for the currently logged in user.
+            </summary> 
+            <value>The process definitions.</value>
+            <ininAsyncCompletedParamException/>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.FlowStatus">
+            <summary>
+            Represents the running flow status.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.FlowStatus.None">
+            <summary>Unknown flow status.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.FlowStatus.NotFound">
+            <summary>Status not found.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.FlowStatus.Invalid">
+            <summary>The flow is invalid.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.FlowStatus.Running">
+            <summary>The flow is running.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.FlowStatus.Error">
+            <summary>The flow is in error.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.FlowStatus.Completed">
+            <summary>The flow is completed.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.FlowStatus.Cancelled">
+            <summary>The flow is cancelled.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.FlowStatus.RestoredInError">
+            <summary>The flow is restored and it is in an error state.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.FlowStatus.PropagatedError">
+            <summary>Error state due to one of the child actions being in an error state.</summary>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.LaunchableProcessesEventArgs">
+            <summary>
+            Provides data for the LaunchableProcessesChanged event of a <see cref="T:ININ.IceLib.ProcessAutomation.ProcessManager"/>.
+            </summary>
+            <doccompleted/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.LaunchableProcessesEventArgs.Added">
+            <summary> 
+            Gets the list of new launchable processes that are added for the currently logged in user.
+            </summary> 
+            <value>The process definitions.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.LaunchableProcessesEventArgs.Updated">
+            <summary>
+            Gets the list of updated launchable processes for the currently logged in user.
+            </summary>
+            <value>The process definitions.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.LaunchableProcessesEventArgs.Removed">
+            <summary>
+            Gets the list of launchable processes that are removed for the currently logged in user.
+            </summary>
+            <value>The process definitions.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.LaunchType">
+            <summary>
+            Represents the flow launching type.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.LaunchType.None">
+            <summary>Launching type has not been set.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.LaunchType.Unspecified">
+            <summary>Launching type was not specified.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.LaunchType.User">
+            <summary>A user launched this process.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.LaunchType.Email">
+            <summary>An e-mail launched this process.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.LaunchType.Handler">
+            <summary>A handler launched this process.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.LaunchType.Flow">
+            <summary>A process launched this sub-process.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.LaunchType.UserTest">
+            <summary>A user launched this process in test mode.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.LaunchType.FlowTest">
+            <summary>A process in test mode launched this sub-process.</summary>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.NamespaceDoc">
+            <summary>
+            <para>The <B>ININ.IceLib.ProcessAutomation</B> namespace contains classes for 
+            manipulating, monitoring, and managing Interaction Process Automation data.</para>
+            <para>The Interaction Process Automation system
+            consists of many entities such as Processes, Process instances, and Work Items.</para>
+            </summary>
+            <icversion>3.0 SU 8</icversion>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.PageCommand">
+            <summary>
+            Defines a command. Use this class to send commands on script pages.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.PageCommand.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageCommand.CommandType">
+            <summary>
+            Gets the type of command. <see cref="T:ININ.IceLib.ProcessAutomation.PageCommandType"/>.
+            </summary>
+            <value>The type of the command.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageCommand.CommandId">
+            <summary>
+            Gets ID of the command.
+            </summary>
+            <value>The Command ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageCommand.CommandName">
+            <summary>
+            Gets the user friendly name set for this command.
+            </summary>
+            <value>The Command Name.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageCommand.CommandData">
+            <summary>
+            Gets the data associated with this command.
+            </summary>
+            <value>The Command Data.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageCommand.ErrorId">
+            <summary>
+            Gets or sets the error data.
+            </summary>
+            <value>The error data.</value>
+            <exception cref="T:System.ArgumentException">The <c>target</c> parameter value is out of the range that server supports.</exception>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageCommand.ErrorData">
+            <summary>
+            Gets or sets the error ID.
+            </summary>
+            <value>The error ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageCommand.DataValuesVersion">
+            <summary>
+            Gets or sets the version of data values.
+            </summary>
+            <value>The Data Values Version.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.PageCommandType">
+            <summary>
+            Defines different types of commands that an application can send for <see cref="T:ININ.IceLib.ProcessAutomation.PageCommand"/>.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.PageCommandType.None">
+            <summary>None.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.PageCommandType.Submit">
+            <summary>Submit the page data.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.PageCommandType.Cancel">
+            <summary>Cancel the page.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.PageCommandType.Save">
+            <summary>Save the page data.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.PageCommandType.Hold">
+            <summary>Hold the page.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.PageCommandType.Error">
+            <summary>Notify the server that the page did not load completely.</summary>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.PageInstance">
+            <summary>
+            Provides data for an instance of a page.
+            </summary>
+            <remarks>
+            	<see cref="E:ININ.IceLib.ProcessAutomation.WorkItemInteraction.PageDisplayed"/> event of <see cref="T:ININ.IceLib.ProcessAutomation.WorkItemInteraction"/> use supply a PageInstance.
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.PageInstance.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageInstance.PageDefinitionId">
+            <summary>
+            Gets the Page Definition ID.
+            </summary>
+            <value>The Page Definition Description.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageInstance.PageInstanceId">
+            <summary>
+            Gets the Page Instance ID.
+            </summary>
+            <value>The Page Instance ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageInstance.PageInstanceName">
+            <summary>
+            Gets the Page Instance Name.
+            </summary>
+            <value>The Page Instance Name.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageInstance.PageInstanceDescription">
+            <summary>
+            Gets the Page Instance Description.
+            </summary>
+            <value>The Page Instance Description.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageInstance.PageContents">
+            <summary>
+            Gets the contents of the page.
+            </summary>
+            <value>The Contents of the page.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageInstance.PageDataDefinition">
+            <summary>
+            Gets the definitions of the data objects in the page.
+            </summary>
+            <value>The Contents of the page.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageInstance.PageData">
+            <summary>
+            Gets the data that needs to be shown on the page.
+            </summary>
+            <value>The Data on the page.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageInstance.PageDataDefinitionVersion">
+            <summary>
+            Gets the version of data definition.
+            </summary>
+            <value>The Data Definition Version.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.PageInstance.PageDataValuesVersion">
+            <summary>
+            Gets the version of data values.
+            </summary>
+            <value>The Data Values Version.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessAction">
+            <summary>
+            Represents a action under a <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessAction.#ctor(ININ.IceLib.ProcessAutomation.ProcessManager,System.Collections.Generic.Dictionary{ININ.IceLib.ProcessAutomation.ProcessActionProperty,System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/> class.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessAction.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.Status">
+            <summary>Gets the action status.</summary>
+            <value>The action status.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.Id">
+            <summary>Gets the ID.</summary>
+            <value>The ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.ConfigId">
+            <summary>Gets the config ID.</summary>
+            <value>The config ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.Name">
+            <summary>Gets the name.</summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.DisplayName">
+            <summary>Gets the display name.</summary>
+            <value>The display name.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.Details">
+            <summary>Gets the details.</summary>
+            <value>The Details.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.StartTime">
+            <summary>Gets the start time.</summary>
+            <value>The start time.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.EndTime">
+            <summary>Gets the end time.</summary>
+            <value>The end time.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.TaskId">
+            <summary>
+            Gets the ID of the task that this action is running.
+            </summary>
+            <value>The task ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.Failed">
+            <summary>Gets a value indicating whether this <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/> is failed.</summary>
+            <value><see langword="true"/> if failed; otherwise, <see langword="false"/>.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.ErrorInformation">
+            <summary>Gets the error information.</summary>
+            <value>The error information.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.ParentProcess">
+            <summary>Gets <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.</summary>
+            <value>The <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> that owns this action.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.ChildActions">
+            <summary>Gets the actions.</summary>
+            <value>The actions.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.AssociatedTask">
+            <summary>Gets the actions.</summary>
+            <value>The actions.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAction.ParentAction">
+            <summary>Gets the parent <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/>.</summary>
+            <value>The parent action.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessActionCollection">
+            <summary>
+            Represents a collection of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/> objects.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessActionCollection.GetKeyForItem(ININ.IceLib.ProcessAutomation.ProcessAction)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessActionCollection.TryGetValue(System.String,ININ.IceLib.ProcessAutomation.ProcessAction@)">
+            <summary>
+            Gets the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/> that has the same <see cref="P:ININ.IceLib.ProcessAutomation.ProcessAction.Id"/> as key.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="entry">The value.</param>
+            <returns>The <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/>.</returns>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessActionProperty">
+            <summary>
+            Properties of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/> that might change.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessActionProperty.Id">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessAction.Id"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessActionProperty.ConfigId">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessAction.ConfigId"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessActionProperty.Name">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessAction.Name"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessActionProperty.DisplayName">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessAction.DisplayName"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessActionProperty.Details">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessAction.Details"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessActionProperty.StartTime">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessAction.StartTime"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessActionProperty.EndTime">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessAction.EndTime"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessActionProperty.Status">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessAction.Status"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessActionProperty.StatusName">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessStatus.Name"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessActionProperty.FailedAction">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessAction.Failed"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessActionProperty.ErrorInformation">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessAction.ErrorInformation"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction"/>.</summary>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessAutomationItemType">
+            <summary>
+            Defines the type of Process Automation item.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationItemType.None">
+            <summary>None.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationItemType.Process">
+            <summary>The item is a process.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationItemType.Action">
+            <summary>The item is an action.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationItemType.Task">
+            <summary>The item is a task.</summary>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState">
+            <summary>
+            Defines the state of Process Automation Server.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.None">
+            <summary>None.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.Running">
+            <summary>The server is running.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.ShuttingDown">
+            <summary>The server has initiated the shut down process.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.Down">
+            <summary>The server is shut down.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.NotResponding">
+            <summary>The server is not responding to requests.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.RestoringProcesses">
+            <summary>The server is currently restoring processes.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.ReadingPersistence">
+            <summary>The server is currently reading process information from persistence.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.SyncPersistence">
+            <summary>The server is currently synchronizing its in-memory information with persistence data.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.Overloaded">
+            <summary>The server is currently overloaded.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.OverloadOfMemory">
+            <summary>Current memory usage of the server is high.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.OverloadOfCpu">
+            <summary>Current CPU usage of the server is high.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.OverloadOfThreads">
+            <summary>Current thread usage of the server is high.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.OverloadOfDiskspace">
+            <summary>Current diskspace usage of the server is high.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.OverloadedWithProcesses">
+            <summary>The server is currently processing a large number of processes and is overloaded as a result.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState.Unknown">
+            <summary>The state of the server is unknown.</summary>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessAutomationServerStateEventArgs">
+            <summary>
+            Provides data for the ProcessAutomationServerStateChanged event of a <see cref="T:ININ.IceLib.ProcessAutomation.ProcessManager"/>.
+            </summary>
+            <doccompleted/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessAutomationServerStateEventArgs.ProcessAutomationServerState">
+            <summary>Gets the current state of the process automation server.</summary>
+            <value>The current state of the process automation server.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessData">
+            <summary>
+            Represents Process data.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessData.#ctor(ININ.IceLib.ProcessAutomation.ProcessAutomationItemType,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessData"/> class.</summary>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessData.InitialData">
+            <summary>Gets the data blob.</summary>
+            <value>The data blob.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessDataDefinition">
+            <summary>
+            Represents Process Data Definition.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessDataDefinition.#ctor(ININ.IceLib.ProcessAutomation.ProcessAutomationItemType,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessDataDefinition"/> class.</summary>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessDataDefinition.DataDefinition">
+            <summary>Gets the data definition blob.</summary>
+            <value>The data definition blob.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessDefinition">
+            <summary>
+            Provides information about a process that the user can launch.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessDefinition.#ctor(ININ.IceLib.ProcessAutomation.ProcessManager,ININ.ThinBridge.NotifierReader)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessDefinition"/> class.
+            </summary>
+            <param name="manager">The process manager.</param>
+            <param name="reader">The Notifier Reader that contains data for this process definition.</param>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessDefinition.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessDefinition.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessDefinition.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessDefinition.CreateInstance(ININ.IceLib.ProcessAutomation.ProcessLaunchParameters)">
+            <summary>
+            Launches this process.
+            </summary>
+            <param name="launchParameters">The parameters needs to be set while launching the process.</param>
+            <returns>The created Process Instance.</returns>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/>.</exception>
+            <ConnectionExceptions/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessDefinition.CreateInstanceAsync(ININ.IceLib.ProcessAutomation.ProcessLaunchParameters,System.EventHandler{ININ.IceLib.AsyncCompletedEventArgs{ININ.IceLib.ProcessAutomation.ProcessInstance}},System.Object)">
+            <summary>
+            Asynchronously launches this process.
+            </summary>
+            <param name="launchParameters">The parameters needs to be set while launching the process.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks><ininAsyncMethodNote/></remarks>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Id">
+            <summary>
+            Gets the ID of the process definition.
+            </summary>
+            <value>The Process Definition ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Name">
+            <summary>
+            Gets the Name of the process definition.
+            </summary>
+            <value>The Process Definition Name .</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Description">
+            <summary>
+            Gets the Description of the process definition.
+            </summary>
+            <value>The Process Definition Description.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.PublishedVersion">
+            <summary>
+            Gets the Published Version of this process. When launching a process
+            IPA will always launch the published version.  Watch for changes to
+            the published version to determine when inputs, etc to the process
+            have changed.
+            </summary>
+            <icversion>4.0 SU 1</icversion>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Inputs">
+            <summary>
+            Gets the Xml schema for the inputs to the published version
+            of this process.  The inputs can change when a new version
+            of a process is published, so ensure you are watching the
+            ProcessDefinition object for changes via the ProcessDefinitionList.
+            </summary>
+            <value>The Process Definition Inputs.</value>
+            <icversion>4.0 SU 1</icversion>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.InputsStr">
+            <summary>
+            The raw input xsd
+            </summary>
+            <value>The raw input string for the published process.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessDefinitionList">
+            <summary>
+            A watchable list of all <see cref="T:ININ.IceLib.ProcessAutomation.ProcessDefinition"/> instances the current user has access to.
+            </summary>
+            <remarks>
+            This class can be used to start and stop a watch on all <see cref="T:ININ.IceLib.ProcessAutomation.ProcessDefinition"/> instances
+            the current user has access to.  This is different from the watch available on <see cref="T:ININ.IceLib.ProcessAutomation.ProcessManager"/>, 
+            which only watches instances that are launchable.
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessDefinitionList.#ctor(ININ.IceLib.ProcessAutomation.ProcessManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessDefinitionList"/> class.
+            </summary>
+            <param name="processManager">The process manager.</param>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessDefinitionList.StartWatching">
+            <summary>
+            Sends a request to the server to watch the list of processes definitions for the currently logged in user.
+            </summary>
+            <returns>The list of process definitions for the currently logged in user.</returns>
+            <exception cref="T:ININ.IceLib.IceLibException">The Session does not have a valid connection.</exception>
+            <exception cref="T:System.ObjectDisposedException">The Session has been disposed.</exception>
+            <ConnectionExceptions/>
+            <remarks>
+            When this method completes, it will raise the event <see cref="F:ININ.IceLib.ProcessAutomation.ProcessDefinitionList.ProcessDefinitionsListChanged"/>.
+            Note that an event handler needs to be set for <see cref="F:ININ.IceLib.ProcessAutomation.ProcessDefinitionList.ProcessDefinitionsListChanged"/> before calling
+            this method.
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">The list of process definitions is already watched.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessDefinitionList.StartWatchingAsync(System.EventHandler{ININ.IceLib.ProcessAutomation.AsyncGetProcessDefinitionsCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously sends a request to the server to watch the list of process definitions for the currently 
+            logged in user.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <exception cref="T:System.InvalidOperationException">The list of process definitions is already watched.</exception>
+            <remarks>
+            When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread 
+            appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> 
+            property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs-derived 
+            object</see> passed to the delegate will contain any exceptions thrown while executing the asynchronous 
+            task.  See the synchronous version of this method for more detailed error information.
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessDefinitionList.StopWatching">
+            <summary>
+            Sends a request to the server to stop watching the list of process definitions for the currently logged in user.
+            </summary>
+            <exception cref="T:ININ.IceLib.IceLibException">The Session does not have a valid connection.</exception>
+            <exception cref="T:System.ObjectDisposedException">The Session has been disposed.</exception>
+            <remarks>
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">The list of process definitions is not watched.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessDefinitionList.StopWatchingAsync(System.EventHandler{System.ComponentModel.AsyncCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously sends a request to the server to stop watching the list of process definitions for the 
+            currently logged in user.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <exception cref="T:System.InvalidOperationException">The list of process definitions is not watched.</exception>
+            <remarks>
+            When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread 
+            appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> 
+            property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs-derived 
+            object</see> passed to the delegate will contain any exceptions thrown while executing the asynchronous 
+            task.  See the synchronous version of this method for more detailed error information.
+            </remarks>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessDefinitionList.ProcessDefinitionsListChanged">
+            <summary>
+            Raised when existing process definitions for the logged in user are updated.
+            </summary>
+            <remarks>
+            When this event is raised it is an indication that the list of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessDefinition"/>s that the
+            logged in user has access to has changed in some way.  For example, a new ProcessDefinition may have been
+            added, or an existing one removed. 
+            </remarks>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessDefinitionList.ProcessDefinitionChanged">
+            <summary>
+            Raised when the properties of a process definition change.
+            </summary>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessDefinitionList.IsWatching">
+            <summary>
+            Gets a value indicating whether this instance is watched.
+            </summary>
+            <value>
+            	<see langword="True"/> if this instance is watched; otherwise, <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessDefinitionList.ProcessDefinitions">
+            <summary>
+            Gets the cached list of processes definitions.
+            </summary>
+            <value>The processes definitions.</value>
+            <exception cref="T:ININ.IceLib.NotCachedException">A <see cref="M:ININ.IceLib.ProcessAutomation.ProcessDefinitionList.StartWatching"/> has not 
+            been called / it has been called, but not completed yet.</exception>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessDefinitionListCache">
+            <summary>
+            Helper class for starting, stopping, and modifying watches on a list of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessDefinition"/>s.
+            </summary>
+            <remarks>
+            It is more efficient to use these helper methods than to call Start/Stop/Change watch on each individual
+            <see cref="T:ININ.IceLib.ProcessAutomation.ProcessDefinition"/> when the same action is being taken on each one.
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessDefinitionListCache.IsWatching(ININ.IceLib.ProcessAutomation.ProcessDefinitionList)">
+            <summary>
+            Gets a value indicating whether this instance is watched.
+            </summary>
+            <value>
+            	<see langword="True"/> if this instance is watched; otherwise, <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessDefinitionListCache.ProcessDefinitions">
+            <summary>
+            Gets the cached list of processes definitions.
+            </summary>
+            <value>The processes definitions.</value>
+            <exception cref="T:ININ.IceLib.NotCachedException">A <see cref="M:ININ.IceLib.ProcessAutomation.ProcessDefinitionListCache.StartWatchingProcessDefinitions(ININ.IceLib.ProcessAutomation.ProcessDefinitionList)"/> has not 
+            been called / it has been called, but not completed yet.</exception>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessDefinitionListEventArgs">
+            <summary>
+            Provides data for the <see cref="F:ININ.IceLib.ProcessAutomation.ProcessDefinitionList.ProcessDefinitionsListChanged"/> event.
+            </summary>
+            <doccompleted/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessDefinitionListEventArgs.Added">
+            <summary> 
+            Gets the list of new <see cref="T:ININ.IceLib.ProcessAutomation.ProcessDefinition"/> instances for the currently logged in user.
+            </summary> 
+            <value>The process definitions.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessDefinitionListEventArgs.Updated">
+            <summary>
+            Gets the list of updated <see cref="T:ININ.IceLib.ProcessAutomation.ProcessDefinition"/> instances for the currently logged in user.
+            </summary>
+            <value>The process definitions.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessDefinitionListEventArgs.Removed">
+            <summary>
+            Gets the list of removed <see cref="T:ININ.IceLib.ProcessAutomation.ProcessDefinition"/> instances for the currently logged in user.
+            </summary>
+            <value>The process definitions.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessInstance">
+            <summary>
+            Defines an instance of a process.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.#ctor(ININ.IceLib.ProcessAutomation.ProcessManager,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> class.
+            </summary>
+            <param name="processManager">The process manager.</param>
+            <param name="processInstanceId">The process instance identifier.</param>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.IsWatching">
+            <summary>
+            Determines whether this instance is watching actions / tasks / data.
+            </summary>
+            <returns>
+            	<see langword="true"/> if this instance is watching; otherwise, <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.StartWatching(ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings)">
+            <summary>
+            Starts watching.
+            </summary>
+            <remarks>
+            <ininHowWatchesWork/>
+            </remarks>
+            <param name="watchSettings">One or more enumeration items defined in <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings"/>.</param>
+            <ConnectionExceptions/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.StartWatchingAsync(ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings,System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously starts watching.
+            </summary>
+            <param name="watchSettings">One or more enumeration items defined in <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings"/>.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+            <remarks>
+            <ininAsyncMethodNote/>
+            <ininHowWatchesWork/>
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.ChangeWatching(ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings)">
+            <summary>
+            Changes watching.
+            </summary>
+            <remarks>
+            <ininHowWatchesWork/>
+            </remarks>
+            <param name="watchSettings">One or more enumeration items defined in <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings"/>.</param>
+            <ConnectionExceptions/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.ChangeWatchingAsync(ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings,System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously changes watching.
+            </summary>
+            <param name="watchSettings">One or more enumeration items defined in <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings"/>.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+            <remarks>
+            <ininAsyncMethodNote/>
+            <ininHowWatchesWork/>
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.StopWatching">
+            <summary>
+            Stops watching.
+            </summary>
+            <remarks>
+            <ininHowWatchesWork />
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.StopWatchingAsync(System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously stops watching.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+            <remarks>
+            <ininAsyncMethodNote/>
+            <ininHowWatchesWork/>
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.AssociateInteraction(ININ.IceLib.Interactions.InteractionId)">
+            <summary>
+            Associates the interaction with this process instance.
+            </summary>
+            <param name="interactionId">The interaction ID.</param>
+            <exception cref="T:System.ArgumentException">The <c>target</c> parameter was invalid.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.AssociateInteractionAsync(ININ.IceLib.Interactions.InteractionId,System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously associates the interaction with this process instance.
+            </summary>
+            <param name="interactionId">The interaction ID.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <exception cref="T:System.ArgumentException">The <c>target</c> parameter was invalid.</exception>
+            <remarks><ininAsyncMethodNote/></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.AssociateInteraction(ININ.IceLib.Interactions.InteractionId,System.String)">
+            <summary>
+            Associates the interaction with this process instance.
+            </summary>
+            <param name="interactionId">The interaction ID.</param>
+            <param name="callIdKey">The <see cref="P:ININ.IceLib.Interactions.Interaction.CallIdKey"/> of the interactoin.</param>
+            <exception cref="T:System.ArgumentException">The <c>target</c> parameter was invalid.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.AssociateInteractionAsync(ININ.IceLib.Interactions.InteractionId,System.String,System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously associates the interaction with this process instance.
+            </summary>
+            <param name="interactionId">The interaction ID.</param>
+            <param name="callIdKey">The <see cref="P:ININ.IceLib.Interactions.Interaction.CallIdKey"/> of the interactoin.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <exception cref="T:System.ArgumentException">The <c>target</c> parameter was invalid.</exception>
+            <remarks>When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs-derived object</see> passed to the delegate will contain any exceptions thrown while executing the asynchronous task.  See the synchronous version of this method for more detailed error information.</remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.DisassociateInteraction(ININ.IceLib.ProcessAutomation.AssociatedInteraction)">
+            <summary>
+            Removes the association between the interaction and this process instance.
+            </summary>
+            <param name="associatedInteraction">The interaction that is associated with this process instance.</param>
+            <exception cref="T:System.ArgumentException">The <c>target</c> parameter was invalid.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.DisassociateInteractionAsync(ININ.IceLib.ProcessAutomation.AssociatedInteraction,System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously removes the association between the interaction and this process instance.
+            </summary>
+            <param name="associatedInteraction">The interaction that is associated with this process instance.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <exception cref="T:System.ArgumentException">The <c>target</c> parameter was invalid.</exception>
+            <remarks><ininAsyncMethodNote/></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.GetNotesAndAssociatedInteractions">
+            <summary>
+            Gets the notes and associated interactions for this process.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.GetNotesAndAssociatedInteractionsAsync(System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously Gets the notes and associated interactions for this process.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam /></param>
+            <remarks><ininAsyncMethodNote /></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.AssociateNotes(System.String)">
+            <summary>
+            Adds a notes entry to this process instance.
+            </summary>
+            <param name="notes">The notes.</param>
+            <exception cref="T:System.ArgumentNullException">The <c>target</c> parameter was null.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.AssociateNotesAsync(System.String,System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously adds a notes entry to this process instance.
+            </summary>
+            <param name="notes">The notes.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <exception cref="T:System.ArgumentException">The <c>target</c> parameter was invalid.</exception>
+            <remarks><ininAsyncMethodNote/></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.RetryFailedActions(System.Collections.Generic.ICollection{ININ.IceLib.ProcessAutomation.ProcessAction})">
+            <summary>
+            Retries the failed actions.
+            </summary>
+            <param name="failedActions">The failed actions.</param>
+            <exception cref="T:System.ArgumentNullException">The <c>target</c> parameter was null.</exception>
+            <exception cref="T:System.ArgumentException">The <c>target</c> parameter was invalid.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.RetryFailedActionsAsync(System.Collections.Generic.ICollection{ININ.IceLib.ProcessAutomation.ProcessAction},System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously retries the failed actions.
+            </summary>
+            <param name="failedActions">The failed actions.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <exception cref="T:System.ArgumentNullException">The <c>target</c> parameter was null.</exception>
+            <exception cref="T:System.ArgumentException">The <c>target</c> parameter was invalid.</exception>
+            <remarks><ininAsyncMethodNote/></remarks>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstance.ProcessInstanceUpdated">
+            <summary>Occurs when status of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> is updated.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstance.TasksAdded">
+            <summary>Occurs when a Task is added to this <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstance.TasksUpdated">
+            <summary>Occurs when a Task under this <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> is updated.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstance.TasksCompleted">
+            <summary>Occurs when a Task under this <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> is updated.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstance.ActionsAdded">
+            <summary>Occurs when a Action is added to this <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstance.ActionsUpdated">
+            <summary>Occurs when a Action under this <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> is updated.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstance.ActionsCompleted">
+            <summary>Occurs when a Action under this <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> is updated.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstance.DataDefinitionUpdated">
+            <summary>Occurs when Data Definition is obtained / updated.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstance.InitialDataReceived">
+            <summary>Occurs when Data under this <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> is initially obtained.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstance.DataUpdated">
+            <summary>Occurs when Data under this <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> is changed.</summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstance.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.Id">
+            <summary>Gets the globally unique identifier of a process instance.</summary>
+            <value>The process instance identifier.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.NumericId">
+            <summary>
+            Gets the numeric identifier for this process instance.  The numeric
+            identifier is only unique on a given Interaction Center site.
+            </summary>
+            <value>The numeric identifier.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.ProcessLaunchMode">
+            <summary>
+            Gets the process launch mode.<see cref="P:ININ.IceLib.ProcessAutomation.ProcessInstance.ProcessLaunchMode"/>.
+            </summary>
+            <value>The process launch mode.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.DefinitionId">
+            <summary>Gets the identifier of the process definition.</summary>
+            <value>The process definition identifier.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.Version">
+            <summary>Gets the version of the process instance.</summary>
+            <value>The version.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.Name">
+            <summary>Gets the name of the process instance.</summary>
+            <value>The process instance name.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.Description">
+            <summary>Gets the description of the process instance.</summary>
+            <value>The process instance description.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.Status">
+            <summary>Gets the process instance status.</summary>
+            <value>The process instance status.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.StateName">
+            <summary>Gets the name of the state the process instance is currently in.</summary>
+            <value>The name of the state.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.LaunchName">
+            <summary>Gets the name of the launch.</summary>
+            <value>The name of the launch.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.LaunchType">
+            <summary>Gets the type of the launch.</summary>
+            <value>The type of the launch.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.LaunchingUserDisplayName">
+            <summary>
+            Gets the display name of the user that launched this process.
+            </summary>
+            <value>The display name of the launching user.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.StartTime">
+            <summary>Gets the start time.</summary>
+            <value>The start time.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.EndTime">
+            <summary>Gets the end time.</summary>
+            <value>The end time.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.DynamicDetails">
+            <summary>Gets the dynamic details.</summary>
+            <value>The dynamic details.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.CancelReason">
+            <summary>Gets the cancel reason.</summary>
+            <value>The cancel reason.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.InitialData">
+            <summary>Gets the data associated with the process instance.</summary>
+            <value>The data.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.DataUpdates">
+            <summary>
+            Gets the updates that occurred on the data after the <see cref="M:ININ.IceLib.ProcessAutomation.ProcessInstance.StartWatching(ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings)"/> is called.
+            </summary>
+            <value>The data updates.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.DataDefinition">
+            <summary>Gets the data definition associated with the process instance data.</summary>
+            <value>The data definition.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.ActionInProgress">
+            <summary>
+            Gets the currently running actions for the Process instance.
+            These are the actions running at the root or state level within the process instance.
+            </summary>
+            <value>The actions.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.CachedActions">
+            <summary>
+            Gets the cached actions.
+            </summary>
+            <value>The cached actions.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.CachedTasks">
+            <summary>
+            Gets the cached tasks.
+            </summary>
+            <value>The cached tasks.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.Notes">
+            <summary>
+            Gets the associated notes.
+            </summary>
+            <value>The notes.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.AssociatedInteractions">
+            <summary>
+            Gets the associated interactions.
+            </summary>
+            <value>The associated interactions.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.ErrorId">
+            <summary>
+            Gets the error associated with this process.
+            </summary>
+            <value>The error ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstance.ErrorMessage">
+            <summary>
+            Gets the error message associated with this process.
+            </summary>
+            <value>The error message.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessInstanceEventArgs">
+            <summary>
+            Supplies data to the events provided by <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.
+            </summary>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstanceEventArgs.ProcessActions">
+            <summary>Gets the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction">ProcessActions</see> that were updated.</summary>
+            <value>The process actions.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstanceEventArgs.ProcessTasks">
+            <summary>Gets the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAction">ProcessTasks</see> that were updated.</summary>
+            <value>The process tasks.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstanceEventArgs.ProcessDataDefinition">
+            <summary>
+            Gets the data updates.
+            </summary>
+            <value>The data updates.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstanceEventArgs.InitialData">
+            <summary>
+            Gets the process data as it existed when we started the data watch.
+            </summary>
+            <value>The process data.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstanceEventArgs.DataUpdates">
+            <summary>
+            Gets the updates that occurred after we started the data watch (<see cref="M:ININ.IceLib.ProcessAutomation.ProcessInstance.StartWatching(ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings)"/>).
+            </summary>
+            <value>The data updates.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty">
+            <summary>
+            Properties that might change for a <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.Id">
+            <summary>Represents the run time instance of the process.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.DefinitionId">
+            <summary>Represents the unique identifier to access the process definition.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.ProcessLaunchMode">
+            <summary>Represents the launch mode. <see cref="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.ProcessLaunchMode"/></summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.NumericId">
+            <summary>Represents the numeric identifier (an alternative to <see cref="P:ININ.IceLib.ProcessAutomation.ProcessInstance.Id"/>).</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.Version">
+            <summary>Represents the process's version.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.Status">
+            <summary>Represents the status.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.StatusName">
+            <summary>Represents the status name.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.Name">
+            <summary>Represents the flow name.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.Description">
+            <summary>Represents the flow description.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.StateName">
+            <summary>Represents the flow current state name.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.LaunchName">
+            <summary>Represents the name of the entity launching the process.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.LaunchType">
+            <summary>Represents what type of entity launched the process.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.LaunchingUserDisplayName">
+            <summary>Represents what display name of the user htat launched the process.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.StartTime">
+            <summary>Represents the start time.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.EndTime">
+            <summary>Represents the end time.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.DynamicDetails">
+            <summary>Represents the dynamic details.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceProperty.CancelReason">
+            <summary>Represents the cancel reason.</summary>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessInstanceSearchResults">
+            <summary>
+            Provides results for <see cref="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.SearchForProcesses(ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings)"/>.
+            </summary>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstanceSearchResults.ProcessInstancesFound">
+            <summary>
+            Gets the process instances found.
+            </summary>
+            <value>The process instances found.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstanceSearchResults.MaxResultsLimitReached">
+            <summary>
+            Gets a value indicating whether a limit on the number of search results has reached.
+            </summary>
+            <value>
+            	<see langword="true"/> if search results limit is reached; otherwise, <see langword="false"/>.
+            </value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings">
+            <summary>
+            Provides search settings for <see cref="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.SearchForProcesses(ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings)"/>.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings.IsEmpty">
+            <summary>
+            Determines whether there are any search terms in this object.
+            </summary>
+            <returns>
+            	<see langword="true"/> if there are no search terms; otherwise, <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings.FreeText">
+            <summary>
+            Gets or sets the free text.
+            </summary>
+            <value>The free text.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings.ProcessDefinitionId">
+            <summary>
+            Gets or sets the process definition ID.
+            </summary>
+            <value>The process definition ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings.ProcessInstanceId">
+            <summary>
+            Gets or sets the process instance ID.
+            </summary>
+            <value>The process instance ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings.StartTime">
+            <summary>
+            Gets or sets the start time.
+            </summary>
+            <value>The start time.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings.EndTime">
+            <summary>
+            Gets or sets the end time.
+            </summary>
+            <value>The end time.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings.ExcludeTestProcesses">
+            <summary>
+            Gets or sets whether test processes be excluded from search results.
+            </summary>
+            <value>Exclude test processes.</value>
+            <remarks>Test processes are included in search results by default. Use this property if the application does not want to get test (debug) processes.</remarks>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings">
+            <summary>
+            Represents the options to watch a <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings.None">
+            <summary>Watch nothing.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings.TasksAndActions">
+            <summary>Watch tasks and actions under a <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings.Data">
+            <summary>Watch data under a <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings.NotesAndRelatedInteractions">
+            <summary>Watch notes and related interactions under a <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.</summary>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessLaunchMode">
+            <summary>
+            Specifies the launch mode for a process.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessLaunchMode.None">
+            <summary>No launch mode was specified.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessLaunchMode.Regular">
+            <summary>Launch in regular mode.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessLaunchMode.Debug">
+            <summary>Launch in debug mode.</summary>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessLaunchParameters">
+            <summary>
+            Provides a way to attach data while launching processes.
+            </summary>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessLaunchParameters.InputDocument">
+             <summary>
+             Gets or sets the input document.
+             </summary>
+             <value>The input document.</value>
+             <example>
+             <code lang="C#" unescaped="true">
+             static XmlDocument CreateInputXmlDocument()
+             {
+                // Create a new XmlDocument to pass as the initial values for IPA process input variables
+                XmlDocument xmldoc = new XmlDocument();
+            
+                // Creates the XML declaration
+                XmlNode xmlnode = xmldoc.CreateNode(XmlNodeType.XmlDeclaration, "", "");
+                xmldoc.AppendChild(xmlnode);
+            
+                // The root element of all process input XML documents is "Process"
+                XmlElement xmlelement = xmldoc.CreateElement("Process");
+                xmlelement.SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+            
+                // Add an element for each process input variable that should be set when the process starts.
+                // You can set a process variable as an input in Interaction Process Automation
+                // by changing the assessibility parameter of the variable to "Input."
+                // The name of the element needs to match the variable name in Interaction Process
+                // Automation exactly.
+                AddXmlElement(xmldoc, xmlelement, "ExampleBoolean", "true");
+                AddXmlElement(xmldoc, xmlelement, "ExampleDate", "2002-09-24");
+                AddXmlElement(xmldoc, xmlelement, "ExampleDateTime", "2002-05-30T09:00:00");
+                AddXmlElement(xmldoc, xmlelement, "ExampleDecimal", "127.00");
+                AddXmlElement(xmldoc, xmlelement, "ExampleDuration", "P5DT15H");
+                AddXmlElement(xmldoc, xmlelement, "ExampleInteger", "72");
+                AddXmlElement(xmldoc, xmlelement, "ExampleMailbox", "Info@ININ.com");
+                AddXmlElement(xmldoc, xmlelement, "ExampleSkill", "Spanish");
+                AddXmlElement(xmldoc, xmlelement, "ExampleString", "Hello World!");
+                AddXmlElement(xmldoc, xmlelement, "ExampleTime", "09:30:10");
+                AddXmlElement(xmldoc, xmlelement, "ExampleUser", "admin");
+                AddXmlElement(xmldoc, xmlelement, "ExampleWorkgroup", "Support");
+                AddXmlElement(xmldoc, xmlelement, "ExampleStringCollection", "Red");
+                AddXmlElement(xmldoc, xmlelement, "ExampleStringCollection", "Green");
+                AddXmlElement(xmldoc, xmlelement, "ExampleStringCollection", "Blue");
+             
+                xmldoc.AppendChild(xmlelement);
+             
+                return xmldoc;
+             }
+             
+             public static void AddXmlElement(XmlDocument doc, XmlElement parent, string name, string value)
+             {
+                if (string.IsNullOrEmpty(value)) return;
+             
+                XmlElement element = doc.CreateElement(name);
+                element.AppendChild(doc.CreateTextNode(value));
+                parent.AppendChild(element);
+             }
+             </code>
+             </example>
+             <remarks>
+             Use the input document to specify the initial values of process input variables.  Only variables you have added
+             to a process under variables can be set.  The Interaction Process Automation designer provides an XSD to validate
+             the XML input document.  Right-click on the process variables in the navigation pane, and choose "Export XSD...."
+             <para>
+             For process input variables that are collections you can specify the element name multiple times as shown above. A 
+             collection input variable cannot be NOT_SET.  The values in a collection can be NOT_SET.</para>
+             <para/>
+             <para>Interaction Process Automation supports the concept of NOT_SET, which means the process variable does not have a value.
+             To specify NOT_SET in the XML document, add xsi:nil="true" as an attribute of the element name.  No element text should be 
+             specified.  For example: &lt;ExampleUser xsi:nil="true"/&gt;</para>
+             
+             <para>The following is a list of supported data types in Interaction Process Automation along with
+             information about how to specify the value for each data type as a string to conform with
+             XML data type standards.</para>
+             <para/>
+             <list type="bullet">
+             <listheader>
+             <term>term</term>
+             <description>description</description>
+             </listheader>
+             <item>
+             <term>Boolean</term>
+             <description>A boolean can be any of the following values: true, false, 1, 0</description>
+             </item>
+             <item>
+             <term>Date</term>
+             <description>A date must be in the following format: YYYY-MM-DD[Z|(+|-)hh:mm] where YYYY = 4 digit year, 
+             MM = 2 digit month, DD = 2 digit day, hh = 2 digit hour offset and mm = 2 digit minute offset. 
+             YYYY-MM-DD represents the year, month and day portion of the date. [Z|(+|-)hh:mm] represents the 
+             offset of the date from universal coordinated time.  If no offset is specified the timezone
+             for this date will be set to the timezone of the IC server.  Otherwise the offset will be applied and
+             the timezone will be changed to universal coordinated time.   The date must be between 1800-1-1
+             and 2200-12-31.  For example: 2001-10-26, 2001-10-26+02:00, 2001-10-26Z, 2001-10-26+00:00</description>
+             </item>
+             <item>
+             <term>DateTime</term>
+             <description>A datetime must be in the following format: YYYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm] where YYYY = 4 
+             digit year, MM = 2 digit month, DD = 2 digit day, hh = 2 digit hour, mm = 2 digit minute and 
+             ss = 2 digit second. YYYY-MM-DDThh:mm:ss represents the year, month, day, hour, minute and second 
+             portion of the date time. T is a separator indicating where the time portion starts. [Z|(+|-)hh:mm] 
+             represents the offset of the date time from universal coordinated time. If no offset is specified the 
+             timezone for this datetime will be set to the timezone of the IC server.  Otherwise the offset will 
+             be applied and the timezone will be changed to universal coordinated time  The date time must be between 
+             1800-1-1T00:00:00 and 2200-12-31T23:59:59  For example: 2001-10-26T21:32:52, 2001-10-26T21:32:52+02:00, 
+             2001-10-26T19:32:52Z, 2001-10-26T19:32:52+00:00, or 2001-10-26T21:32:52.12679</description>
+             </item>
+             <item>
+             <term>Decimal</term>
+             <description>A decimal must have a value consisting of a mantissa followed, optionally, by the character "E" or "e", 
+             followed by an exponent. The exponent must be an integer. The mantissa must be a decimal number. The 
+             representations for exponent and mantissa must follow the rules for integer and decimal. If the "E" or 
+             "e" and the following exponent are omitted, an exponent value of 0 is assumed.  The value space of a 
+             decimal consists of the values m × 2^e, where m is an integer whose absolute value is less than 2^53, 
+             and e is an integer between -1075 and 970, inclusive.  For example: 6.2, -1E4, 1267.43233E12, 12.78e-2, 12, 
+             and 0 are all legal values for a decimal.</description>
+             </item>
+             <item>
+             <term>Duration</term>
+             <description>A duration must be in the following format: "(-)PnDTnHnMnS" where P indicates the period, nD the number of days, 
+             T indicates the start of the time section, nH the number of hours, nM the number of minutes and nS the number
+             of seconds. Numeric components in the string like 'nD' that represent the number of days will not be returned if 
+             n equals 0. The minus sign will be present if the duration is negative. Note: nS may include fractional seconds.   
+             For example: PT1004199059S, PT130S, PT2M10S, P1DT2S, or P3DT5H20M30.123S</description>
+             </item>
+             <item>
+             <term>Integer</term>
+             <description>An integer must be a number between 9223372036854775807 and -9223372036854775808 inclusive.
+             For example: -1, 0, 12678967543233, 100000</description>
+             </item>
+             <item>
+             <term>Mailbox</term>
+             <description>A mailbox must contain two parts.  The part before the @ sign is the local-part of the address, often the username 
+             of the recipient (jsmith), and the part after the @ sign is the domain which is a hostname to which the e-mail message 
+             will be sent (example.com).
+             For example: Info@ININ.com, jsmith@example.com</description>
+             </item>
+             <item>
+             <term>Skill</term>
+             <description>A skill is a string that matches an existing skill name in Interaction Administrator.
+             For example: Spanish, English</description>
+             </item>
+             <item>
+             <term>String</term>
+             <description>A string is a finite-length sequence of characters.
+             For example: Hello World!</description>
+             </item>
+             <item>
+             <term>Time</term>
+             <description>A time must be in the following format: hh:mm:ss[Z|(+|-)hh:mm] where hh = 2 digit hour, mm = 2 digit minute and
+             ss = 2 digit second. hh:mm:ss represents the hour, minute and second portion of the time. [Z|(+|-)hh:mm] represents 
+             the offset of the time from universal coordinated time.  If no offset is specified the 
+             timezone for this datetime will be set to the timezone of the IC server.  Otherwise the offset will be applied and
+             the timezone will be changed to universal coordinated time.
+             For example: 21:32:52, 21:32:52+02:00, 19:32:52Z, 19:32:52+00:00, and 21:32:52.12679.</description>
+             </item>
+             <item>
+             <term>User</term>
+             <description>A user is a string that matches an existing user name in Interaction Administrator.
+             For example: admin</description>
+             </item>
+             <item>
+             <term>Workgroup</term>
+             <description>A workgroup is a string that matches an existing workgroup name in Interaction Administrator.
+             For example: Support</description>
+             </item>
+             </list>
+             </remarks>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessLaunchParameters.AssociatedInteraction">
+            <summary>
+            Gets or sets the associated interaction.
+            </summary>
+            <remarks>
+            The associated interaction will be shown when viewing details of this process from the Process Monitor or
+            the Interaction Client.
+            </remarks>
+            <value>The associated interaction.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessManager">
+            <summary>
+            Provides access to all process automation classes in the <see cref="N:ININ.IceLib.ProcessAutomation"/> namespace.
+            </summary>
+            <remarks>
+            This class serves as the initial entry point into the <see cref="N:ININ.IceLib.ProcessAutomation"/> namespace. It contains references to 
+            all watched objects and watched attribute caches. All classes in the <see cref="N:ININ.IceLib.ProcessAutomation"/> namespace send and receive
+            messages to/from the IC system via the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessManager.Session"/> object of the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessManager"/>.<br/><br/>
+            <note>The <see cref="T:ININ.IceLib.ProcessAutomation.ProcessManager"/> class is a singleton object and is accessed using the
+            <see cref="M:ININ.IceLib.ProcessAutomation.ProcessManager.GetInstance(ININ.IceLib.Connection.Session)"/> method.</note><br/>
+            <example>
+            <code lang="C#" unescaped="false">
+            Session session = new Session();
+            session.Connect(...);
+            ProcessManager manager = ProcessManager.GetInstance(session);
+            </code>
+            </example>
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.GetInstance(ININ.IceLib.Connection.Session)">
+            <summary>
+            Gets a <see cref="T:ININ.IceLib.ProcessAutomation.ProcessManager"/>.
+            </summary>
+            <param name="session">The Session with which it is associated.</param>
+            <returns>The <see cref="T:ININ.IceLib.ProcessAutomation.ProcessManager"/> object.</returns>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.CancelProcessInstancesImpl(System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.String})">
+            <ConnectionExceptions />
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.CancelProcessInstances(System.Collections.Generic.ICollection{System.Int64},System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            Cancels process instances specified by the list of numeric IDs.
+            </summary>
+            <param name="numericIds">The process definition numeric IDs.</param>
+            <param name="cancelReasons">The reasons the processes were canceled.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">A parameter did not have did not contain the right number of elements.</exception>
+            <icversion>4.0 SU 1</icversion>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.CancelProcessInstancesAsync(System.Collections.Generic.ICollection{System.Int64},System.Collections.Generic.ICollection{System.String},System.EventHandler{ININ.IceLib.AsyncCompletedEventArgs{System.Collections.ObjectModel.ReadOnlyCollection{ININ.IceLib.ProcessAutomation.ProcessManager.CancelResults}}},System.Object)">
+            <summary>
+            Asynchronously cancels process instances specified by the list of numeric IDs.
+            </summary>
+            <param name="numericIds">The process definition numeric IDs.</param>
+            <param name="cancelReasons">The reasons the processes were canceled.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState">An object that contains state information for this request.</param>
+            <remarks>When completed, the <paramref name="completedCallback"/> delegate is invoked on a thread appropriate to the application-model, such as the GUI thread in a UI application.  The <c>Error</c> property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs">AsyncCompletedEventArgs-derived object</see> passed to the delegate will contain any exceptions thrown while executing the asynchronous task.  See the synchronous version of this method for more detailed error information.</remarks>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">A parameter did not have did not contain the right number of elements.</exception>
+            <icversion>4.0 SU 1</icversion>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.LaunchProcess(System.String,ININ.IceLib.ProcessAutomation.ProcessLaunchParameters)">
+            <summary>
+            Launches a process specified by <see cref="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Id"/>.
+            </summary>
+            <param name="processDefinitionId">The process definition ID. (See <see cref="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Id"/>.)</param>
+            <param name="launchParameters">The parameters needs to be set while launching the process.</param>
+            <returns>The created Process Instance.</returns>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.LaunchProcessAsync(System.String,ININ.IceLib.ProcessAutomation.ProcessLaunchParameters,System.EventHandler{ININ.IceLib.AsyncCompletedEventArgs{ININ.IceLib.ProcessAutomation.ProcessInstance}},System.Object)">
+            <summary>
+            Asynchronously launches a process specified by <see cref="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Id"/>.
+            </summary>
+            <param name="processDefinitionId">The process definition ID. (See <see cref="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Id"/>.)</param>
+            <param name="launchParameters">The parameters needs to be set while launching the process.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks><ininAsyncMethodNote/></remarks>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.LaunchProcessByName(System.String,ININ.IceLib.ProcessAutomation.ProcessLaunchParameters)">
+            <summary>
+            Launches a process specified by <see cref="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Name"/>.
+            </summary>
+            <param name="processName">The process <see cref="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Name"/>.</param>
+            <param name="launchParameters">The parameters needs to be set while launching the process.</param>
+            <returns>The created Process Instance.</returns>
+            <example>
+            The following code can be used to connect to the IC server, connect as the specified user, 
+            and launch a process with a set of initial data.
+            <code lang="C#" unescaped="true">
+            Session session = new Session();
+            session.Connect(...);
+            ProcessManager wfManager = ProcessManager.GetInstance(session);
+            ProcessLaunchParameters parameters = new ProcessLaunchParameters();
+            
+            // This creates an XmlDocument to be passed into the launch as the initial values
+            // for process input variables.  See the documentation for InputDocument for the example
+            // code for CreateInputXmlDocument().
+            parameters.InputDocument = CreateInputXmlDocument();
+            try
+            {
+                ProcessInstance instance = wfManager.LaunchProcessByName("Sample Process Launch", parameters);
+                if (instance != null)
+                {
+                    Console.WriteLine("Process started Id: " + instance.NumericId);
+                }
+                else
+                {
+                    Console.WriteLine("Failed to start process. LaunchProcessByName returned a null instance.");
+                }
+            }
+            catch (Exception exception)
+            {
+               Console.WriteLine("Caught an exception while starting the process: " + exception.Message);
+            }
+            </code>
+            </example>
+            <remarks>
+            <para>The name of the process needs to exactly match the name given to the process by the process designer.</para>
+            <para>Ensure the process is published in Interaction Process Automation and ensure that the launching user has 
+            "Launch Process" access control rights in Interaction Administrator, otherwise the launch will fail.</para>
+            </remarks>
+            <exception cref="T:System.ArgumentException">An argument was invalid.</exception>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+            <ConnectionExceptions/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.LaunchProcessByNameAsync(System.String,ININ.IceLib.ProcessAutomation.ProcessLaunchParameters,System.EventHandler{ININ.IceLib.AsyncCompletedEventArgs{ININ.IceLib.ProcessAutomation.ProcessInstance}},System.Object)">
+            <summary>
+            Asynchronously launches a process specified by <see cref="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Name"/>.
+            </summary>
+            <param name="processName">The process <see cref="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Name"/>.</param>
+            <param name="launchParameters">The parameters needs to be set while launching the process.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks><ininAsyncMethodNote/></remarks>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.GetLaunchableProcesses">
+            <summary>
+            Gets the list of launchable processes for the currently logged in user.
+            </summary>
+            <returns>The launchable processes.</returns>
+            <exception cref="T:ININ.IceLib.IceLibException">The Session does not have a valid connection.</exception>
+            <exception cref="T:System.ObjectDisposedException">The Session has been disposed.</exception>
+            <ConnectionExceptions/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.GetLaunchableProcessesAsync(System.EventHandler{ININ.IceLib.ProcessAutomation.AsyncGetLaunchableProcessesCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously gets the list of launchable processes for the currently logged in user.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam /></param>
+            <remarks><ininAsyncMethodNote /></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.StartWatchingLaunchableProcesses">
+            <summary>
+            Sends a request to the server to watch the list of launchable processes for the currently logged in user.
+            </summary>
+            <exception cref="T:ININ.IceLib.IceLibException">The Session does not have a valid connection.</exception>
+            <exception cref="T:System.ObjectDisposedException">The Session has been disposed.</exception>
+            <ConnectionExceptions/>
+            <remarks>
+            When this method completes, it will raise the event <see cref="F:ININ.IceLib.ProcessAutomation.ProcessManager.LaunchableProcessesChanged"/>. Note that an event handler needs to be set for <see cref="F:ININ.IceLib.ProcessAutomation.ProcessManager.LaunchableProcessesChanged"/> before calling this method.
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.StartWatchingLaunchableProcessesAsync(System.EventHandler{System.ComponentModel.AsyncCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously sends a request to the server to watch the list of launchable processes for the currently logged in user.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam /></param>
+            <remarks><ininAsyncMethodNote /></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.StopWatchingLaunchableProcesses">
+            <summary>
+            Sends a request to the server to stop watching the list of launchable processes for the currently logged in user.
+            </summary>
+            <exception cref="T:ININ.IceLib.IceLibException">The Session does not have a valid connection.</exception>
+            <exception cref="T:System.ObjectDisposedException">The Session has been disposed.</exception>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.StopWatchingLaunchableProcessesAsync(System.EventHandler{System.ComponentModel.AsyncCompletedEventArgs},System.Object)">
+            <summary>
+            Asynchronously sends a request to the server to stop watching the list of launchable processes for the currently logged in user.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam /></param>
+            <remarks><ininAsyncMethodNote /></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.CheckForRunningProcess(System.String)">
+            <summary>Checks to see if the specified process is already running.</summary>
+            <param name="processDefinitionId">The process definition ID. (See <see cref="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Id"/>.)</param>
+            <returns><c>true</c> if specified process is already running; othwerwise <c>false</c>.</returns>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/> or <see cref="F:System.String.Empty"/>.</exception>
+            <icversion>3.0 SU 15, 4.0 SU 2</icversion>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.CheckForRunningProcessAsync(System.String,System.EventHandler{ININ.IceLib.AsyncCompletedEventArgs{System.Boolean}},System.Object)">
+            <summary>Asynchronously checks to see if the specified process is already running.</summary>
+            <param name="processDefinitionId">The process definition ID. (See <see cref="P:ININ.IceLib.ProcessAutomation.ProcessDefinition.Id"/>.)</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <exception cref="T:System.ArgumentNullException">A parameter is <see langword="null"/> or <see cref="F:System.String.Empty"/>.</exception>
+            <remarks><ininAsyncMethodNote/></remarks>
+            <icversion>3.0 SU 15, 4.0 SU 2</icversion>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.GetCurrentStateOfProcessAutomationServer">
+            <summary>
+            Gets the current state of the Process Automation Server.
+            </summary>
+            <returns>The <see cref="P:ININ.IceLib.ProcessAutomation.ProcessManager.ProcessAutomationServerState"/>.</returns>
+            <icversion>3.0 SU 15, 4.0 SU 2</icversion>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessManager.GetCurrentStateOfProcessAutomationServerAsync(System.EventHandler{ININ.IceLib.AsyncCompletedEventArgs{ININ.IceLib.ProcessAutomation.ProcessAutomationServerState}},System.Object)">
+            <summary>
+            Asynchronously gets the current state of the Process Automation Server.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam /></param>
+            <remarks><ininAsyncMethodNote/></remarks>
+            <icversion>3.0 SU 15, 4.0 SU 2</icversion>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessManager.LaunchableProcessesChanged">
+            <summary>
+            Raised when existing launchable processes for the logged in user are updated.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessManager.ProcessAutomationServerStateChanged">
+            <summary>
+            Raised when Process Automation Server is either running or down. <see cref="P:ININ.IceLib.ProcessAutomation.ProcessManager.ProcessAutomationServerState"/>.
+            </summary>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessManager.ProcessDefinitionListCache">
+            <summary>
+            Gets the process definition list.
+            </summary>
+            <value>The process definition list.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessManager.Session">
+            <summary>
+            Gets the Session with which this <see cref="T:ININ.IceLib.ProcessAutomation.ProcessManager"/> is associated.
+            </summary>
+            <value>The session object.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessManager.InstanceId">
+            <summary>
+            Gets the unique ID for this object instance.
+            </summary>
+            <value>The instance ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessManager.ProcessAutomationServerState">
+            <summary>
+            Gets the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessAutomationServerState"/>.
+            </summary>
+            <value>The value of the process automation server's state.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessManager.LaunchableProcesses">
+            <summary>
+            Gets the cached list of launchable processes.
+            </summary>
+            <value>The launchable processes.</value>
+            <exception cref="T:ININ.IceLib.NotCachedException">A <see cref="M:ININ.IceLib.ProcessAutomation.ProcessManager.StartWatchingLaunchableProcesses"/> has not 
+            been called / it has been called, but not completed yet.</exception>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessManager.CancelResults">
+            <summary>
+            The result code of a cancel process attempt.
+            </summary>
+            <icversion>4.0 SU 1</icversion>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessManager.CancelResults.Success">
+            <summary>
+            Gets the value indicating whether this result is a success.
+            </summary>
+            <value><c>true</c> if success; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessManager.CancelResults.ErrorString">
+            <summary>
+            Gets the error string if an error occurs.
+            </summary>
+            <value>The error string.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessMonitor">
+            <summary>
+            Provides the mechanism to initiate and monitor process instances.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.#ctor(ININ.IceLib.ProcessAutomation.ProcessManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessMonitor"/> class.
+            </summary>
+            <param name="manager">The manager.</param>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.GetWatchedProcesses">
+            <summary>
+            Gets the watched process instances after a <c>StartWatching</c>.
+            </summary>
+            <returns>The process instances.</returns>
+            <exception cref="T:ININ.IceLib.NotCachedException">A StartWatch has not been called.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.IsWatching">
+            <summary>
+            Determines whether this instance is watching the list of flows.
+            </summary>
+            <returns>
+            	<see langword="true"/> if this instance is watching; otherwise, <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.StartWatching(ININ.IceLib.ProcessAutomation.ProcessMonitorFilter)">
+            <summary>
+            Starts the watching processes.
+            </summary>
+            <param name="filter">The filter.</param>
+            <exception cref="T:System.ArgumentNullException">The <c>target</c> parameter was null.</exception>
+            <exception cref="T:System.InvalidOperationException">The object is already being watched.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.StartWatchingAsync(ININ.IceLib.ProcessAutomation.ProcessMonitorFilter,System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously starts watching processes that match the current <see cref="T:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter"/>.
+            </summary>
+            <param name="filter">The filter.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks><ininAsyncMethodNote/></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.ChangeWatchedProcesses(ININ.IceLib.ProcessAutomation.ProcessMonitorFilter)">
+            <summary>
+            Changes the watched processes.
+            </summary>
+            <param name="filter">The filter.</param>
+            <exception cref="T:System.ArgumentNullException">The <c>target</c> parameter was null.</exception>
+            <exception cref="T:System.InvalidOperationException">The object is not being watched.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.ChangeWatchedProcessesAsync(ININ.IceLib.ProcessAutomation.ProcessMonitorFilter,System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously starts watching processes that match the current <see cref="T:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter"/>.
+            </summary>
+            <param name="filter">The filter.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks><ininAsyncMethodNote/></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.StopWatching">
+            <summary>
+            Stops watching processes that match the current <see cref="T:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter"/>.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The object is not being watched.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.StopWatchingAsync(System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously stops watching processes that match the current <see cref="T:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter"/>.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks><ininAsyncMethodNote/></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.CancelRunningProcesses(ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData[])">
+            <summary>
+            Cancels the processes defined in <see cref="T:ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData"/>.
+            </summary>
+            <param name="cancelData">The process defined by <see cref="T:ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData"/>.</param>
+            <exception cref="T:System.ArgumentNullException">The <c>target</c> parameter was null.</exception>
+            <exception cref="T:System.ArgumentException">The <c>target</c> parameter was invalid.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.CancelRunningProcessesAsync(ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData[],System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously cancels the processes defined in <see cref="T:ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData"/>.
+            </summary>
+            <param name="cancelData">The cancel data.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks><ininAsyncMethodNote/></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.RetryFailedProcesses(System.Collections.Generic.ICollection{ININ.IceLib.ProcessAutomation.ProcessInstance})">
+            <summary>
+            Retries failed processes.
+            </summary>
+            <param name="failedProcesses">The <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance">processes</see> that need to be retried.</param>
+            <exception cref="T:System.ArgumentNullException">The <c>target</c> parameter was null.</exception>
+            <exception cref="T:System.ArgumentException">The <c>target</c> parameter was invalid.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.RetryFailedProcessesAsync(System.Collections.Generic.ICollection{ININ.IceLib.ProcessAutomation.ProcessInstance},System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously retries failed processes..
+            </summary>
+            <param name="failedProcesses">The <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance">processes</see> that need to be retried.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks><ininAsyncMethodNote/></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.SearchForProcesses(ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings)">
+            <summary>
+            Searches the server for running and completed processes that match the passed <see cref="T:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter"/>.
+            </summary>
+            <param name="searchSettings">The search settings.</param>
+            <remarks>
+            The <see cref="P:ININ.IceLib.ProcessAutomation.ProcessInstance.Notes"/> and <see cref="P:ININ.IceLib.ProcessAutomation.ProcessInstance.AssociatedInteractions"/> properties of the results found in the 
+            <see cref="P:ININ.IceLib.ProcessAutomation.ProcessInstanceSearchResults.ProcessInstancesFound"/> property are not immediately available.  To get these values, a call to 
+            <see cref="M:ININ.IceLib.ProcessAutomation.ProcessInstance.GetNotesAndAssociatedInteractions"/> must be called if a watch is not already in place on the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> 
+            from a call to <see cref="M:ININ.IceLib.ProcessAutomation.ProcessInstance.StartWatching(ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings)"/>.
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">The <c>target</c> parameter was null.</exception>
+            <exception cref="T:System.InvalidOperationException">The object is already being watched.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.SearchForProcessesAsync(ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings,System.EventHandler{ININ.IceLib.ProcessAutomation.SearchForProcessesAsyncEventArgs},System.Object)">
+            <summary>
+            Asynchronously searches the server for running and completed processes that match the passed <see cref="T:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter"/>.
+            </summary>
+            <param name="searchSettings">The search settings.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks>
+            <ininAsyncMethodNote/>
+            The <see cref="P:ININ.IceLib.ProcessAutomation.ProcessInstance.Notes"/> and <see cref="P:ININ.IceLib.ProcessAutomation.ProcessInstance.AssociatedInteractions"/> properties of the results found in the 
+            <see cref="P:ININ.IceLib.ProcessAutomation.ProcessInstanceSearchResults.ProcessInstancesFound"/> property are not immediately available.  To get these values, a call to 
+            <see cref="M:ININ.IceLib.ProcessAutomation.ProcessInstance.GetNotesAndAssociatedInteractions"/> must be called if a watch is not already in place on the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> 
+            from a call to <see cref="M:ININ.IceLib.ProcessAutomation.ProcessInstance.StartWatching(ININ.IceLib.ProcessAutomation.ProcessInstanceWatchSettings)"/>.
+            </remarks>
+        </member>
+        <member name="E:ININ.IceLib.ProcessAutomation.ProcessMonitor.ProcessInstancesAdded">
+            <summary>
+            Occurs when items are added to the monitor.
+            </summary>
+        </member>
+        <member name="E:ININ.IceLib.ProcessAutomation.ProcessMonitor.ProcessInstancesChanged">
+            <summary>
+            Occurs when monitored items have changed.
+            </summary>
+        </member>
+        <member name="E:ININ.IceLib.ProcessAutomation.ProcessMonitor.ProcessInstancesDeleted">
+            <summary>
+            Occurs when monitored items have been deleted.
+            </summary>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessMonitorCache">
+            <summary>
+            Cache to manage watched process instances.
+            </summary>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData">
+            <summary>
+            Represents a class that can send request to cancel a running process.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData.#ctor(ININ.IceLib.ProcessAutomation.ProcessInstance,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData"/> class.
+            </summary>
+            <param name="processInstance">The <see cref="P:ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData.ProcessInstance"/>.</param>
+            <param name="cancelReason">The cancel reason.</param>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData"/> class.
+            </summary>
+            <param name="processInstanceId">The process instance ID.</param>
+            <param name="cancelReason">The cancel reason.</param>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData.ProcessInstance">
+            <summary>
+            Gets <see cref="P:ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData.ProcessInstance"/>.
+            </summary>
+            <value>The process instance.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessMonitorCancelData.CancelReason">
+            <summary>
+            Gets the cancel reason.
+            </summary>
+            <value>The cancel reason.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessMonitorEventArgs">
+            <summary>
+            Represents a <c>ProcessMonitor</c> event.
+            </summary>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessMonitorEventArgs.ProcessInstances">
+            <summary>Gets the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance">ProcessInstances</see> that were updated.</summary>
+            <value>The process instances.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter">
+            <summary>
+            Provides the mechanism for <c>ProcessMonitor</c> to filter requests.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.FilterByAny">
+            <summary>
+            Filters on any process instance.
+            </summary>
+            <returns>A filter of the specified type.</returns>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.FilterByProcessName(System.String)">
+            <summary>
+            Filters the name of the by process.
+            </summary>
+            <param name="processName">Name of the process.</param>
+            <returns>A filter of the specified type.</returns>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.FilterByOwner(System.String)">
+            <summary>
+            Filters by the process owner.
+            </summary>
+            <param name="owner">The owner.</param>
+            <returns>A filter of the specified type.</returns>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.FilterByLaunchType(ININ.IceLib.ProcessAutomation.LaunchType)">
+            <summary>
+            Filters by launch type.
+            </summary>
+            <param name="launchType">Type of the launch.</param>
+            <returns>A filter of the specified type.</returns>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.FilterByLaunchType(ININ.IceLib.ProcessAutomation.LaunchType,System.String)">
+            <summary>
+            Filters by launch type and  name.
+            </summary>
+            <param name="launchType">Type of the launch.</param>
+            <param name="launchName">Name of the launch.</param>
+            <returns>A filter of the specified type.</returns>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.FilterByProcessInstanceId(System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            Filters by process instance IDs.
+            </summary>
+            <param name="processInstanceIds">The process instance IDs.</param>
+            <returns>A filter of the specified type.</returns>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.FilterByProcessDefinitionId(System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            Filters by process definition IDs.
+            </summary>
+            <param name="processDefinitionIds">The process definition IDs.</param>
+            <returns>A filter of the specified type.</returns>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.CreateFilterXml">
+            <summary>
+            Creates the filter XML.
+            </summary>
+            <returns>The filter XML.</returns>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.Scope">
+            <summary>
+            Gets the scope.
+            </summary>
+            <value>The scope.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.ProcessName">
+            <summary>
+            Gets the name of the process.
+            </summary>
+            <value>The name of the process.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.Owner">
+            <summary>
+            Gets the owner.
+            </summary>
+            <value>The owner.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.LaunchType">
+            <summary>
+            Gets the type of the launch.
+            </summary>
+            <value>The type of the launch.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.LaunchName">
+            <summary>
+            Gets the name of the launch.
+            </summary>
+            <value>The name of the launch.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.ProcessInstanceIds">
+            <summary>
+            Gets the process instance IDs.
+            </summary>
+            <value>The process instance IDs.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter.ProcessDefinitionIds">
+            <summary>
+            Gets the process definition IDs.
+            </summary>
+            <value>The process definition IDs.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessMonitorFilterScope">
+            <summary>
+            Represents what to filter for in a <see cref="T:ININ.IceLib.ProcessAutomation.ProcessMonitorFilter"/>.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessMonitorFilterScope.Any">
+            <summary>Get any instances.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessMonitorFilterScope.ProcessName">
+            <summary>Filter by process name.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessMonitorFilterScope.Owner">
+            <summary>Filter by owner.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessMonitorFilterScope.LaunchType">
+            <summary>Filter by launching type.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessMonitorFilterScope.ProcessInstanceId">
+            <summary>Filter by <see cref="P:ININ.IceLib.ProcessAutomation.ProcessInstance.Id">process instance ID</see>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessMonitorFilterScope.ProcessDefinitionId">
+            <summary>Filter by <see cref="P:ININ.IceLib.ProcessAutomation.ProcessInstance.DefinitionId">process definition ID</see>.</summary>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessNote">
+            <summary>
+            Defines a note that was added to <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> through the method <see cref="M:ININ.IceLib.ProcessAutomation.ProcessInstance.AssociateNotes(System.String)"/>.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessNote.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessNote.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessNote.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessNote.UserId">
+            <summary>
+            Gets the user ID of the user that added this notes entry to <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.
+            </summary>
+            <value>The user ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessNote.Note">
+            <summary>
+            Gets the note.
+            </summary>
+            <value>The note.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessNote.DateTime">
+            <summary>
+            Gets the date time when this entry was added to <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.
+            </summary>
+            <value>The date time.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessStatus">
+            <summary>
+            Represents the current status of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessStatus.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessStatus.Id">
+            <summary>
+            Gets the status ID.
+            </summary>
+            <returns>The flow status.</returns>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessStatus.Name">
+            <summary>
+            Gets the status name of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.
+            </summary>
+            <returns>The flow status name.</returns>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessStatus.Description">
+            <summary>
+            Gets the status description of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.
+            </summary>
+            <returns>The flow status description.</returns>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessTask">
+            <summary>
+            Represents a Process task.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessTask.#ctor(ININ.IceLib.ProcessAutomation.ProcessManager,System.Collections.Generic.Dictionary{ININ.IceLib.ProcessAutomation.ProcessTaskProperty,System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.ProcessTask"/> class.
+            </summary>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.ProcessTask.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessTask.Status">
+            <summary>Gets the task status.</summary>
+            <value>The task status.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessTask.Id">
+            <summary>Gets the ID of this task.</summary>
+            <value>The Task ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessTask.Name">
+            <summary>Gets the name.</summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessTask.Description">
+            <summary>Gets the description.</summary>
+            <value>The description.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessTask.StartTime">
+            <summary>Gets the start time.</summary>
+            <value>The start time.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessTask.EndTime">
+            <summary>Gets the end time.</summary>
+            <value>The end time.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessTask.ConfigId">
+            <summary>Gets the config ID.</summary>
+            <value>The config ID.</value>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ProcessTask.ParentProcess">
+            <summary>Gets <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/>.</summary>
+            <value>The <see cref="T:ININ.IceLib.ProcessAutomation.ProcessInstance"/> that owns this action.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ProcessTaskProperty">
+            <summary>
+            Properties of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessTask"/> that might change.
+            </summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessTaskProperty.Id">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessTask.Id"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessTask"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessTaskProperty.Name">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessTask.Name"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessTask"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessTaskProperty.Description">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessTask.Description"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessTask"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessTaskProperty.ConfigId">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessTask.ConfigId"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessTask"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessTaskProperty.StartTime">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessTask.StartTime"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessTask"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessTaskProperty.EndTime">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessTask.EndTime"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessTask"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessTaskProperty.Status">
+            <summary>Represents the <see cref="P:ININ.IceLib.ProcessAutomation.ProcessTask.Status"/> property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessTask"/>.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.ProcessTaskProperty.StatusName">
+            <summary>Represents the status name property of <see cref="T:ININ.IceLib.ProcessAutomation.ProcessTask"/>.</summary>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.SearchForProcessesAsyncEventArgs">
+            <summary>
+            Provides data for <see cref="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.SearchForProcesses(ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings)"/>.
+            </summary>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.SearchForProcessesAsyncEventArgs.SearchResults">
+            <summary>
+            Gets the search results for <see cref="M:ININ.IceLib.ProcessAutomation.ProcessMonitor.SearchForProcesses(ININ.IceLib.ProcessAutomation.ProcessInstanceSearchSettings)"/>.
+            </summary>
+            <value>The search results.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.ShowPageEventArgs">
+            <summary>
+            Provides data for the PageDisplayed event of a <see cref="T:ININ.IceLib.ProcessAutomation.WorkItemInteraction"/>.
+            </summary>
+            <doccompleted/>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.ShowPageEventArgs.PageInstance">
+            <summary>
+            Gets the properties of the page that the client application needs to display.
+            </summary>
+            <value>The page instance.</value>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.WorkItemInteraction">
+            <summary>Represents a work item interaction within the Interaction Center system.</summary>
+            <remarks>Actions that require user input are executed by placing Work Item interactions on a user queue.
+            <para>
+            <list type="bullet">
+            <item>To <b>start watching</b> a work item interaction call <see cref="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemStartWatching"/> or 
+            <see cref="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemStartWatchingAsync(System.ComponentModel.AsyncCompletedEventHandler,System.Object)"/>. When the asynchronous work item start watch completes it invokes the   
+            <c>completedCallback</c> delegate.<br/><br/></item>
+            <item>To <b>stop watching</b> a work item interaction call <see cref="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemStopWatching"/> or 
+            <see cref="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemStopWatchingAsync(System.ComponentModel.AsyncCompletedEventHandler,System.Object)"/>. When the asynchronous work item stop watch completes, it invokes the   
+            <c>completedCallback</c> delegate.<br/><br/></item>
+            <item>Calling <i>WorkItemStartWatching</i> or <i>WorkItemStartWatchingAsync</i> when a watch is already
+            in place, or calling <i>WorkItemStopWatching</i> or <i>WorkItemStopWatchingAsync</i> when a watch is 
+            not in place raises an <see cref="T:System.InvalidOperationException"/>.<br/><br/></item> 
+            </list>
+            </para>
+            <note>The asynchronous versions of the above methods are preferred since they can be lengthy operations.</note>
+            </remarks>
+            <doccompleted/>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.#ctor(ININ.IceLib.ProcessAutomation.ProcessManager,ININ.IceLib.Interactions.InteractionId)">
+            <overloads>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.WorkItemInteraction"/> class.
+            </overloads>
+            
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.WorkItemInteraction"/> class.
+            </summary>
+            <param name="processManager">The process manager.</param>
+            <param name="interactionId">The interaction ID.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.#ctor(ININ.IceLib.Interactions.InteractionsManager,ININ.IceLib.Interactions.InteractionId)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.WorkItemInteraction"/> class.
+            </summary>
+            <param name="interactionsManager">The Interactions Manager.</param>
+            <param name="interactionId">The interaction ID.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemIsWatching">
+            <summary>
+            Determines whether a Work Item watch is active.
+            </summary>
+            <returns>
+            	<see langword="true"/> if a Work Item watch is active; otherwise, <see langword="false"/>.
+            </returns>
+            <remarks>
+            This method determines whether a Work Item watch is in place for this instance.
+            </remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemStartWatching">
+            <summary>
+            Starts watching the Work Item interaction.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The object is already being watched.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemStartWatchingAsync(System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously starts watching the Work Item interaction.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam /></param>
+            <remarks><ininAsyncMethodNote /></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemStopWatching">
+            <summary>
+            Stops watching the Work Item interaction.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The object is not being watched.</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemStopWatchingAsync(System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously stops watching the Work Item interaction.
+            </summary>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam /></param>
+            <remarks><ininAsyncMethodNote /></remarks>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.CreatePageCommand(ININ.IceLib.ProcessAutomation.PageCommandType,System.String,System.String,System.String,System.String)">
+            <overloads>
+            Constructs a page command.
+            </overloads>
+            <summary>
+            Initializes a new instance of the <see cref="T:ININ.IceLib.ProcessAutomation.PageCommand"/> class with empty data.
+            </summary>
+            <param name="type">Type of command that is being sent.</param>
+            <param name="commandId">ID of the command.</param>
+            <param name="commandName">User friendly name for this command.</param>
+            <param name="commandData">Data associated with this command.</param>
+            <param name="dataValuesVersion">Version of data values that the client is sending.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="type"/> is set to <see cref="F:ININ.IceLib.ProcessAutomation.PageCommandType.None"/>. It should be any value from <see cref="T:ININ.IceLib.ProcessAutomation.PageCommandType"/> other than <see cref="F:ININ.IceLib.ProcessAutomation.PageCommandType.None"/>.</exception>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.SendCommand(ININ.IceLib.ProcessAutomation.PageInstance,ININ.IceLib.ProcessAutomation.PageCommand)">
+            <summary>
+            Sends a command to the server along with data.
+            </summary>
+            <param name="pageInstance">Page on which the command needs to be executed.</param>
+            <param name="pageCommand">The command that needs to be executed.</param>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.WorkItemInteraction.SendCommandAsync(ININ.IceLib.ProcessAutomation.PageInstance,ININ.IceLib.ProcessAutomation.PageCommand,System.ComponentModel.AsyncCompletedEventHandler,System.Object)">
+            <summary>
+            Asynchronously sends a command to the server along with data.
+            </summary>
+            <param name="pageInstance">Page on which the command needs to be executed.</param>
+            <param name="pageCommand">The command that needs to be executed.</param>
+            <param name="completedCallback">The callback to invoke when the asynchronous operation completes.</param>
+            <param name="userState"><ininAsyncStateParam/></param>
+            <remarks><ininAsyncMethodNote/></remarks>
+            <exception cref="T:System.ArgumentNullException">A parameter is a null reference (Nothing in Visual Basic).</exception>
+        </member>
+        <member name="E:ININ.IceLib.ProcessAutomation.WorkItemInteraction.PageDisplayed">
+            <summary>
+            Occurs when the IC server indicates that a page that belong to this <see cref="T:ININ.IceLib.ProcessAutomation.WorkItemInteraction"/> needs to be displayed to the user.
+            </summary>
+        </member>
+        <member name="E:ININ.IceLib.ProcessAutomation.WorkItemInteraction.AllPagesClosed">
+            <summary>
+            Occurs when the IC server indicates that all pages that belong to this <see cref="T:ININ.IceLib.ProcessAutomation.WorkItemInteraction"/> needs to be closed.
+            </summary>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.WorkItemInteraction.ProcessDefinitionId">
+            <summary>
+            Gets the <see cref="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.ProcessDefinitionId"/>.
+            </summary>
+            <value>The ID of the process definition from which the process instances were created that created this work item interaction.</value>
+            <exception cref="T:ININ.IceLib.NotCachedException">The associated attribute is not being watched.</exception>
+            <icversion>4.0 SU 2</icversion>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.WorkItemInteraction.ProcessInstanceId">
+            <summary>
+            Gets the <see cref="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.ProcessInstanceId"/>.
+            </summary>
+            <value>The ID of the process that this work item interaction is associated with.</value>
+            <exception cref="T:ININ.IceLib.NotCachedException">The associated attribute is not being watched.</exception>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.WorkItemInteraction.ProcessNumericId">
+            <summary>
+            Gets the <see cref="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.ProcessNumericId"/>.
+            </summary>
+            <value>The human readable numeric ID of the process that this work item interaction is associated with.</value>
+            <exception cref="T:ININ.IceLib.NotCachedException">The associated attribute is not being watched.</exception>
+            <icversion>4.0 SU 1</icversion>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemCategory">
+            <summary>
+            Gets the <see cref="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.WorkItemCategory"/>.
+            </summary>
+            <value>The current category for the work item associated with this work item interaction.</value>
+            <exception cref="T:ININ.IceLib.NotCachedException">The associated attribute is not being watched.</exception>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemDescription">
+            <summary>
+            Gets the <see cref="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.WorkItemDescription"/>.
+            </summary>
+            <value>The current description for the work item associated with this work item interaction.</value>
+            <exception cref="T:ININ.IceLib.NotCachedException">The associated attribute is not being watched.</exception>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemDueDate">
+            <summary>
+            Gets the <see cref="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.WorkItemDueDate"/>.
+            </summary>
+            <value>The due date for the work item associated with this work item interaction.</value>
+            <exception cref="T:ININ.IceLib.NotCachedException">The associated attribute is not being watched.</exception>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemInitiationTime">
+            <summary>
+            Gets the <see cref="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.WorkItemInitiationTime"/>.
+            </summary>
+            <value>The initiation time for the work item associated with this work item interaction.</value>
+            <exception cref="T:ININ.IceLib.NotCachedException">The associated attribute is not being watched.</exception>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemIsTransferable">
+            <summary>
+            Gets the <see cref="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.WorkItemIsTransferable"/>.
+            </summary>
+            <value>The value that determines if this work item interaction is transferable.</value>
+            <exception cref="T:ININ.IceLib.NotCachedException">The associated attribute is not being watched.</exception>
+            <icversion>4.0 SU 2</icversion>
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.WorkItemInteraction.WorkItemError">
+            <summary>
+            Gets the <see cref="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.WorkItemError"/>.
+            </summary>
+            <value>The error occurred while processing this work item interaction.</value>
+            <exception cref="T:ININ.IceLib.NotCachedException">The associated attribute is not being watched.</exception>
+        </member>
+        <member name="T:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName">
+            <summary>
+            Specifies attribute names that can be used with WorkItemInteractions.
+            </summary>
+            <doccompleted/>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.ProcessDefinitionId">
+            <summary>The process definition from which the process instances were created that created this interaction.</summary>
+            <icversion>4.0 SU 2</icversion>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.ProcessInstanceId">
+            <summary>The process instance that initiated this interaction.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.WorkItemCategory">
+            <summary>The current category for the work item interaction.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.WorkItemDescription">
+            <summary>The current description for the work item interaction.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.WorkItemDueDate">
+            <summary>The due date of the work item interaction.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.WorkItemInitiationTime">
+            <summary>The initiation time of the work item interaction.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.WorkItemIsTransferable">
+            <summary>Determines if this work item interaction can be transfered.</summary>
+            <icversion>4.0 SU 2</icversion>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.WorkItemError">
+            <summary>An error occurred while processing this work item.</summary>
+        </member>
+        <member name="F:ININ.IceLib.ProcessAutomation.WorkItemInteractionAttributeName.ProcessNumericId">
+            <summary>The human readable numeric ID assigned to the process instance.</summary>
+            <icversion>4.0 SU 1</icversion>
+        </member>
+        <member name="M:ININ.IceLib.ProcessAutomation.WorkItemInteractionCache.ChangeWatchedAttributesImpl(ININ.IceLib.Interactions.Internal.AttributeKey[],System.Boolean)">
+            <ConnectionExceptions />
+        </member>
+        <member name="P:ININ.IceLib.ProcessAutomation.WorkItemInteractionCache.ProcessManager">
+            <summary>
+            Gets the ProcessManager with which this Interaction is associated.
+            </summary>
+            <value>The process manager.</value>
+        </member>
+    </members>
+</doc>
