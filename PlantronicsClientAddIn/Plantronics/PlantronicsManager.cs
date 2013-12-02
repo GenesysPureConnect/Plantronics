@@ -1,13 +1,16 @@
-using System;
-using PlantronicsClientAddIn.Interactions;
-using PlantronicsClientAddIn.Status;
 using ININ.InteractionClient.AddIn;
 using Interop.Plantronics;
-using System.Runtime.InteropServices;
+using PlantronicsClientAddIn.Interactions;
+using PlantronicsClientAddIn.Status;
+using System;
 
 namespace PlantronicsClientAddIn.Plantronics
 {
-    public class PlantronicsManager : IPlantronicsManager, IDisposable
+    /// <summary>
+    /// The purpose of this class is to handle events coming from the Plantronics API.  
+    /// It is the central point for making things happen, based on different events, we can perform specific actions in CIC.
+    /// </summary>
+    public class PlantronicsManager : IDisposable
 	{
         private readonly ISessionCOMManager m_sessionComManager = null;
         private IComSession m_comSession = null;
@@ -22,15 +25,16 @@ namespace PlantronicsClientAddIn.Plantronics
 		private ITraceContext _traceContext;
         private INotificationService _notificationService;
 
-		public PlantronicsManager (IStatusManager statusManager, IInteractionManager interactionManager, INotificationService notificationService, ITraceContext traceContext)
+		public PlantronicsManager (IStatusManager statusManager, 
+                                    IInteractionManager interactionManager, 
+                                    INotificationService notificationService,
+                                    ITraceContext traceContext)
 		{
 			_statusManager = statusManager;
 			_interactionManager = interactionManager;
 			_traceContext = traceContext;
             _notificationService = notificationService;
             
-            //Register Plugin with PURE
-            //SessionManager is a singleton and get its reference on the init of the Plugin.
             m_sessionComManager = new SessionComManagerClass();
             m_sessionManagerEvents = m_sessionComManager as ISessionCOMManagerEvents_Event;
             m_comSession = m_sessionComManager.Register("Interaction Client Plantronics AddIn");
@@ -58,7 +62,7 @@ namespace PlantronicsClientAddIn.Plantronics
             _traceContext.Status("Plantronics connected device information");
             _traceContext.Status("Plantronics: Internal Name- " + device.InternalName);
             _traceContext.Status("Plantronics: Is Attached- " + device.IsAttached);
-            _traceContext.Status("Plantronics: Manufacture rName- " + device.ManufacturerName);
+            _traceContext.Status("Plantronics: Manufacturer Name- " + device.ManufacturerName);
             _traceContext.Status("Plantronics: Product ID- " + device.ProductID);
             _traceContext.Status("Plantronics: Product Name- " + device.ProductName);
             _traceContext.Status("Plantronics: Serial Number- " + device.SerialNumber);
@@ -69,7 +73,8 @@ namespace PlantronicsClientAddIn.Plantronics
         private void RegisterEvents()
         {
             LogDeviceInfo(m_device);
-            // Register for some device events!
+
+            // Register for some device events
             m_deviceComEvents = m_device.DeviceEvents as IDeviceCOMEvents_Event;
             m_deviceComEvents.ButtonPressed += new IDeviceCOMEvents_ButtonPressedEventHandler(OnButtonPressed);
 
@@ -91,6 +96,11 @@ namespace PlantronicsClientAddIn.Plantronics
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnHeadsetStateChanged(object sender, _DeviceListenerEventArgs e)
         {
             _traceContext.Status("OnHeadsetStateChanged " + e.ToString());
@@ -156,11 +166,6 @@ namespace PlantronicsClientAddIn.Plantronics
                 m_sessionComManager.UnRegister(m_comSession);
             }
             catch { }
-        }
-
-        public IDevice GetDevice()
-        {
-            return m_device;
         }
     }
 }

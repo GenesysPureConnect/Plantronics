@@ -61,9 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interactions\InteractionManager.cs" />
-    <Compile Include="Plantronics\IPlantronicsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MyQueueMonitor.cs" />
     <Compile Include="AddIn.cs" />
     <Compile Include="Status\IStatusManager.cs" />
     <Compile Include="Interactions\IInteractionManager.cs" />

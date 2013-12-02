@@ -7,10 +7,13 @@ using System.Text;
 
 namespace PlantronicsClientAddIn.Status
 {
+    /// <summary>
+    /// StatusManager uses IceLib to set the users's status to either available or away from desk.  
+    /// </summary>
     internal class StatusManager : IStatusManager
     {
-        const string AwayFromDesk = "away from desk";
-        const string Available = "available";
+        private const string AwayFromDesk = "away from desk";
+        private const string Available = "available";
 
         private readonly PeopleManager _peopleManager;
         private readonly UserStatusList _userStatusList;
@@ -42,12 +45,6 @@ namespace PlantronicsClientAddIn.Status
         public void SetLastStatus()
         {
             SetToAvailable();
-            //var previousStatusInfo = _userStatusList.GetPreviousStatusInfo().Take(0);
-            //if (previousStatusInfo != null && previousStatusInfo.Count() >= 0)
-            //{
-            //    var previousStatus = previousStatusInfo.fr ;
-            //    SetStatus(previousStatus.StatusId.ToLower());
-            //}
         }
 
         private void SetStatus(string statusId)

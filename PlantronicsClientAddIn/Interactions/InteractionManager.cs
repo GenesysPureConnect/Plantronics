@@ -2,20 +2,22 @@
 using ININ.IceLib.Interactions;
 using ININ.InteractionClient.AddIn;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PlantronicsClientAddIn.Interactions
 {
+    /// <summary>
+    /// The InteractionManager class is responsible for picking up or disconnecting calls based on the state that they are in. 
+    /// </summary>
     internal class InteractionManager : IInteractionManager
     {
         private readonly InteractionsManager _interactionManager;
         private readonly IQueueService _queueService;
         private readonly IQueue _myInteractionsQueue;
+        private readonly ITraceContext _traceContext;
 
-        public InteractionManager(Session session, IQueueService queueService)
+        public InteractionManager(Session session, IQueueService queueService, ITraceContext traceContext)
         {
+            _traceContext = traceContext;
             _interactionManager = InteractionsManager.GetInstance(session);
             _queueService = queueService;
 
@@ -25,22 +27,39 @@ namespace PlantronicsClientAddIn.Interactions
 
         public void PickupOrDisconnectCall()
         {
-            IInteraction call = null;
+            _traceContext.Status("looking for a call that is alerting or connected");
+            Interaction call = null;
 
             //first try to find an alerting CALL, and pick that up
-            call = _myInteractionsQueue.Interactions.FirstOrDefault(c => c.GetAttribute(InteractionAttributeName.State) == InteractionAttributeValues.State.Alerting);
+            call = FindCall(InteractionAttributeValues.State.Alerting);
             if (call != null)
             {
-                _interactionManager.CreateInteraction(new InteractionId(call.InteractionId)).Pickup();
+                call.Pickup();
                 return; //don't do anything else here
             }
             
             //if there is not an alerting call, Disconnect a connected Call;
-            call = _myInteractionsQueue.Interactions.FirstOrDefault(c => c.GetAttribute(InteractionAttributeName.State) == InteractionAttributeValues.State.Connected);
+            call = FindCall(InteractionAttributeValues.State.Connected);
             if (call != null)
             {
-                _interactionManager.CreateInteraction(new InteractionId(call.InteractionId)).Disconnect();
+                call.Disconnect();
             }
+        }
+
+        private Interaction FindCall(string state)
+        {
+            foreach (var interaction in _myInteractionsQueue.Interactions)
+            {
+                if (interaction.GetAttribute(InteractionAttributeName.State) == state && 
+                    interaction.GetAttribute(InteractionAttributeName.InteractionType) == InteractionAttributeValues.InteractionType.Call)
+                {
+                    _traceContext.Note(String.Format("Found {0} with state {1}", interaction.InteractionId, state));
+                    return _interactionManager.CreateInteraction(new InteractionId(interaction.InteractionId));
+                }
+            }
+
+            _traceContext.Note(String.Format("Could not find interaction with state {0}", state));
+            return null;
         }
     }
 }
