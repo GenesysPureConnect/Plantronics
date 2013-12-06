@@ -2,6 +2,7 @@
 using ININ.IceLib.Interactions;
 using ININ.InteractionClient.AddIn;
 using System;
+using System.Collections.Generic;
 
 namespace PlantronicsClientAddIn.Interactions
 {
@@ -46,6 +47,26 @@ namespace PlantronicsClientAddIn.Interactions
             }
         }
 
+        public void HoldCall()
+        {
+            var calls = FindAllCalls(InteractionAttributeValues.State.Connected);
+
+            if (calls.Count > 0)
+            {
+                calls[0].Hold(true);
+            }
+        }
+
+        public void PickupHeldCall()
+        {
+            var calls = FindAllCalls(InteractionAttributeValues.State.Held);
+
+            if (calls.Count == 1)
+            {
+                calls[0].Pickup();
+            }
+        }
+
         private Interaction FindCall(string state)
         {
             foreach (var interaction in _myInteractionsQueue.Interactions)
@@ -60,6 +81,22 @@ namespace PlantronicsClientAddIn.Interactions
 
             _traceContext.Note(String.Format("Could not find interaction with state {0}", state));
             return null;
+        }
+
+        private IList<Interaction> FindAllCalls(string state)
+        {
+            List<Interaction> calls = new List<Interaction>();
+            foreach (var interaction in _myInteractionsQueue.Interactions)
+            {
+                if (interaction.GetAttribute(InteractionAttributeName.State) == state &&
+                    interaction.GetAttribute(InteractionAttributeName.InteractionType) == InteractionAttributeValues.InteractionType.Call)
+                {
+                    _traceContext.Note(String.Format("Found {0} with state {1}", interaction.InteractionId, state));
+                    calls.Add(_interactionManager.CreateInteraction(new InteractionId(interaction.InteractionId)));
+                }
+            }
+
+            return calls;
         }
     }
 }

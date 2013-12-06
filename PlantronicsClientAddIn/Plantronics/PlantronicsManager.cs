@@ -3,6 +3,7 @@ using Interop.Plantronics;
 using PlantronicsClientAddIn.Interactions;
 using PlantronicsClientAddIn.Status;
 using System;
+using System.Diagnostics;
 
 namespace PlantronicsClientAddIn.Plantronics
 {
@@ -103,21 +104,26 @@ namespace PlantronicsClientAddIn.Plantronics
         /// <param name="e"></param>
         private void OnHeadsetStateChanged(object sender, _DeviceListenerEventArgs e)
         {
+            Debug.WriteLine("OnHeadsetStateChanged " + e.ToString());
             _traceContext.Status("OnHeadsetStateChanged " + e.ToString());
             if (e.HeadsetStateChange == HeadsetStateChange.HeadsetStateChange_InRange)
             {
+                
                 _notificationService.Notify("Headset in range", "Headset", NotificationType.Info, TimeSpan.FromSeconds(3));
                 _statusManager.SetLastStatus();
+                _interactionManager.PickupHeldCall();
             }
             else if (e.HeadsetStateChange == HeadsetStateChange.HeadsetStateChange_OutofRange)
             {
                 _notificationService.Notify("Headset out of range", "Headset", NotificationType.Warning, TimeSpan.FromSeconds(3));
                 _statusManager.SetToAwayFromDesk();
+                _interactionManager.HoldCall();
             }
         }
 
         private void OnButtonPressed(object sender, _DeviceEventArgs e)
         {
+            Debug.WriteLine("OnButtonPressed " + e.ToString());
             _traceContext.Status("OnButtonPressed " + e.ToString());
             if (e.ButtonPressed == HeadsetButton.HeadsetButton_Talk)
             {
@@ -128,7 +134,7 @@ namespace PlantronicsClientAddIn.Plantronics
         private void OnDeviceStateChanged(object sender, _DeviceStateEventArgs e)
         {
             _traceContext.Status("OnDeviceStateChanged " + e.ToString());
-            
+            Debug.WriteLine("OnDeviceStateChanged " + e.ToString());
             switch (e.State)
             {
                 case DeviceState.DeviceState_Added:
@@ -151,8 +157,6 @@ namespace PlantronicsClientAddIn.Plantronics
                     m_device = null;
                     _notificationService.Notify("Plantronics Headset Removed", "Headset", NotificationType.Info, TimeSpan.FromSeconds(2));
                     break;
-
-
             }
         }
 
