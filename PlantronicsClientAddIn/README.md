@@ -5,6 +5,8 @@ This AddIn is a scaffold example around the [Plantronics Spokes SDK][1].  The Sp
 
 This example was tested with the [Plantronics DA45][2].  Minimal testing was done with the [Plantronics Legend UC][3] but some of the device events such as connected/disconnected were inconsistent from the DA45.
 
+A demo video of this project in action can be seen at http://www.youtube.com/watch?v=pFQC-6TcQSo
+
 AddIn Features
 --------------
 The AddIn will perform the following actions based on the Plantronics headset event
