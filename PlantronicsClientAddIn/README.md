@@ -8,7 +8,7 @@ This example was tested with the [Plantronics DA45][2].  Minimal testing was don
 A demo video of this project in action can be seen at http://www.youtube.com/watch?v=pFQC-6TcQSo
 
 Running The Add-In
-===================
+--------------
 It is required that the SDK is installed in order for this Add-In to run.  Once it is installed, create a directory in Program Files (x86)\Interactive Intelligence\ICUserApps called AddIns, copy the 2 dlls to that new folder and restart the Interaction Client. 
 
 
