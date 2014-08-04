@@ -1,5 +1,6 @@
 using ININ.InteractionClient.AddIn;
 using Interop.Plantronics;
+using Plantronics.UC.SpokesWrapper;
 using PlantronicsClientAddIn.Interactions;
 using PlantronicsClientAddIn.Status;
 using System;
@@ -7,19 +8,15 @@ using System.Diagnostics;
 
 namespace PlantronicsClientAddIn.Plantronics
 {
+    
     /// <summary>
     /// The purpose of this class is to handle events coming from the Plantronics API.  
     /// It is the central point for making things happen, based on different events, we can perform specific actions in CIC.
     /// </summary>
     public class PlantronicsManager : IDisposable
 	{
-        private readonly ISessionCOMManager m_sessionComManager = null;
-        private IComSession m_comSession = null;
-        private IDevice m_device = null;
-        private ISessionCOMManagerEvents_Event m_sessionManagerEvents;
-
-        private IDeviceCOMEvents_Event m_deviceComEvents;
-        private IDeviceListenerCOMEvents_Event m_deviceListenerEvents;
+   
+        private Spokes _spokes;
 
 		private IStatusManager _statusManager;
 		private IInteractionManager _interactionManager;
@@ -35,142 +32,117 @@ namespace PlantronicsClientAddIn.Plantronics
 			_interactionManager = interactionManager;
 			_traceContext = traceContext;
             _notificationService = notificationService;
+
+            _spokes = Spokes.Instance;
+
+            _spokes.PutOn += OnHeadsetPutOn;
+            _spokes.TakenOff += OnHeadsetTakenOff;
             
-            m_sessionComManager = new SessionComManagerClass();
-            m_sessionManagerEvents = m_sessionComManager as ISessionCOMManagerEvents_Event;
-            m_comSession = m_sessionComManager.Register("Interaction Client Plantronics AddIn");
+            _spokes.Docked += OnHeadsetDocked;
+            _spokes.UnDocked += OnHeadsetUnDocked;
 
-            // Now check if our plugin session was created
-            if (m_comSession != null)
-            {
-                // detect devices added/removed
-                m_sessionManagerEvents.DeviceStateChanged += OnDeviceStateChanged;
+            _spokes.Attached += OnHeadsetAttached;
+            _spokes.Detached += OnHeadsetDetached;
 
-                //Get current Device
-                m_device = m_comSession.ActiveDevice;
+            _spokes.InRange += OnHeadsetInRange;
+            _spokes.OutOfRange += OnHeadsetOutOfRange;
 
-                // if we have a device register for events
-                if (m_device != null)
-                {
-                    // Register for device events
-                    RegisterEvents();
-                }
-            }
+            _spokes.ButtonPress += OnDeviceButtonPress;
+
+            _spokes.Connect("Interaction Client AddIn");
 		}
 
-        private void LogDeviceInfo(IDevice device)
+        private void OnDeviceButtonPress(object sender, ButtonPressArgs e)
         {
-            _traceContext.Status("Plantronics connected device information");
-            _traceContext.Status("Plantronics: Internal Name- " + device.InternalName);
-            _traceContext.Status("Plantronics: Is Attached- " + device.IsAttached);
-            _traceContext.Status("Plantronics: Manufacturer Name- " + device.ManufacturerName);
-            _traceContext.Status("Plantronics: Product ID- " + device.ProductID);
-            _traceContext.Status("Plantronics: Product Name- " + device.ProductName);
-            _traceContext.Status("Plantronics: Serial Number- " + device.SerialNumber);
-            _traceContext.Status("Plantronics: Vendor ID- " + device.VendorID);
-            _traceContext.Status("Plantronics: Version Number- " + device.VersionNumber);
-        }
-
-        private void RegisterEvents()
-        {
-            LogDeviceInfo(m_device);
-
-            // Register for some device events
-            m_deviceComEvents = m_device.DeviceEvents as IDeviceCOMEvents_Event;
-            m_deviceComEvents.ButtonPressed += new IDeviceCOMEvents_ButtonPressedEventHandler(OnButtonPressed);
-
-            m_deviceListenerEvents = m_device.DeviceListener as IDeviceListenerCOMEvents_Event;
-            if (m_deviceListenerEvents != null)
-            {
-                m_deviceListenerEvents.HeadsetStateChanged += new IDeviceListenerCOMEvents_HeadsetStateChangedEventHandler(OnHeadsetStateChanged);
-            }
-        }
-
-        private void UnRegisterEvents()
-        {
-            m_deviceComEvents.ButtonPressed -= OnButtonPressed;
-            m_deviceListenerEvents = m_device.DeviceListener as IDeviceListenerCOMEvents_Event;
-            
-            if (m_deviceListenerEvents != null)
-            {
-                m_deviceListenerEvents.HeadsetStateChanged -= OnHeadsetStateChanged;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnHeadsetStateChanged(object sender, _DeviceListenerEventArgs e)
-        {
-            Debug.WriteLine("OnHeadsetStateChanged " + e.ToString());
-            _traceContext.Status("OnHeadsetStateChanged " + e.ToString());
-            if (e.HeadsetStateChange == HeadsetStateChange.HeadsetStateChange_InRange)
-            {
-                
-                _notificationService.Notify("Headset in range", "Headset", NotificationType.Info, TimeSpan.FromSeconds(3));
-                _statusManager.SetLastStatus();
-                _interactionManager.PickupHeldCall();
-            }
-            else if (e.HeadsetStateChange == HeadsetStateChange.HeadsetStateChange_OutofRange)
-            {
-                _notificationService.Notify("Headset out of range", "Headset", NotificationType.Warning, TimeSpan.FromSeconds(3));
-                _statusManager.SetToAwayFromDesk();
-                _interactionManager.HoldCall();
-            }
-        }
-
-        private void OnButtonPressed(object sender, _DeviceEventArgs e)
-        {
-            Debug.WriteLine("OnButtonPressed " + e.ToString());
-            _traceContext.Status("OnButtonPressed " + e.ToString());
-            if (e.ButtonPressed == HeadsetButton.HeadsetButton_Talk)
+            Debug.WriteLine("OnButtonPressed " + e.headsetButton);
+            _traceContext.Status("OnButtonPressed " + e.headsetButton);
+            if (e.headsetButton == DeviceHeadsetButton.HeadsetButton_Talk)
             {
                 _interactionManager.PickupOrDisconnectCall();
             }
+
         }
 
-        private void OnDeviceStateChanged(object sender, _DeviceStateEventArgs e)
+        private void OnHeadsetOutOfRange(object sender, EventArgs e)
         {
-            _traceContext.Status("OnDeviceStateChanged " + e.ToString());
-            Debug.WriteLine("OnDeviceStateChanged " + e.ToString());
-            switch (e.State)
-            {
-                case DeviceState.DeviceState_Added:
-                    // register event handlers
-                    if (m_device != null)
-                    {
-                        UnRegisterEvents();
-                    }
-
-                    m_device = m_comSession.ActiveDevice;
-                    RegisterEvents();
-                    _notificationService.Notify(String.Format("{0} headset connected", m_device.ProductName), "Headset", NotificationType.Info, TimeSpan.FromSeconds(2));
-                    break;
-                case DeviceState.DeviceState_Removed:
-                    // unregister event handlers
-                    if (m_device != null)
-                    {
-                        UnRegisterEvents();
-                    }
-                    m_device = null;
-                    _notificationService.Notify("Plantronics Headset Removed", "Headset", NotificationType.Info, TimeSpan.FromSeconds(2));
-                    break;
-            }
+            Debug.WriteLine("OnHeadsetOutOfRange " );
+            _traceContext.Status("OnHeadsetOutOfRange " );
+            _notificationService.Notify("Headset out of range", "Headset", NotificationType.Warning, TimeSpan.FromSeconds(3));
+            _statusManager.SetToAwayFromDesk();
         }
 
+        private void OnHeadsetInRange(object sender, EventArgs e)
+        {
+            Debug.WriteLine("OnHeadsetInRange ");
+            _traceContext.Status("OnHeadsetInRange ");
+
+            _notificationService.Notify("Headset in range", "Headset", NotificationType.Info, TimeSpan.FromSeconds(3));
+            _statusManager.SetLastStatus();
+        }
+
+        private void OnHeadsetDetached(object sender, EventArgs e)
+        {
+            Debug.WriteLine("OnHeadsetDetached " );
+            _traceContext.Status("OnHeadsetDetached ");
+
+            _notificationService.Notify("Plantronics Headset Detached", "Headset", NotificationType.Info, TimeSpan.FromSeconds(2));
+            _statusManager.SetToAwayFromDesk();
+        }
+
+        private void OnHeadsetAttached(object sender, AttachedArgs e)
+        {
+            Debug.WriteLine("OnHeadsetAttached " + e.m_device.ManufacturerName + " " + e.m_device.SerialNumber);
+            _traceContext.Status("OnHeadsetAttached " + e.ToString());
+            _notificationService.Notify(String.Format("{0} headset connected", _spokes.GetDevice.ProductName), "Headset", NotificationType.Info, TimeSpan.FromSeconds(2));
+            LogDeviceInfo(e.m_device);
+            _statusManager.SetLastStatus();
+        }
+
+        private void OnHeadsetUnDocked(object sender, DockedStateArgs e)
+        {
+            Debug.WriteLine("OnHeadsetUnDocked " );
+            _traceContext.Status("OnHeadsetUnDocked ");
+            _interactionManager.PickupAlertingCall();
+        }
+
+        private void OnHeadsetDocked(object sender, DockedStateArgs e)
+        {
+            Debug.WriteLine("OnHeadsetDocked " );
+            _traceContext.Status("OnHeadsetDocked " );
+            _interactionManager.DisconnectCall();
+
+        }
+
+        private void OnHeadsetTakenOff(object sender, WearingStateArgs e)
+        {
+            Debug.WriteLine("OnHeadsetTakenOff " );
+            _traceContext.Status("OnHeadsetTakenOff " );
+            _interactionManager.HoldCall();
+        }
+
+        private void OnHeadsetPutOn(object sender, WearingStateArgs e)
+        {
+            Debug.WriteLine("OnHeadsetPutOn " );
+            _traceContext.Status("OnHeadsetPutOn " );
+            _interactionManager.PickupHeldCall();
+        }
+        
+        private void LogDeviceInfo(ICOMDevice device)
+        {
+            _traceContext.Status("Plantronics connected device information");
+            _traceContext.Status("Plantronics: Internal Name- " + device.InternalName);
+            _traceContext.Status("Plantronics: Manufacturer Name- " + device.ManufacturerName);
+            _traceContext.Status("Plantronics: Product Name- " + device.ProductName);
+            _traceContext.Status("Plantronics: Serial Number- " + device.SerialNumber);
+            _traceContext.Status("Plantronics: Version Number- " + device.VersionNumber);
+        }
+      
         public void Dispose()
         {
-            try
-            {
-                UnRegisterEvents();
-                m_device = null;
-                m_sessionManagerEvents.DeviceStateChanged -= OnDeviceStateChanged;
-                m_sessionComManager.UnRegister(m_comSession);
-            }
-            catch { }
+            _spokes = null;
+            _spokes.Disconnect();
         }
     }
+     
 }
 

@@ -47,6 +47,29 @@ namespace PlantronicsClientAddIn.Interactions
             }
         }
 
+        public void PickupAlertingCall()
+        {
+            Interaction call = null;
+
+            //first try to find an alerting CALL, and pick that up
+            call = FindCall(InteractionAttributeValues.State.Alerting);
+            if (call != null)
+            {
+                call.Pickup();
+            }
+
+        }
+
+        public void DisconnectCall()
+        {
+            //if there is not an alerting call, Disconnect a connected Call;
+            var call = FindCall(InteractionAttributeValues.State.Connected);
+            if (call != null)
+            {
+                call.Disconnect();
+            }
+        }
+
         public void HoldCall()
         {
             var calls = FindAllCalls(InteractionAttributeValues.State.Connected);
