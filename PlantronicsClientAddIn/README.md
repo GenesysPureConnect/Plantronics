@@ -9,7 +9,7 @@ A demo video of this project in action can be seen at http://www.youtube.com/wat
 
 Running The Add-In
 --------------
-It is required that the SDK is installed in order for this Add-In to run.  Once it is installed, create a directory in Program Files (x86)\Interactive Intelligence\ICUserApps called AddIns, copy the 2 dlls to that new folder and restart the Interaction Client. 
+It is required that the SDK is installed ([Download Here][4]) in order for this Add-In to run.  Once it is installed, create a directory in Program Files (x86)\Interactive Intelligence\ICUserApps called AddIns, copy the 2 dlls to that new folder and restart the Interaction Client. 
 
 
 AddIn Features
@@ -65,6 +65,7 @@ The AddIn will perform the following actions based on the Plantronics headset ev
 
 
 
-  [1]: http://developer.plantronics.com/docs/DOC-1073
+  [1]: http://developer.plantronics.com/docs/DOC-1422
   [2]: http://www.plantronics.com/us/product/da45
   [3]: http://www.plantronics.com/us/product/voyager-legend-uc
+  [4]: http://developer.plantronics.com/docs/DOC-1313
