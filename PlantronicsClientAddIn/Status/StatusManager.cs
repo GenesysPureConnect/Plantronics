@@ -1,5 +1,6 @@
 ﻿using ININ.IceLib.Connection;
 using ININ.IceLib.People;
+using ININ.InteractionClient.AddIn;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +19,13 @@ namespace PlantronicsClientAddIn.Status
         private readonly PeopleManager _peopleManager;
         private readonly UserStatusList _userStatusList;
         private readonly StatusMessageList _statusMessageList;
+        private readonly ITraceContext _traceContext;
         private readonly string _userId;
 
-        public StatusManager(Session session)
+        public StatusManager(Session session, ITraceContext traceContext)
         {
             _userId = session.UserId;
+            _traceContext = traceContext;
             _peopleManager = PeopleManager.GetInstance(session);
             _userStatusList = new UserStatusList(_peopleManager);
             _userStatusList.StartWatching(new[] { _userId });
@@ -49,13 +52,20 @@ namespace PlantronicsClientAddIn.Status
 
         private void SetStatus(string statusId)
         {
+            _traceContext.Status("Setting status to " + statusId);
             var statusDetails = _statusMessageList.GetList().FirstOrDefault(s => s.Id.ToLower() == statusId);
             if (statusDetails != null)
             {
                 UserStatusUpdate statusUpdate = new UserStatusUpdate(_peopleManager);
                 statusUpdate.UserId = _userId;
                 statusUpdate.StatusMessageDetails = statusDetails;
+                _traceContext.Status("Sending status update request");
                 statusUpdate.UpdateRequest();
+            }
+            else
+            {
+                _traceContext.Warning("status message not found");
+                _statusMessageList.GetList().ToList().ForEach(s => _traceContext.Status("Status: " + s.Id));
             }
         }
     }

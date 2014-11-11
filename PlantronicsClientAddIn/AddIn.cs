@@ -26,7 +26,7 @@ namespace PlantronicsClientAddIn
                 //must have the icelib sdk license to get the session as a service
                 _session = (Session)serviceProvider.GetService(typeof(Session));
                 _interactionManager = new InteractionManager(_session, (IQueueService)serviceProvider.GetService(typeof(IQueueService)), _traceContext);
-                _statusManager = new StatusManager(_session);
+                _statusManager = new StatusManager(_session, _traceContext);
                 _notificationService = (INotificationService)serviceProvider.GetService(typeof(INotificationService));
 
                 _plantronicsManager = new PlantronicsManager(_statusManager, _interactionManager, _notificationService, _traceContext);
