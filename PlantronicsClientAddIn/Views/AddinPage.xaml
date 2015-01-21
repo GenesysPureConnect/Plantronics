@@ -51,16 +51,16 @@
                         <ColumnDefinition/>
                         
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0">Product Name:</Label>
-                    <Label Grid.Row="0" Grid.Column="1" Content="{Binding ProductName}"></Label>
-                    <Label Grid.Row="1" Grid.Column="0">Manufacturer Name:</Label>
-                    <Label Grid.Row="1" Grid.Column="1" Content="{Binding ManufacturerName}"></Label>
-                    <Label Grid.Row="2" Grid.Column="0">Internal Name:</Label>
-                    <Label Grid.Row="2" Grid.Column="1" Content="{Binding InternalName}"></Label>
-                    <Label Grid.Row="3" Grid.Column="0">Serial Number:</Label>
-                    <Label Grid.Row="3" Grid.Column="1" Content="{Binding SerialNumber}"></Label>
-                    <Label Grid.Row="4" Grid.Column="0">Version Number:</Label>
-                    <Label Grid.Row="4" Grid.Column="1" Content="{Binding VersionNumber}"></Label>
+                    <TextBlock Grid.Row="0" Grid.Column="0">Product Name:</TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ProductName}"></TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0">Manufacturer Name:</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ManufacturerName}"></TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0">Internal Name:</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding InternalName}"></TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0">Serial Number:</TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SerialNumber}"></TextBlock>
+                    <TextBlock Grid.Row="4" Grid.Column="0">Version Number:</TextBlock>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding VersionNumber}"></TextBlock>
                 </Grid>
             </StackPanel>
         </GroupBox>

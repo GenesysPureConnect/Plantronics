@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\ICUserApps\AddIns\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\Program Files %28x86%29\Interactive Intelligence\ICUserApps\AddIns\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Settings\ISettingsManager.cs" />
     <Compile Include="Settings\SettingsManager.cs" />
+    <Compile Include="SpokesDebugLogger.cs" />
     <Compile Include="Status\IStatusManager.cs" />
     <Compile Include="Interactions\IInteractionManager.cs" />
     <Compile Include="Plantronics\PlantronicsManager.cs" />

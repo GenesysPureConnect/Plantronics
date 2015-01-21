@@ -61,7 +61,7 @@ namespace PlantronicsClientAddIn
                 s_settingsManager = new SettingsManager();
                 s_deviceSettings = new DeviceStatus(s_traceContext);
 
-                s_plantronicsManager = new PlantronicsManager(s_statusManager, s_interactionManager, s_notificationService, s_settingsManager, s_deviceSettings, s_traceContext);
+                s_plantronicsManager = new PlantronicsManager(s_statusManager, s_interactionManager, s_notificationService, s_settingsManager, s_deviceSettings, s_traceContext,new SpokesDebugLogger(s_traceContext));
                 s_traceContext.Always("Plantronics AddIn Loaded");
             }
             catch (ArgumentNullException)

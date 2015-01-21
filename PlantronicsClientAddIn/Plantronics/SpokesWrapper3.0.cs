@@ -1872,7 +1872,8 @@ namespace Plantronics.UC.SpokesWrapper
         {
             try
             {
-                m_activeDevice = m_comSession.GetActiveDevice();
+                var test = m_comSession.GetActiveDevice();
+                m_activeDevice = test;
             }
             catch (Exception e)
             {

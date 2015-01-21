@@ -30,16 +30,19 @@ namespace PlantronicsClientAddIn.Plantronics
                                     IInteractionManager interactionManager, 
                                     INotificationService notificationService,
                                     ISettingsManager settingsManager,
-            IDeviceStatus deviceSettings,
-                                    ITraceContext traceContext)
+                                    IDeviceStatus deviceSettings,
+                                    ITraceContext traceContext, 
+                                    DebugLogger logger)
 		{
 			_statusManager = statusManager;
 			_interactionManager = interactionManager;
 			_traceContext = traceContext;
             _notificationService = notificationService;
             _settingsManager = settingsManager;
+            _deviceSettings = deviceSettings;
 
             _spokes = Spokes.Instance;
+            _spokes.SetLogger(logger);
 
             _spokes.PutOn += OnHeadsetPutOn;
             _spokes.TakenOff += OnHeadsetTakenOff;
@@ -115,6 +118,8 @@ namespace PlantronicsClientAddIn.Plantronics
             {
                 _statusManager.SetStatus(_settingsManager.DisconnectStatusKey);
             }
+
+            _deviceSettings.DeviceDisconnected();
         }
 
         private void OnHeadsetAttached(object sender, AttachedArgs e)
