@@ -1,0 +1,175 @@
+﻿<UserControl x:Class="PlantronicsClientAddIn.Views.AddinPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:PlantronicsClientAddIn.ViewModels"
+             mc:Ignorable="d"
+             Background="White"
+            
+             d:DesignHeight="400" d:DesignWidth="600">
+    <UserControl.Resources>
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="25"/>
+        </Style>
+        <DataTemplate x:Key="StatusTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding Image}" Height="16" Width="16"></Image>
+                <Label Content="{Binding Text}"></Label>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250px"/>
+            <ColumnDefinition/>
+            
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Column="0" Margin="5">
+            
+            <GroupBox.DataContext>
+                <vm:StatusViewModel/>
+            </GroupBox.DataContext>
+
+            <GroupBox.Header>Headset Status</GroupBox.Header>
+                
+            <StackPanel>
+                <Label Foreground="Red" Visibility="{Binding ErrorVisibility}" >No Headset Detected</Label>
+                <Grid Visibility="{Binding ConnectionVisibility}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition/>
+                        
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0">Product Name:</Label>
+                    <Label Grid.Row="0" Grid.Column="1" Content="{Binding ProductName}"></Label>
+                    <Label Grid.Row="1" Grid.Column="0">Manufacturer Name:</Label>
+                    <Label Grid.Row="1" Grid.Column="1" Content="{Binding ManufacturerName}"></Label>
+                    <Label Grid.Row="2" Grid.Column="0">Internal Name:</Label>
+                    <Label Grid.Row="2" Grid.Column="1" Content="{Binding InternalName}"></Label>
+                    <Label Grid.Row="3" Grid.Column="0">Serial Number:</Label>
+                    <Label Grid.Row="3" Grid.Column="1" Content="{Binding SerialNumber}"></Label>
+                    <Label Grid.Row="4" Grid.Column="0">Version Number:</Label>
+                    <Label Grid.Row="4" Grid.Column="1" Content="{Binding VersionNumber}"></Label>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Margin="5">
+            <GroupBox.DataContext>
+                <vm:SettingsViewModel/>
+            </GroupBox.DataContext>
+            <GroupBox.Resources>
+                <Style TargetType="CheckBox">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Width" Value="150px"/>
+                    <Setter Property="Margin" Value="4"/>
+                </Style>
+            </GroupBox.Resources>
+            <GroupBox.Header>Settings</GroupBox.Header>
+            <ScrollViewer>
+            <StackPanel>
+                <GroupBox Grid.Column="1" Margin="5">
+                    <GroupBox.Header>When headset is disconnected</GroupBox.Header>
+                    <StackPanel>
+                            <Label Content="{Binding DisconnectStatusKey}"></Label>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding DisconnectChangeStatus}">Change Status</CheckBox>
+                                <ComboBox ItemTemplate="{StaticResource StatusTemplate}" 
+                                          IsEnabled="{Binding DisconnectChangeStatus}" 
+                                          ItemsSource="{Binding StatusList}"
+                                          SelectedValue="{Binding DisconnectStatus, Mode=TwoWay}"
+                                          
+                                          ></ComboBox>
+                            </StackPanel>
+                            <CheckBox  IsChecked="{Binding DisconnectNotification}">Show Notification</CheckBox>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Grid.Column="1" Margin="5">
+                    <GroupBox.Header>When headset is connected</GroupBox.Header>
+                    <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding ConnectChangeStatus}">Change Status</CheckBox>
+                                <ComboBox ItemTemplate="{StaticResource StatusTemplate}" 
+                                          IsEnabled="{Binding ConnectChangeStatus}" 
+                                          ItemsSource="{Binding StatusList}"
+                                          SelectedValue="{Binding ConnectStatus, Mode=TwoWay}" 
+                                          
+                                          ></ComboBox>
+                            </StackPanel>
+                            <CheckBox  IsChecked="{Binding ConnectNotification}">Show Notification</CheckBox>
+                        </StackPanel>
+                </GroupBox>
+                <!--
+                <GroupBox Grid.Column="1" Margin="5">
+                    <GroupBox.Header>When headset is in range</GroupBox.Header>
+                    <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Checked="{Binding ConnectChangeStatus}">Change Status</CheckBox>
+                                <ComboBox IsEnabled="{Binding DisconnectChangeStatus}" ItemsSource="{Binding StatusList}" ></ComboBox>
+                            </StackPanel>
+                            <CheckBox  Checked="{Binding ConnectNotification}">Show Notification</CheckBox>
+                        </StackPanel>
+                </GroupBox>
+                <GroupBox Grid.Column="1" Margin="5">
+                    <GroupBox.Header>When headset is out of range</GroupBox.Header>
+                    <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Checked="{Binding DisconnectChangeStatus}">Change Status</CheckBox>
+                                <ComboBox IsEnabled="{Binding DisconnectChangeStatus}" ItemsSource="{Binding StatusList}" ></ComboBox>
+                            </StackPanel>
+                            <CheckBox  Checked="{Binding DisconnectNotification}">Show Notification</CheckBox>
+                        </StackPanel>
+                </GroupBox>-->
+            </StackPanel>
+            </ScrollViewer>
+            <!--
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25px"></RowDefinition>
+                    <RowDefinition Height="25px"/>
+                    <RowDefinition Height="25px"/>
+                    <RowDefinition Height="25px"/>
+                    <RowDefinition Height="25px"/>
+                    <RowDefinition Height="25px"/>
+                    <RowDefinition Height="25px"/>
+                    <RowDefinition Height="25px"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label></Label>
+                <CheckBox Grid.Row="0" VerticalAlignment="Bottom">Change status when headset is out of range</CheckBox>
+                <ComboBox Grid.Row="1" Margin="15,4,4,4"></ComboBox>
+                <CheckBox Grid.Row="2" VerticalAlignment="Bottom">Change status when headset is back in range</CheckBox>
+                <ComboBox Grid.Row="3" Margin="15,4,4,4"></ComboBox>
+
+                <CheckBox Grid.Row="4" VerticalAlignment="Bottom">Change status when headset is connected</CheckBox>
+                <ComboBox Grid.Row="5" Margin="15,4,4,4"></ComboBox>
+                
+                <CheckBox Grid.Row="6" VerticalAlignment="Bottom">Change status when headset is disconnected</CheckBox>
+                <ComboBox Grid.Row="7" Margin="15,4,4,4"></ComboBox>
+                
+                <GroupBox Grid.Row="8">
+                    <GroupBox.Header>Notifications</GroupBox.Header>
+                    <StackPanel>
+                    <CheckBox>Out of Range</CheckBox>
+                    <CheckBox>In Range</CheckBox>
+                    <CheckBox>Disconnected</CheckBox>
+                    <CheckBox>Connected</CheckBox>
+                    </StackPanel>
+                </GroupBox>
+
+            </Grid>-->
+        </GroupBox>
+    </Grid>
+</UserControl>

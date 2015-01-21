@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Threading;
 using Interop.Plantronics;
+using System.Diagnostics.CodeAnalysis;
 
 /*******
  * 
@@ -206,6 +207,7 @@ namespace Plantronics.UC.SpokesWrapper
     /// <summary>
     /// Struct to hold info on Plantronics device capabilities
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public struct SpokesDeviceCaps
     {
         public bool HasProximity;
@@ -250,6 +252,7 @@ namespace Plantronics.UC.SpokesWrapper
     /// <summary>
     /// Event args for Mute Changed event handler
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class MuteChangedArgs : EventArgs
     {
         public bool m_muteon = false;
@@ -263,6 +266,7 @@ namespace Plantronics.UC.SpokesWrapper
         /// <summary>
     /// Event args for Line Active Changed event handler
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class LineActiveChangedArgs : EventArgs
     {
         public bool m_lineactive = false;
@@ -289,6 +293,7 @@ namespace Plantronics.UC.SpokesWrapper
     /// <summary>
     /// Event args for TakenOff/PutOn events (wearing state) event handlers
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class WearingStateArgs : EventArgs
     {
         public bool m_worn = false;
@@ -304,6 +309,7 @@ namespace Plantronics.UC.SpokesWrapper
     /// <summary>
     /// Event args for Docked/UnDocked events (docking) event handlers
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class DockedStateArgs : EventArgs
     {
         public bool m_docked = false;
@@ -329,6 +335,7 @@ namespace Plantronics.UC.SpokesWrapper
     /// <summary>
     /// Event args for OnCall event handler
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class OnCallArgs : EventArgs
     {
         public string CallSource;

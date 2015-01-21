@@ -5,6 +5,7 @@ using PlantronicsClientAddIn.Interactions;
 using PlantronicsClientAddIn.Status;
 using System;
 using System.Diagnostics;
+using PlantronicsClientAddIn.Settings;
 
 namespace PlantronicsClientAddIn.Plantronics
 {
@@ -22,16 +23,21 @@ namespace PlantronicsClientAddIn.Plantronics
 		private IInteractionManager _interactionManager;
 		private ITraceContext _traceContext;
         private INotificationService _notificationService;
+        private ISettingsManager _settingsManager;
+        private IDeviceStatus _deviceSettings;
 
 		public PlantronicsManager (IStatusManager statusManager, 
                                     IInteractionManager interactionManager, 
                                     INotificationService notificationService,
+                                    ISettingsManager settingsManager,
+            IDeviceStatus deviceSettings,
                                     ITraceContext traceContext)
 		{
 			_statusManager = statusManager;
 			_interactionManager = interactionManager;
 			_traceContext = traceContext;
             _notificationService = notificationService;
+            _settingsManager = settingsManager;
 
             _spokes = Spokes.Instance;
 
@@ -67,8 +73,16 @@ namespace PlantronicsClientAddIn.Plantronics
         {
             Debug.WriteLine("OnHeadsetOutOfRange " );
             _traceContext.Status("OnHeadsetOutOfRange " );
-            _notificationService.Notify("Headset out of range", "Headset", NotificationType.Warning, TimeSpan.FromSeconds(3));
-            _statusManager.SetToAwayFromDesk();
+
+            if (_settingsManager.OutOfRangeNotification)
+            {
+                _notificationService.Notify("Headset out of range", "Headset", NotificationType.Warning, TimeSpan.FromSeconds(3));
+            }
+
+            if (_settingsManager.OutOfRangeChangeStatus)
+            {
+                _statusManager.SetStatus(_settingsManager.OutOfRangeStatusKey);
+            }
         }
 
         private void OnHeadsetInRange(object sender, EventArgs e)
@@ -76,8 +90,15 @@ namespace PlantronicsClientAddIn.Plantronics
             Debug.WriteLine("OnHeadsetInRange ");
             _traceContext.Status("OnHeadsetInRange ");
 
-            _notificationService.Notify("Headset in range", "Headset", NotificationType.Info, TimeSpan.FromSeconds(3));
-            _statusManager.SetLastStatus();
+            if (_settingsManager.InRangeNotification)
+            {
+                _notificationService.Notify("Headset in range", "Headset", NotificationType.Info, TimeSpan.FromSeconds(3));
+            }
+
+            if (_settingsManager.InRangeChangeStatus)
+            {
+                _statusManager.SetStatus(_settingsManager.InRangeStatusKey);
+            }
         }
 
         private void OnHeadsetDetached(object sender, EventArgs e)
@@ -85,19 +106,37 @@ namespace PlantronicsClientAddIn.Plantronics
             Debug.WriteLine("OnHeadsetDetached " );
             _traceContext.Status("OnHeadsetDetached ");
 
-            _notificationService.Notify("Plantronics Headset Detached", "Headset", NotificationType.Info, TimeSpan.FromSeconds(2));
-            _statusManager.SetToAwayFromDesk();
+            if (_settingsManager.DisconnectNotification)
+            {
+                _notificationService.Notify("Plantronics Headset Detached", "Headset", NotificationType.Info, TimeSpan.FromSeconds(2));
+            }
+
+            if (_settingsManager.DisconnectChangeStatus)
+            {
+                _statusManager.SetStatus(_settingsManager.DisconnectStatusKey);
+            }
         }
 
         private void OnHeadsetAttached(object sender, AttachedArgs e)
         {
             Debug.WriteLine("OnHeadsetAttached " + e.m_device.ManufacturerName + " " + e.m_device.SerialNumber);
             _traceContext.Status("OnHeadsetAttached " + e.ToString());
-            _notificationService.Notify(String.Format("{0} headset connected", _spokes.GetDevice.ProductName), "Headset", NotificationType.Info, TimeSpan.FromSeconds(2));
-            LogDeviceInfo(e.m_device);
-            _statusManager.SetLastStatus();
+            
+            _deviceSettings.DeviceConnected(e.m_device);
+            _deviceSettings.TraceSettings();
+
+            if (_settingsManager.ConnectNotification)
+            {
+                _notificationService.Notify(String.Format("{0} headset connected", _spokes.GetDevice.ProductName), "Headset", NotificationType.Info, TimeSpan.FromSeconds(2));
+            }
+
+            if (_settingsManager.ConnectChangeStatus)
+            {
+                _statusManager.SetStatus(_settingsManager.ConnectStatusKey);
+            }
         }
 
+        
         private void OnHeadsetUnDocked(object sender, DockedStateArgs e)
         {
             Debug.WriteLine("OnHeadsetUnDocked " );
@@ -127,15 +166,6 @@ namespace PlantronicsClientAddIn.Plantronics
             _interactionManager.PickupHeldCall();
         }
         
-        private void LogDeviceInfo(ICOMDevice device)
-        {
-            _traceContext.Status("Plantronics connected device information");
-            _traceContext.Status("Plantronics: Internal Name- " + device.InternalName);
-            _traceContext.Status("Plantronics: Manufacturer Name- " + device.ManufacturerName);
-            _traceContext.Status("Plantronics: Product Name- " + device.ProductName);
-            _traceContext.Status("Plantronics: Serial Number- " + device.SerialNumber);
-            _traceContext.Status("Plantronics: Version Number- " + device.VersionNumber);
-        }
       
         public void Dispose()
         {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace PlantronicsClientAddIn.Status
 {
@@ -7,6 +8,8 @@ namespace PlantronicsClientAddIn.Status
 		void SetToAwayFromDesk();
 		void SetToAvailable();
 		void SetLastStatus();
+        void SetStatus(string key);
+        IList<Status> GetSettableStatuses();
 	}
 }
 
