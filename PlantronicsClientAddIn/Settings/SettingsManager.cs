@@ -34,147 +34,147 @@ namespace PlantronicsClientAddIn.Settings
         }
 
 
-        public string DisconnectStatusKey
+        public string DeviceDisconnectStatusKey
         {
             get
             {
-                return GetStringSetting("DisconnectStatusKey", AwayFromDeskKey);
+                return GetStringSetting("DeviceDisconnectStatusKey", AwayFromDeskKey);
             }
             set
             {
-                SaveSetting("DisconnectStatusKey", value);
+                SaveSetting("DeviceDisconnectStatusKey", value);
             }
         }
 
-        public bool DisconnectChangeStatus
+        public bool DeviceDisconnectChangeStatus
         {
             get
             {
-                return GetBoolSetting("DisconnectChangeStatus", true);
+                return GetBoolSetting("DeviceDisconnectChangeStatus", true);
             }
             set
             {
-                SaveSetting("DisconnectChangeStatus", value);
+                SaveSetting("DeviceDisconnectChangeStatus", value);
             }
         }
 
-        public bool DisconnectNotification
+        public bool DeviceDisconnectNotification
         {
             get
             {
-                return GetBoolSetting("DisconnectNotification", true);
+                return GetBoolSetting("DeviceDisconnectNotification", true);
             }
             set
             {
-                SaveSetting("DisconnectNotification", value);
+                SaveSetting("DeviceDisconnectNotification", value);
             }
         }
 
-        public string ConnectStatusKey
+        public string DeviceConnectStatusKey
         {
             get
             {
-                return GetStringSetting("ConnectStatusKey", AwayFromDeskKey);
+                return GetStringSetting("DeviceConnectStatusKey", AwayFromDeskKey);
             }
             set
             {
-                SaveSetting("ConnectStatusKey", value);
+                SaveSetting("DeviceConnectStatusKey", value);
             }
         }
 
-        public bool ConnectChangeStatus
+        public bool DeviceConnectChangeStatus
         {
             get
             {
-                return GetBoolSetting("ConnectChangeStatus", true);
+                return GetBoolSetting("DeviceConnectChangeStatus", true);
             }
             set
             {
-                SaveSetting("ConnectChangeStatus", value);
+                SaveSetting("DeviceConnectChangeStatus", value);
             }
         }
 
-        public bool ConnectNotification
+        public bool DeviceConnectNotification
         {
             get
             {
-                return GetBoolSetting("ConnectNotification", true);
+                return GetBoolSetting("DeviceConnectNotification", true);
             }
             set
             {
-                SaveSetting("ConnectNotification", value);
+                SaveSetting("DeviceConnectNotification", value);
             }
         }
 
-        public string OutOfRangeStatusKey
+        public string HeadsetDisconnectStatusKey
         {
             get
             {
-                return GetStringSetting("OutOfRangeStatusKey", AwayFromDeskKey);
+                return GetStringSetting("HeadsetDisconnectStatusKey", AwayFromDeskKey);
             }
             set
             {
-                SaveSetting("OutOfRangeStatusKey", value);
+                SaveSetting("HeadsetDisconnectStatusKey", value);
             }
         }
 
-        public bool OutOfRangeChangeStatus
+        public bool HeadsetDisconnectChangeStatus
         {
             get
             {
-                return GetBoolSetting("OutOfRangeChangeStatus", true);
+                return GetBoolSetting("HeadsetDisconnectChangeStatus", true);
             }
             set
             {
-                SaveSetting("OutOfRangeChangeStatus", value);
+                SaveSetting("HeadsetDisconnectChangeStatus", value);
             }
         }
 
-        public bool OutOfRangeNotification
+        public bool HeadsetDisconnectNotification
         {
             get
             {
-                return GetBoolSetting("OutOfRangeNotification", true);
+                return GetBoolSetting("HeadsetDisconnectNotification", true);
             }
             set
             {
-                SaveSetting("OutOfRangeNotification", value);
+                SaveSetting("HeadsetDisconnectNotification", value);
             }
         }
 
-        public string InRangeStatusKey
+        public string HeadsetConnectStatusKey
         {
             get
             {
-                return GetStringSetting("InRangeStatusKey", AwayFromDeskKey);
+                return GetStringSetting("HeadsetConnectStatusKey", AwayFromDeskKey);
             }
             set
             {
-                SaveSetting("InRangeStatusKey", value);
+                SaveSetting("HeadsetConnectStatusKey", value);
             }
         }
 
-        public bool InRangeChangeStatus
+        public bool HeadsetConnectChangeStatus
         {
             get
             {
-                return GetBoolSetting("InRangeChangeStatus", true);
+                return GetBoolSetting("HeadsetConnectChangeStatus", true);
             }
             set
             {
-                SaveSetting("InRangeChangeStatus", value);
+                SaveSetting("HeadsetConnectChangeStatus", value);
             }
         }
 
-        public bool InRangeNotification
+        public bool HeadsetConnectNotification
         {
             get
             {
-                return GetBoolSetting("InRangeNotification", true);
+                return GetBoolSetting("HeadsetConnectNotification", true);
             }
             set
             {
-                SaveSetting("InRangeNotification", value);
+                SaveSetting("HeadsetConnectNotification", value);
             }
         }
 

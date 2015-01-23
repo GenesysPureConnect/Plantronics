@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Threading;
 using Interop.Plantronics;
-using System.Diagnostics.CodeAnalysis;
 
 /*******
  * 
@@ -40,6 +39,46 @@ using System.Diagnostics.CodeAnalysis;
  * 
  * VERSION HISTORY:
  * ********************************************************************************
+ * Version 1.5.30:
+ * Date: 23rd Jan 2015
+ * Tested with Plantronics Hub / SDK version(s): 3.4.50921.12982 (22/01/2015 pre-release for DA Series)
+ * Changed by: Lewis Collins
+ *   Changes:
+ *     - Adding get "initial" QuickDisconnect QD state from Plantronics SDK ICOMDeviceSettingsExt.
+ *      HeadsetConnnectedState method.
+ *
+ * Version 1.5.29:
+ * Date: 2nd Dec 2014
+ * Compatible with Spokes SDK version(s): 3.3.50862.10305 (24/11/2014 pre-release for DA Series)
+ * Tested with Hub version: 
+ * Changed by: Lewis Collins
+ *   Changes:
+ *     - Adding knowledge of QD connector feature (new DA Series audio processors)
+ *
+ * Version 1.5.28:
+ * Date: 22nd Aug 2014
+ * Compatible with Spokes SDK version(s): 3.x
+ * Tested with Hub version: 3.0.50718.1966
+ * Changed by: Lewis Collins
+ *   Changes:
+ *     - Adding missing hold call/resume call functions
+ *
+ * Version 1.5.28:
+ * Date: 19th Aug 2014
+ * Compatible with Spokes SDK version(s): 3.x
+ * Tested with Hub version: 3.0.50718.1966
+ * Changed by: Lewis Collins
+ *   Changes:
+ *     - Fixed error in the initial docked/undocked state detection.
+ *
+ * Version 1.5.27:
+ * Date: 18th Aug 2014
+ * Compatible with Spokes SDK version(s): 3.x
+ * Tested with Hub version: 3.0.50718.1966
+ * Changed by: Lewis Collins
+ *   Changes:
+ *     - The missing "AnswerCall" method was added to this version.
+ * 
  * Version 1.5.26:
  * Date: 14th Nov 2013
  * Compatible with Spokes SDK version(s): 3.x
@@ -207,7 +246,6 @@ namespace Plantronics.UC.SpokesWrapper
     /// <summary>
     /// Struct to hold info on Plantronics device capabilities
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public struct SpokesDeviceCaps
     {
         public bool HasProximity;
@@ -218,11 +256,12 @@ namespace Plantronics.UC.SpokesWrapper
         public bool HasMultiline;
         public bool IsWireless;
         public string ProductId;
+        public bool HasQDConnector; // for CC products, a QD quick disconnect connector for headset
 
         /// <summary>
         /// Constructor: pass in boolean values for whether it has the given device capabilities or not
         /// </summary>
-        public SpokesDeviceCaps(bool HasProximity, bool HasMobCallerId, bool HasMobCallState, bool HasDocking, bool HasWearingSensor, bool HasMultiline, bool IsWireless)
+        public SpokesDeviceCaps(bool HasProximity, bool HasMobCallerId, bool HasMobCallState, bool HasDocking, bool HasWearingSensor, bool HasMultiline, bool IsWireless, bool HasQDConnector = false)
         {
             this.HasProximity = HasProximity;
             this.HasMobCallerId = HasMobCallerId;
@@ -232,6 +271,7 @@ namespace Plantronics.UC.SpokesWrapper
             this.HasMultiline = HasMultiline;
             this.IsWireless = IsWireless;
             this.ProductId = "";
+            this.HasQDConnector = HasQDConnector;
         }
 
         /// <summary>
@@ -245,14 +285,14 @@ namespace Plantronics.UC.SpokesWrapper
                 "Dockable = " + HasDocking + "\r\n" +
                 "Wearing Sensor = " + HasWearingSensor + "\r\n" +
                 "Multiline = " + HasMultiline + "\r\n" +
-                "Is Wireless = " + IsWireless + "\r\n";
+                "Is Wireless = " + IsWireless + "\r\n" +
+                "QD Connector = " + HasQDConnector + "\r\n";
         }
     }
 
     /// <summary>
     /// Event args for Mute Changed event handler
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class MuteChangedArgs : EventArgs
     {
         public bool m_muteon = false;
@@ -263,10 +303,9 @@ namespace Plantronics.UC.SpokesWrapper
         }
     }
 
-        /// <summary>
+    /// <summary>
     /// Event args for Line Active Changed event handler
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class LineActiveChangedArgs : EventArgs
     {
         public bool m_lineactive = false;
@@ -293,7 +332,6 @@ namespace Plantronics.UC.SpokesWrapper
     /// <summary>
     /// Event args for TakenOff/PutOn events (wearing state) event handlers
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class WearingStateArgs : EventArgs
     {
         public bool m_worn = false;
@@ -307,9 +345,23 @@ namespace Plantronics.UC.SpokesWrapper
     }
 
     /// <summary>
+    /// Event args for Connected/Disconnects events (QD make/break) event handlers
+    /// </summary>
+    public class ConnectedStateArgs : EventArgs
+    {
+        public bool m_connected = false;
+        public bool m_isInitialStateEvent = false;
+
+        public ConnectedStateArgs(bool connected, bool isInitialStateEvent)
+        {
+            m_connected = connected;
+            m_isInitialStateEvent = isInitialStateEvent;
+        }
+    }
+
+    /// <summary>
     /// Event args for Docked/UnDocked events (docking) event handlers
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class DockedStateArgs : EventArgs
     {
         public bool m_docked = false;
@@ -335,7 +387,6 @@ namespace Plantronics.UC.SpokesWrapper
     /// <summary>
     /// Event args for OnCall event handler
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class OnCallArgs : EventArgs
     {
         public string CallSource;
@@ -583,17 +634,25 @@ namespace Plantronics.UC.SpokesWrapper
 
         private SpokesDeviceCaps GetMyDeviceCapabilities()
         {
-	        SpokesDeviceCaps retval = new SpokesDeviceCaps();
-            retval.ProductId="";
+            SpokesDeviceCaps retval = new SpokesDeviceCaps();
+            retval.HasProximity = false;
+            retval.HasMobCallerId = false;
+            retval.HasMobCallState = false;
+            retval.HasDocking = false;
+            retval.HasWearingSensor = false;
+            retval.HasMultiline = false;
+            retval.IsWireless = false;
+            retval.ProductId = "";
+            retval.HasQDConnector = false;
             string prodidstr;
-            
-            if (m_activeDevice!=null && m_AllDeviceCapabilities.Count()>0)
+
+            if (m_activeDevice != null && m_AllDeviceCapabilities.Count() > 0)
             {
                 prodidstr = string.Format("{0:X}", m_activeDevice.ProductId).ToUpper();
 
                 foreach (SpokesDeviceCaps caps in m_AllDeviceCapabilities)
                 {
-                    if (caps.ProductId.CompareTo(prodidstr)==0)
+                    if (caps.ProductId.CompareTo(prodidstr) == 0)
                     {
                         // we got a match of our product!
                         DebugPrint(MethodInfo.GetCurrentMethod().Name, "INFO: Got a match of our Plantronics device in DeviceCapabilities.csv:");
@@ -603,87 +662,91 @@ namespace Plantronics.UC.SpokesWrapper
                     }
                 }
             }
-	        return retval;
+            return retval;
         }
 
         private void PreLoadAllDeviceCapabilities()
         {
-	        string line;
+            string line;
 
-	        SpokesDeviceCaps devicecaps;
+            SpokesDeviceCaps devicecaps;
             m_AllDeviceCapabilities = new List<SpokesDeviceCaps>();
 
-	        try 
-	        {
-                System.IO.StreamReader in_stream = 
+            try
+            {
+                System.IO.StreamReader in_stream =
                    new System.IO.StreamReader("DeviceCapabilities.csv");
 
-		        while((line = in_stream.ReadLine()) != null)
+                while ((line = in_stream.ReadLine()) != null)
                 {
-				        if (line.Length>0)
-				        {
-					        if (line.Substring(0,1).CompareTo("#")!=0 && line.Substring(0,1).CompareTo(",")!=0)
-					        {
-						        // not a comment line or empty line (with only commas)
+                    if (line.Length > 0)
+                    {
+                        if (line.Substring(0, 1).CompareTo("#") != 0 && line.Substring(0, 1).CompareTo(",") != 0)
+                        {
+                            // not a comment line or empty line (with only commas)
 
-                                devicecaps = new SpokesDeviceCaps();
-                                string[] words = line.Split(',');
+                            devicecaps = new SpokesDeviceCaps();
+                            string[] words = line.Split(',');
 
-						        int i = 0;
-                                string token = "";
+                            int i = 0;
+                            string token = "";
 
-                                foreach (string word in words)
-	                            {
-                                    token = word.ToUpper();
-                                    switch(i)
-							        {
-							        case 0:
-								        devicecaps.ProductId = word;
-								        break;
-							        case 1:
-								        // no action - this is the device name we don't need
-								        break;
-							        case 2:
-								        devicecaps.HasProximity = token.CompareTo("YES")==0 ? true : false;
-								        break;
-							        case 3:
+                            foreach (string word in words)
+                            {
+                                token = word.ToUpper();
+                                switch (i)
+                                {
+                                    case 0:
+                                        devicecaps.ProductId = word;
+                                        break;
+                                    case 1:
+                                        // no action - this is the device name we don't need
+                                        break;
+                                    case 2:
+                                        devicecaps.HasProximity = token.CompareTo("YES") == 0 ? true : false;
+                                        break;
+                                    case 3:
                                         devicecaps.HasMobCallerId = token.CompareTo("YES") == 0 ? true : false;
-								        break;
-							        case 4:
+                                        break;
+                                    case 4:
                                         devicecaps.HasMobCallState = token.CompareTo("YES") == 0 ? true : false;
-								        break;
-							        case 5:
+                                        break;
+                                    case 5:
                                         devicecaps.HasDocking = token.CompareTo("YES") == 0 ? true : false;
-								        break;
-							        case 6:
+                                        break;
+                                    case 6:
                                         devicecaps.HasWearingSensor = token.CompareTo("YES") == 0 ? true : false;
-								        break;
-							        case 7:
+                                        break;
+                                    case 7:
                                         devicecaps.HasMultiline = token.CompareTo("YES") == 0 ? true : false;
-								        break;
-							        case 8:
+                                        break;
+                                    case 8:
                                         devicecaps.IsWireless = token.CompareTo("YES") == 0 ? true : false;
+                                        break;
+                                    case 9:
+                                        devicecaps.HasQDConnector = token.CompareTo("YES") == 0 ? true : false;
 
-								        // now, add the devicecaps to our list:
-								        m_AllDeviceCapabilities.Add(devicecaps);
+                                        // now, add the devicecaps to our list:
+                                        m_AllDeviceCapabilities.Add(devicecaps);
 
-								        break;
-							        }
-
-                                    i++;
+                                        break;
                                 }
 
-						        //DebugPrint(__FUNCTION__, "got some tokens");
-					        }
-				        }
-				        //devicecaps
-		        }
-		        in_stream.Close();
-	        }
-	        catch(Exception e) {
-		        //std::cerr << "Exception opening/reading/closing file\n";
-		        DebugPrint(MethodInfo.GetCurrentMethod().Name, "Exception reading DeviceCapabilities.csv. Does this file exist in current working directory?");
-	        }
+                                i++;
+                            }
+
+                            //DebugPrint(__FUNCTION__, "got some tokens");
+                        }
+                    }
+                    //devicecaps
+                }
+                in_stream.Close();
+            }
+            catch (Exception e)
+            {
+                //std::cerr << "Exception opening/reading/closing file\n";
+                DebugPrint(MethodInfo.GetCurrentMethod().Name, "Exception reading DeviceCapabilities.csv. Does this file exist in current working directory?");
+            }
         }
 
         /// <summary>
@@ -700,14 +763,14 @@ namespace Plantronics.UC.SpokesWrapper
         /// </summary>
         public static Spokes Instance
         {
-            get 
+            get
             {
-                if (instance == null) 
+                if (instance == null)
                 {
-                    lock (syncRoot) 
+                    lock (syncRoot)
                     {
                         // Instantiate a singleton Spokes object
-                        if (instance == null) 
+                        if (instance == null)
                             instance = new Spokes();
                     }
                 }
@@ -727,6 +790,7 @@ namespace Plantronics.UC.SpokesWrapper
         static ICOMATDCommand m_atdCommand;
         static ICOMHostCommand m_hostCommand;
         static ICOMHostCommandExt m_hostCommandExt;
+        static ICOMDeviceSettingsExt m_deviceSettingsExt;
         public static string m_devicename = "";
         #endregion
 
@@ -784,6 +848,9 @@ namespace Plantronics.UC.SpokesWrapper
         // Docked/undocked:
         public delegate void DockedEventHandler(object sender, DockedStateArgs e);
         public delegate void UnDockedEventHandler(object sender, DockedStateArgs e);
+        // CC Connected/Disconnected QD make/break
+        public delegate void ConnectedEventHandler(object sender, ConnectedStateArgs e);
+        public delegate void DisconnectedEventHandler(object sender, ConnectedStateArgs e);
 
         // Mobile caller id:
         public delegate void MobileCallerIdEventHandler(object sender, MobileCallerIdArgs e);
@@ -804,7 +871,7 @@ namespace Plantronics.UC.SpokesWrapper
         public delegate void MuteChangedEventHandler(object sender, MuteChangedArgs e);
         // Line active awareness:
         public delegate void LineActiveChangedEventHandler(object sender, LineActiveChangedArgs e);
-        
+
         // Device attach/detach:
         public delegate void AttachedEventHandler(object sender, AttachedArgs e);
         public delegate void DetachedEventHandler(object sender, EventArgs e);
@@ -822,7 +889,7 @@ namespace Plantronics.UC.SpokesWrapper
 
         // Call Requested event:
         public delegate void CallRequestedEventHandler(object sender, CallRequestedArgs e);
-                 
+
         // Battery Level Changed event:
         public delegate void BatteryLevelChangedEventHandler(object sender, EventArgs e);
 
@@ -888,6 +955,16 @@ namespace Plantronics.UC.SpokesWrapper
         /// Triggered when a Plantronics device is undocked from its base or cradle
         /// </summary>
         public event DockedEventHandler UnDocked;
+
+        /// <summary>
+        /// Triggered when a CC Plantronics headset is connected to the amplifier (QD connecter)
+        /// </summary>
+        public event ConnectedEventHandler Connected;
+
+        /// <summary>
+        /// Triggered when a CC Plantronics headset is disconnected from the amplifier (QD connecter)
+        /// </summary>
+        public event DisconnectedEventHandler Disconnected;
 
         // Mobile caller id: ************************************************************
         /// <summary>
@@ -1085,6 +1162,18 @@ namespace Plantronics.UC.SpokesWrapper
             //}
         }
 
+        private void OnConnected(ConnectedStateArgs e)
+        {
+            if (Connected != null)
+                Connected(this, e);
+        }
+
+        private void OnDisconnected(ConnectedStateArgs e)
+        {
+            if (Disconnected != null)
+                Disconnected(this, e);
+        }
+
         // Mobile caller id: ************************************************************
         private void OnMobileCallerId(MobileCallerIdArgs e)
         {
@@ -1197,7 +1286,7 @@ namespace Plantronics.UC.SpokesWrapper
             if (BaseButtonPress != null)
                 BaseButtonPress(this, e);
         }
-        
+
         // Triggered when a user call requested event is received from dialpad device: ************************************************************
         private void OnCallRequested(CallRequestedArgs e)
         {
@@ -1221,6 +1310,7 @@ namespace Plantronics.UC.SpokesWrapper
 
         bool isConnected = false;
         private bool m_lastdocked = false;
+        private bool m_lastconnected = true;
         //private int m_battlevEventCount = 0;
         private bool m_firstlegenddockcheck = true; // will become false after first check of Legend docked state (via charging events)
         private bool m_ignorenextundockedevent = false;
@@ -1325,7 +1415,7 @@ namespace Plantronics.UC.SpokesWrapper
             }
             if (isConnected) return true;
             DeviceCapabilities =
-                new SpokesDeviceCaps(false, false, false, false, false, false, false); // we don't yet know what the capabilities are
+                new SpokesDeviceCaps(false, false, false, false, false, false, false, false); // we don't yet know what the capabilities are
             OnCapabilitiesChanged(EventArgs.Empty);
             bool success = false;
             try
@@ -1469,7 +1559,7 @@ namespace Plantronics.UC.SpokesWrapper
                     OnOnMobileCall(new OnMobileCallArgs(m_mobIncoming, MobileCallState.OnCall));
                     break;
                 case CallState.CallState_AcceptCall:
-                case CallState.CallState_CallInProgress:                    
+                case CallState.CallState_CallInProgress:
                     DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: Call was ansswered/in progress!" + e.ToString());
                     OnOnCall(new OnCallArgs(e.CallSource, m_voipIncoming, OnCallCallState.OnCall, e.call.Id));
                     OnCallAnswered(new CallAnsweredArgs(e.call.Id, e.CallSource));
@@ -1554,7 +1644,7 @@ namespace Plantronics.UC.SpokesWrapper
                     DeviceListener_BaseStateChanged(e);
                     break;
                 case COMDeviceEventType.DeviceEventType_HeadsetButtonPressed:
-                    DebugPrint(MethodInfo.GetCurrentMethod().Name, "DeviceEventType_HeadsetButtonPressed "+e.HeadsetButton.ToString());
+                    DebugPrint(MethodInfo.GetCurrentMethod().Name, "DeviceEventType_HeadsetButtonPressed " + e.HeadsetButton.ToString());
                     break;
                 case COMDeviceEventType.DeviceEventType_HeadsetStateChanged:
                 default:
@@ -1741,7 +1831,17 @@ namespace Plantronics.UC.SpokesWrapper
                         case DeviceHeadsetStateChange.HeadsetStateChange_MonoOFF:
                             OnLineActiveChanged(new LineActiveChangedArgs(false));
                             break;
-                       default:
+
+//#if doubloon
+                        // NEW CC events
+                        case DeviceHeadsetStateChange.HeadsetStateChange_Connected:
+                            OnConnected(new ConnectedStateArgs(true, false));
+                            break;
+                        case DeviceHeadsetStateChange.HeadsetStateChange_Disconnected:
+                            OnDisconnected(new ConnectedStateArgs(true, false));
+                            break;
+//#endif
+                        default:
                             break;
                     }
                     break;
@@ -1862,7 +1962,7 @@ namespace Plantronics.UC.SpokesWrapper
                     OnMuteChanged(new MuteChangedArgs(e.mute));
                     break;
             }
-    
+
             OnButtonPress(new ButtonPressArgs(e.ButtonPressed, e.AudioState, e.mute));
         }
         #endregion
@@ -1872,18 +1972,18 @@ namespace Plantronics.UC.SpokesWrapper
         {
             try
             {
-                var test = m_comSession.GetActiveDevice();
-                m_activeDevice = test;
+                m_activeDevice = m_comSession.GetActiveDevice();
             }
             catch (Exception e)
             {
-                DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: Exception caught attaching to device: "+e.ToString());
+                DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: Exception caught attaching to device: " + e.ToString());
+                m_activeDevice = null;
             }
             if (m_activeDevice != null)
             {
                 // LC assume minimum first set of device capabilities...
                 DeviceCapabilities =
-                    new SpokesDeviceCaps(false, false, false, false, false, false, false);
+                    new SpokesDeviceCaps(false, false, false, false, false, false, false, false);
                 OnCapabilitiesChanged(EventArgs.Empty);
 
                 OnSerialNumber(new SerialNumberArgs("", SerialNumberTypes.Base));
@@ -1971,6 +2071,9 @@ namespace Plantronics.UC.SpokesWrapper
                 if (m_atdCommand == null) DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: Error: unable to obtain atd command interface");
                 m_hostCommandExt = m_activeDevice.HostCommand as ICOMHostCommandExt;
                 if (m_hostCommandExt == null) DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: Error: unable to obtain host command ext interface");
+
+                m_deviceSettingsExt = m_activeDevice.HostCommand as ICOMDeviceSettingsExt;
+                if (m_deviceSettingsExt == null) DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: Error: unable to obtain device settings ext interface");
 
                 UpdateOtherDeviceCapabilities();
 
@@ -2155,30 +2258,66 @@ namespace Plantronics.UC.SpokesWrapper
         // now poll for current state (proximity, mobile call status, donned status, mute status)
         private void GetInitialDeviceState()
         {
-            if (m_activeDevice != null)
+            try
             {
-                RegisterForProximity(true);
+                if (m_activeDevice != null)
+                {
+                    RegisterForProximity(true);
 
-                GetInitialSoftphoneCallStatus(); // are we on a call?
+                    GetInitialSoftphoneCallStatus(); // are we on a call?
 
-                GetInitialMobileCallStatus(); // are we on a call?  // LC 11-07-13 commented out, crashing spokes 3.0 sdk
+                    GetInitialMobileCallStatus(); // are we on a call?  // LC 11-07-13 commented out, crashing spokes 3.0 sdk
 
-                GetInitialDonnedStatus(); // are we donned?
+                    GetInitialDonnedStatus(); // are we donned?
 
-                GetInitialMuteStatus();
+                    GetInitialMuteStatus();
 
-                RequestAllSerialNumbers();
+                    RequestAllSerialNumbers();
 
-                GetLastDockedStatus();
+                    GetLastDockedStatus();
 
-                GetActiveAndHeldStates();
+                    GetLastConnectedStatus(); // new
 
-                OnLineActiveChanged(new LineActiveChangedArgs(m_hostCommand.AudioState == DeviceAudioState.AudioState_MonoOn)); // is the line active?
+                    GetActiveAndHeldStates();
+
+                    OnLineActiveChanged(new LineActiveChangedArgs(m_hostCommand.AudioState == DeviceAudioState.AudioState_MonoOn)); // is the line active?
+                }
+                else
+                {
+                    DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: No device is attached, cannot get initial device state.");
+                }
             }
-            else
+            catch (Exception e)
             {
-                DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: No device is attached, cannot get initial device state.");
+                DebugPrint(MethodInfo.GetCurrentMethod().Name, "INFO: exception was caught from Spokes SDK: " + e.GetType());
             }
+        }
+
+        // new get last connected status of headset (QD connector) when app first runs
+        private bool GetLastConnectedStatus()
+        {
+            bool connected = false;
+            try
+            {
+                if (m_hostCommandExt != null)
+                {
+                    m_lastconnected = true; // if settings interface is not available, assume connected
+                    if (m_deviceSettingsExt != null)
+                    {
+                        m_lastconnected = m_deviceSettingsExt.HeadsetConnnectedState;
+                    }
+                    connected = m_lastconnected;
+                    if (connected) OnConnected(new ConnectedStateArgs(true, true));
+                    else OnDisconnected(new ConnectedStateArgs(false, true));
+                }
+            }
+            catch (Exception)
+            {
+                // probably we don't have QD connector, lets inform user...
+                DeviceCapabilities.HasQDConnector = false;
+                OnCapabilitiesChanged(EventArgs.Empty);
+            }
+            return connected;
         }
 
         private void GetInitialSoftphoneCallStatus()
@@ -2217,21 +2356,21 @@ namespace Plantronics.UC.SpokesWrapper
 
         private void DebugPrint(string methodname, string message)
         {
-            if (m_debuglog!=null)
+            if (m_debuglog != null)
                 m_debuglog.DebugPrint(methodname, message);
         }
 
         // hard coded other device caps, beside caller id
         private void UpdateOtherDeviceCapabilities()
         {
-	        // NEW if DeviceCapabilities.csv file exists in your app's current working directory with a list of device
-	        // features in the following format (one device per line):
-	        // ProductId,DeviceName,HasProximity,HasMobCallerId,HasMobCallState,HasDocking,HasWearingSensor,HasMultiline,IsWireless
-	        // Then use those capabilities for current active device
-	        //
+            // NEW if DeviceCapabilities.csv file exists in your app's current working directory with a list of device
+            // features in the following format (one device per line):
+            // ProductId,DeviceName,HasProximity,HasMobCallerId,HasMobCallState,HasDocking,HasWearingSensor,HasMultiline,IsWireless
+            // Then use those capabilities for current active device
+            //
 
-	        // Is the m_AllDeviceCapabilities vector populated? And is my device id in there?
-	        SpokesDeviceCaps myDeviceCapabilities = GetMyDeviceCapabilities();
+            // Is the m_AllDeviceCapabilities vector populated? And is my device id in there?
+            SpokesDeviceCaps myDeviceCapabilities = GetMyDeviceCapabilities();
 
             if (myDeviceCapabilities.ProductId.Length > 0)
             {
@@ -2243,8 +2382,9 @@ namespace Plantronics.UC.SpokesWrapper
                 DeviceCapabilities.HasWearingSensor = myDeviceCapabilities.HasWearingSensor;
                 DeviceCapabilities.HasMultiline = myDeviceCapabilities.HasMultiline;
                 DeviceCapabilities.IsWireless = myDeviceCapabilities.IsWireless;
+                DeviceCapabilities.HasQDConnector = myDeviceCapabilities.HasQDConnector;
             }
-            else if (m_activeDevice!=null && m_activeDevice.ProductId == 126)
+            else if (m_activeDevice != null && m_activeDevice.ProductId == 126)
             {
                 // special case - PLT Labs Concept 1 head tracking headset...
                 DeviceCapabilities.HasProximity = true;
@@ -2253,6 +2393,7 @@ namespace Plantronics.UC.SpokesWrapper
                 DeviceCapabilities.HasWearingSensor = true;
                 DeviceCapabilities.HasDocking = true; // updated, legend does have docking
                 DeviceCapabilities.IsWireless = true;
+                DeviceCapabilities.HasQDConnector = false;
             }
             else
             {
@@ -2361,7 +2502,7 @@ namespace Plantronics.UC.SpokesWrapper
                 // LC Device was disconnected, clear down the GUI state...
                 m_mobIncoming = false; // clear mobile call direction flag
                 m_voipIncoming = false; // clear call direction flag
-                OnNotOnCall(new NotOnCallArgs(0,""));
+                OnNotOnCall(new NotOnCallArgs(0, ""));
                 OnNotOnMobileCall(EventArgs.Empty);
 
                 OnSerialNumber(new SerialNumberArgs("", SerialNumberTypes.Base));
@@ -2413,7 +2554,7 @@ namespace Plantronics.UC.SpokesWrapper
                 DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: INFO: proximity may not be supported on your device.");
                 // uh-oh proximity may not be supported... disable it as option in GUI (only if we have not
                 // loaded all device capabilities database
-                if (m_AllDeviceCapabilities.Count==0)
+                if (m_AllDeviceCapabilities.Count == 0)
                     DeviceCapabilities.HasProximity = false;
                 OnCapabilitiesChanged(EventArgs.Empty);
             }
@@ -2453,7 +2594,7 @@ namespace Plantronics.UC.SpokesWrapper
             bool state = false; // default - unknown state
 
             //Get the current hold state
-            if (m_hostCommandExt!=null)
+            if (m_hostCommandExt != null)
             {
                 state = m_hostCommandExt.GetLinkHoldState(lineType);
             }
@@ -2482,7 +2623,7 @@ namespace Plantronics.UC.SpokesWrapper
             {
                 if (m_hostCommandExt != null)
                 {
-                    docked = m_hostCommandExt.HeadsetDocked;
+                    m_lastdocked = m_hostCommandExt.HeadsetDocked;
                     docked = m_lastdocked;
                     if (docked) OnDocked(new DockedStateArgs(true, true));
                     else OnUnDocked(new DockedStateArgs(false, true));
@@ -2494,7 +2635,7 @@ namespace Plantronics.UC.SpokesWrapper
                 if (m_activeDevice.ProductName.Contains("BT300"))
                 {
                     DeviceCapabilities.HasDocking = true; // updated, legend does have docking
-                      // TODO Raise TT for IsHeadsetDocked should be implemented for BT300!
+                    // TODO Raise TT for IsHeadsetDocked should be implemented for BT300!
                     m_ignorenextundockedevent = true;
                     //m_ignorenextbattlevevent = true;
                     m_lastdocked = DetectLegendDockedState(true);
@@ -2620,7 +2761,7 @@ namespace Plantronics.UC.SpokesWrapper
                             OnPutOn(new WearingStateArgs(true, true));
                             break;
                     }
-                    DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: Last donned state was: "+laststate);
+                    DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: Last donned state was: " + laststate);
                 }
             }
             catch (Exception e)
@@ -2715,6 +2856,75 @@ namespace Plantronics.UC.SpokesWrapper
                     CallCOM call = new CallCOM(); // { Id = callid };
                     call.SetId(callid);
                     m_comSession.GetCallCommand().TerminateCall(call);
+                    success = true;
+                }
+            }
+            catch (Exception) { success = false; }
+            return success;
+        }
+
+        /// <summary>
+        /// Informs Spokes that user has answered an incoming (ringing) softphone call,
+        /// for example with a softphone GUI.
+        /// </summary>
+        /// <param name="callid">The unique numeric id that defines which softphone call you want to end.</param>
+        /// <returns>Boolean indicating if the command was called succesfully or not.</returns>
+        public bool AnswerCall(int callid)
+        {
+            bool success = false;
+            try
+            {
+                if (m_comSession != null)
+                {
+                    CallCOM call = new CallCOM(); // { Id = callid };
+                    call.SetId(callid);
+                    m_comSession.GetCallCommand().AnsweredCall(call);
+                    success = true;
+                }
+            }
+            catch (Exception) { success = false; }
+            return success;
+        }
+
+        /// <summary>
+        /// Informs Spokes that user has placed a softphone call on hold,
+        /// for example with a softphone GUI.
+        /// </summary>
+        /// <param name="callid">The unique numeric id that defines which softphone call you want to end.</param>
+        /// <returns>Boolean indicating if the command was called succesfully or not.</returns>
+        public bool HoldCall(int callid)
+        {
+            bool success = false;
+            try
+            {
+                if (m_comSession != null)
+                {
+                    CallCOM call = new CallCOM(); // { Id = callid };
+                    call.SetId(callid);
+                    m_comSession.GetCallCommand().HoldCall(call);
+                    success = true;
+                }
+            }
+            catch (Exception) { success = false; }
+            return success;
+        }
+
+        /// <summary>
+        /// Informs Spokes that user has resumed a softphone call that was previously on hold,
+        /// for example with a softphone GUI.
+        /// </summary>
+        /// <param name="callid">The unique numeric id that defines which softphone call you want to end.</param>
+        /// <returns>Boolean indicating if the command was called succesfully or not.</returns>
+        public bool ResumeCall(int callid)
+        {
+            bool success = false;
+            try
+            {
+                if (m_comSession != null)
+                {
+                    CallCOM call = new CallCOM(); // { Id = callid };
+                    call.SetId(callid);
+                    m_comSession.GetCallCommand().ResumeCall(call);
                     success = true;
                 }
             }
@@ -2957,12 +3167,33 @@ namespace Plantronics.UC.SpokesWrapper
             DebugPrint(MethodInfo.GetCurrentMethod().Name, "INFO: Setting mute = " + mute.ToString());
             if (m_activeDevice != null && m_hostCommandExt != null)
             {
+                //m_hostCommand.put.mute = mute;
                 m_hostCommandExt.MuteHeadset = mute;
             }
             else
             {
                 DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: INFO: cannot set mute, no device");
             }
+        }
+
+        /// <summary>
+        /// Get the microphone mute state of the attached Plantronics device.
+        /// Note: For wireless devices mute only works when the audio/rf link is active (see also ConnectAudioLinkToDevice method).
+        /// </summary>
+        /// <returns>Boolean indicating if the headset is muted or not.</returns>
+        public bool GetMute()
+        {
+            bool retval = false;
+            DebugPrint(MethodInfo.GetCurrentMethod().Name, "INFO: Getting mute");
+            if (m_activeDevice != null && m_hostCommandExt != null)
+            {
+                retval = m_hostCommand.mute;
+            }
+            else
+            {
+                DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: INFO: cannot get mute, no device");
+            }
+            return retval;
         }
 
         /// <summary>

@@ -12,13 +12,15 @@ namespace PlantronicsClientAddIn
 	public class AddIn : IAddIn
 	{
         private static ITraceContext s_traceContext = null;
-        private static PlantronicsManager s_plantronicsManager = null;
-        private static IStatusManager s_statusManager = null;
+        private static ICicStatusService s_statusManager = null;
         private static IInteractionManager s_interactionManager = null;
         private static INotificationService s_notificationService = null;
         private static Session _session = null;
         private static ISettingsManager s_settingsManager = null;
-        private static IDeviceStatus s_deviceSettings = null;
+        private static IDeviceManager s_deviceManager = null;
+        private static StatusChanger s_statusChanger = null;
+        private static NotificationServer s_notificationServer = null;
+        private static MuteSyncManager s_muteManager = null;
 
         public static ISettingsManager SettingsManager
         {
@@ -28,7 +30,7 @@ namespace PlantronicsClientAddIn
             }
         }
 
-        public static IStatusManager StatusManager
+        public static ICicStatusService StatusManager
         {
             get
             {
@@ -36,11 +38,11 @@ namespace PlantronicsClientAddIn
             }
         }
 
-        public static IDeviceStatus DeviceSettings
+        public static IDeviceManager DeviceSettings
         {
             get
             {
-                return s_deviceSettings;
+                return s_deviceManager;
             }
         }
 
@@ -55,13 +57,16 @@ namespace PlantronicsClientAddIn
                 //must have the icelib sdk license to get the session as a service
                 _session = (Session)serviceProvider.GetService(typeof(Session));
                 s_interactionManager = new InteractionManager(_session, (IQueueService)serviceProvider.GetService(typeof(IQueueService)), s_traceContext);
-                s_statusManager = new StatusManager(_session, s_traceContext);
+                s_statusManager = new CicStatusService(_session, s_traceContext);
                 s_notificationService = (INotificationService)serviceProvider.GetService(typeof(INotificationService));
 
                 s_settingsManager = new SettingsManager();
-                s_deviceSettings = new DeviceStatus(s_traceContext);
+                s_deviceManager = new DeviceManager(s_traceContext, new SpokesDebugLogger(s_traceContext));
 
-                s_plantronicsManager = new PlantronicsManager(s_statusManager, s_interactionManager, s_notificationService, s_settingsManager, s_deviceSettings, s_traceContext,new SpokesDebugLogger(s_traceContext));
+                s_statusChanger = new StatusChanger(s_statusManager, s_deviceManager, s_settingsManager);
+                s_notificationServer = new NotificationServer(s_deviceManager, s_settingsManager, s_notificationService);
+                s_muteManager = new MuteSyncManager((IInteractionSelector)serviceProvider.GetService(typeof(IInteractionSelector)), s_deviceManager);
+
                 s_traceContext.Always("Plantronics AddIn Loaded");
             }
             catch (ArgumentNullException)
@@ -73,8 +78,8 @@ namespace PlantronicsClientAddIn
 
 		public void Unload ()
 		{
-            s_plantronicsManager.Dispose();
-            s_plantronicsManager = null;
+            s_deviceManager.Dispose();
+            s_deviceManager = null;
 		}
 
 

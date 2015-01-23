@@ -13,7 +13,7 @@ namespace PlantronicsClientAddIn.ViewModels
     public class SettingsViewModel 
     {
         private ISettingsManager _settingsManager;
-        private IStatusManager _statusManager;
+        private ICicStatusService _statusManager;
         private SynchronizationContext _synchronizationContext;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -31,7 +31,7 @@ namespace PlantronicsClientAddIn.ViewModels
             
         }
 
-        public SettingsViewModel(ISettingsManager settingsManager, IStatusManager statusManager)
+        public SettingsViewModel(ISettingsManager settingsManager, ICicStatusService statusManager)
         {
             if (settingsManager == null || statusManager == null)
             {
@@ -46,37 +46,37 @@ namespace PlantronicsClientAddIn.ViewModels
             
             StatusList = new ReadOnlyObservableCollection<Status.Status>(new ObservableCollection<Status.Status>(statusList));
             
-            this._connectChangeStatus = _settingsManager.ConnectChangeStatus;
-            this._connectNotification = _settingsManager.ConnectNotification;
-            var connectStatus = statusList.FirstOrDefault(s => s.Key.ToLower() == _settingsManager.ConnectStatusKey.ToLower());
+            this._deviceConnectChangeStatus = _settingsManager.DeviceConnectChangeStatus;
+            this._deviceConnectNotification = _settingsManager.DeviceConnectNotification;
+            var connectStatus = statusList.FirstOrDefault(s => s.Key.ToLower() == _settingsManager.DeviceConnectStatusKey.ToLower());
             if (connectStatus != null)
             {
-                this._connectStatus = connectStatus;
+                this._deviceConnectStatus = connectStatus;
             }
 
-            this._disconnectChangeStatus = _settingsManager.DisconnectChangeStatus;
-            this._disconnectNotification = _settingsManager.DisconnectNotification;
+            this._deviceDisconnectChangeStatus = _settingsManager.DeviceDisconnectChangeStatus;
+            this._deviceDisconnectNotification = _settingsManager.DeviceDisconnectNotification;
 
-            var disconnectStatus = statusList.FirstOrDefault(s => s.Key.ToLower() == _settingsManager.DisconnectStatusKey.ToLower());
+            var disconnectStatus = statusList.FirstOrDefault(s => s.Key.ToLower() == _settingsManager.DeviceDisconnectStatusKey.ToLower());
             if (disconnectStatus != null)
             {
-                this._disconnectStatus = disconnectStatus;
+                this._deviceDisconnectStatus = disconnectStatus;
             }
             
-            this._outOfRangeChangeStatus = _settingsManager.OutOfRangeChangeStatus;
-            this._outOfRangeNotification = _settingsManager.OutOfRangeNotification;
-            var outOfRangeStatus = statusList.FirstOrDefault(s => s.Key.ToLower() == _settingsManager.OutOfRangeStatusKey.ToLower());
-            if (outOfRangeStatus != null)
+            this._headsetDisconnectChangeStatus = _settingsManager.HeadsetDisconnectChangeStatus;
+            this._headsetDisconnectNotification = _settingsManager.HeadsetDisconnectNotification;
+            var headsetDisconnectStatus = statusList.FirstOrDefault(s => s.Key.ToLower() == _settingsManager.HeadsetDisconnectStatusKey.ToLower());
+            if (headsetDisconnectStatus != null)
             {
-                this._outOfRangeStatus = outOfRangeStatus;
+                this._headsetDisconnectStatus = headsetDisconnectStatus;
             }
 
-            this._inRangeChangeStatus = _settingsManager.InRangeChangeStatus;
-            this._inRangeNotification = _settingsManager.InRangeNotification;
-            var inRangeStatus = statusList.FirstOrDefault(s => s.Key.ToLower() == _settingsManager.InRangeStatusKey.ToLower());
-            if (inRangeStatus != null)
+            this._headsetConnectChangeStatus = _settingsManager.HeadsetConnectChangeStatus;
+            this._headsetConnectNotification = _settingsManager.HeadsetConnectNotification;
+            var headsetConnectedStatus = statusList.FirstOrDefault(s => s.Key.ToLower() == _settingsManager.HeadsetConnectStatusKey.ToLower());
+            if (headsetConnectedStatus != null)
             {
-                this._inRangeStatus = inRangeStatus;
+                this._headsetConnectStatus = headsetConnectedStatus;
             }
 
 
@@ -95,183 +95,183 @@ namespace PlantronicsClientAddIn.ViewModels
             }
         }
 
-        private Status.Status _disconnectStatus;
-        public Status.Status DisconnectStatus
+        private Status.Status _deviceDisconnectStatus;
+        public Status.Status DeviceDisconnectStatus
         {
             get
             {
-                return _disconnectStatus;
+                return _deviceDisconnectStatus;
             }
             set
             {
-                _settingsManager.DisconnectStatusKey = value.Key;
-                _disconnectStatus = value;
-                RaisePropertyChanged("DisconnectStatus");
+                _settingsManager.DeviceDisconnectStatusKey = value.Key;
+                _deviceDisconnectStatus = value;
+                RaisePropertyChanged("DeviceDisconnectStatus");
             }
         }
 
-        private bool _disconnectChangeStatus;
-        public bool DisconnectChangeStatus
+        private bool _deviceDisconnectChangeStatus;
+        public bool DeviceDisconnectChangeStatus
         {
             get
             {
-                return _disconnectChangeStatus;
+                return _deviceDisconnectChangeStatus;
             }
             set
             {
-                _settingsManager.DisconnectChangeStatus = value;
-                _disconnectChangeStatus = value;
-                RaisePropertyChanged("DisconnectChangeStatus");
+                _settingsManager.DeviceDisconnectChangeStatus = value;
+                _deviceDisconnectChangeStatus = value;
+                RaisePropertyChanged("DeviceDisconnectChangeStatus");
             }
         }
 
-        private bool _disconnectNotification;
-        public bool DisconnectNotification
+        private bool _deviceDisconnectNotification;
+        public bool DeviceDisconnectNotification
         {
             get
             {
-                return _disconnectNotification;
+                return _deviceDisconnectNotification;
             }
             set
             {
-                _settingsManager.DisconnectNotification = value;
-                _disconnectNotification = value;
-                RaisePropertyChanged("DisconnectNotification");
+                _settingsManager.DeviceDisconnectNotification = value;
+                _deviceDisconnectNotification = value;
+                RaisePropertyChanged("DeviceDisconnectNotification");
             }
         }
 
-        private Status.Status _connectStatus;
-        public Status.Status ConnectStatus
+        private Status.Status _deviceConnectStatus;
+        public Status.Status DeviceConnectStatus
         {
             get
             {
-                return _connectStatus;
+                return _deviceConnectStatus;
             }
             set
             {
-                _settingsManager.ConnectStatusKey = value.Key;
-                _connectStatus = value;
-                RaisePropertyChanged("ConnectStatus");
+                _settingsManager.DeviceConnectStatusKey = value.Key;
+                _deviceConnectStatus = value;
+                RaisePropertyChanged("DeviceConnectStatus");
             }
         }
 
-        private bool _connectChangeStatus;
-        public bool ConnectChangeStatus
+        private bool _deviceConnectChangeStatus;
+        public bool DeviceConnectChangeStatus
         {
             get
             {
-                return _connectChangeStatus;
+                return _deviceConnectChangeStatus;
             }
             set
             {
-                _settingsManager.ConnectChangeStatus = value;
-                _connectChangeStatus = value;
-                RaisePropertyChanged("ConnectChangeStatus");
+                _settingsManager.DeviceConnectChangeStatus = value;
+                _deviceConnectChangeStatus = value;
+                RaisePropertyChanged("DeviceConnectChangeStatus");
             }
         }
 
-        private bool _connectNotification;
-        public bool ConnectNotification
+        private bool _deviceConnectNotification;
+        public bool DeviceConnectNotification
         {
             get
             {
-                return _connectNotification;
+                return _deviceConnectNotification;
             }
             set
             {
-                _settingsManager.ConnectNotification = value;
-                _connectNotification = value;
-                RaisePropertyChanged("ConnectNotification");
+                _settingsManager.DeviceConnectNotification = value;
+                _deviceConnectNotification = value;
+                RaisePropertyChanged("DeviceConnectNotification");
             }
         }
 
-        private Status.Status _outOfRangeStatus;
-        public Status.Status OutOfRangeStatus
+        private Status.Status _headsetDisconnectStatus;
+        public Status.Status HeadsetDisconnectStatus
         {
             get
             {
-                return _outOfRangeStatus;
+                return _headsetDisconnectStatus;
             }
             set
             {
-                _settingsManager.OutOfRangeStatusKey = value.Key;
-                _outOfRangeStatus = value;
-                RaisePropertyChanged("OutOfRangeStatus");
+                _settingsManager.HeadsetDisconnectStatusKey = value.Key;
+                _headsetDisconnectStatus = HeadsetDisconnectStatus;
+                RaisePropertyChanged("HeadsetDisconnectStatus");
             }
         }
 
-        private bool _outOfRangeChangeStatus;
-        public bool OutOfRangeChangeStatus
+        private bool _headsetDisconnectChangeStatus;
+        public bool HeadsetDisconnectChangeStatus
         {
             get
             {
-                return _outOfRangeChangeStatus;
+                return _headsetDisconnectChangeStatus;
             }
             set
             {
-                _settingsManager.OutOfRangeChangeStatus = value;
-                _outOfRangeChangeStatus = value;
-                RaisePropertyChanged("OutOfRangeChangeStatus");
+                _settingsManager.HeadsetDisconnectChangeStatus = value;
+                _headsetDisconnectChangeStatus = value;
+                RaisePropertyChanged("HeadsetDisconnectChangeStatus");
             }
         }
 
-        private bool _outOfRangeNotification;
-        public bool OutOfRangeNotification
+        private bool _headsetDisconnectNotification;
+        public bool HeadsetDisconnectNotification
         {
             get
             {
-                return _outOfRangeNotification;
+                return _headsetDisconnectNotification;
             }
             set
             {
-                _settingsManager.OutOfRangeNotification = value;
-                _outOfRangeNotification = value;
-                RaisePropertyChanged("OutOfRangeNotification");
+                _settingsManager.HeadsetDisconnectNotification = value;
+                _headsetDisconnectNotification = value;
+                RaisePropertyChanged("HeadsetDisconnectNotification");
             }
         }
 
-        private Status.Status _inRangeStatus;
-        public Status.Status InRangeStatus
+        private Status.Status _headsetConnectStatus;
+        public Status.Status HeadsetConnectStatus
         {
             get
             {
-                return _inRangeStatus;
+                return _headsetConnectStatus;
             }
             set
             {
-                _settingsManager.InRangeStatusKey = value.Key;
-                _inRangeStatus = value;
-                RaisePropertyChanged("InRangeStatus");
+                _settingsManager.HeadsetConnectStatusKey = value.Key;
+                _headsetConnectStatus = value;
+                RaisePropertyChanged("HeadsetConnectStatus");
             }
         }
 
-        private bool _inRangeChangeStatus;
-        public bool InRangeChangeStatus
+        private bool _headsetConnectChangeStatus;
+        public bool HeadsetConnectChangeStatus
         {
             get
             {
-                return _inRangeChangeStatus;
+                return _headsetConnectChangeStatus;
             }
             set
             {
-                _settingsManager.InRangeChangeStatus = value;
-                _inRangeChangeStatus = value;
-                RaisePropertyChanged("InRangeChangeStatus");
+                _settingsManager.HeadsetConnectChangeStatus = value;
+                _headsetConnectChangeStatus = value;
+                RaisePropertyChanged("HeadsetConnectChangeStatus");
             }
         }
 
-        private bool _inRangeNotification;
-        public bool InRangeNotification
+        private bool _headsetConnectNotification;
+        public bool HeadsetConnectNotification
         {
             get
             {
-                return _inRangeNotification;
+                return _headsetConnectNotification;
             }
             set
             {
-                _settingsManager.InRangeNotification = value;
-                _inRangeNotification = value;
-                RaisePropertyChanged("InRangeNotification");
+                _settingsManager.HeadsetConnectNotification = value;
+                _headsetConnectNotification = value;
+                RaisePropertyChanged("HeadsetConnectNotification");
             }
         }
 

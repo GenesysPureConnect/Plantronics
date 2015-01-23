@@ -16,8 +16,8 @@ namespace UnitTests
         [TestMethod]
         public void IsConnectedTest()
         {
-            var statusMock = new Moq.Mock<IDeviceStatus>();
-            statusMock.SetupGet(s => s.IsConnected).Returns(false);
+            var statusMock = new Moq.Mock<IDeviceManager>();
+            statusMock.SetupGet(s => s.IsDeviceConnected).Returns(false);
 
             StatusViewModel target = new StatusViewModel(statusMock.Object);
 
@@ -29,7 +29,7 @@ namespace UnitTests
         [TestMethod]
         public void InternalNameTest()
         {
-            var statusMock = new Moq.Mock<IDeviceStatus>();
+            var statusMock = new Moq.Mock<IDeviceManager>();
             statusMock.SetupGet(s => s.InternalName).Returns(TestValue);
 
             StatusViewModel target = new StatusViewModel(statusMock.Object);
@@ -52,7 +52,7 @@ namespace UnitTests
         [TestMethod]
         public void ManufacturerNameTest()
         {
-            var statusMock = new Moq.Mock<IDeviceStatus>();
+            var statusMock = new Moq.Mock<IDeviceManager>();
             statusMock.SetupGet(s => s.ManufacturerName).Returns(TestValue);
 
             StatusViewModel target = new StatusViewModel(statusMock.Object);
@@ -75,7 +75,7 @@ namespace UnitTests
         [TestMethod]
         public void ProductNameTest()
         {
-            var statusMock = new Moq.Mock<IDeviceStatus>();
+            var statusMock = new Moq.Mock<IDeviceManager>();
             statusMock.SetupGet(s => s.ProductName).Returns(TestValue);
 
             StatusViewModel target = new StatusViewModel(statusMock.Object);
@@ -98,7 +98,7 @@ namespace UnitTests
         [TestMethod]
         public void SerialNumberTest()
         {
-            var statusMock = new Moq.Mock<IDeviceStatus>();
+            var statusMock = new Moq.Mock<IDeviceManager>();
             statusMock.SetupGet(s => s.SerialNumber).Returns(TestValue);
 
             StatusViewModel target = new StatusViewModel(statusMock.Object);
@@ -121,7 +121,7 @@ namespace UnitTests
         [TestMethod]
         public void VersionNumberTest()
         {
-            var statusMock = new Moq.Mock<IDeviceStatus>();
+            var statusMock = new Moq.Mock<IDeviceManager>();
             statusMock.SetupGet(s => s.VersionNumber).Returns(0);
 
             StatusViewModel target = new StatusViewModel(statusMock.Object);

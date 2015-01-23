@@ -68,8 +68,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interactions\InteractionManager.cs" />
-    <Compile Include="Plantronics\DeviceStatus.cs" />
-    <Compile Include="Plantronics\IDeviceStatus.cs" />
+    <Compile Include="Interactions\MuteSyncManager.cs" />
+    <Compile Include="NotificationServer.cs" />
+    <Compile Include="Plantronics\DeviceManager.cs" />
+    <Compile Include="Plantronics\IDeviceManager.cs" />
     <Compile Include="Plantronics\SpokesWrapper3.0.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AddIn.cs" />
@@ -81,11 +83,11 @@
     <Compile Include="Settings\ISettingsManager.cs" />
     <Compile Include="Settings\SettingsManager.cs" />
     <Compile Include="SpokesDebugLogger.cs" />
-    <Compile Include="Status\IStatusManager.cs" />
+    <Compile Include="Status\ICicStatusService.cs" />
     <Compile Include="Interactions\IInteractionManager.cs" />
-    <Compile Include="Plantronics\PlantronicsManager.cs" />
     <Compile Include="Status\Status.cs" />
-    <Compile Include="Status\StatusManager.cs" />
+    <Compile Include="Status\CicStatusService.cs" />
+    <Compile Include="Status\StatusChanger.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\StatusViewModel.cs" />
     <Compile Include="Views\AddinPage.xaml.cs">
@@ -108,6 +110,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="README.md" />
     <None Include="TODO.md" />
   </ItemGroup>

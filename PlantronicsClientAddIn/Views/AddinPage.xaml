@@ -62,6 +62,7 @@
                     <TextBlock Grid.Row="4" Grid.Column="0">Version Number:</TextBlock>
                     <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding VersionNumber}"></TextBlock>
                 </Grid>
+                <Label Foreground="Red" Visibility="{Binding MuteVisibility}" >MUTED</Label>
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Column="1" Margin="5">
@@ -81,15 +82,14 @@
             <ScrollViewer>
             <StackPanel>
                 <GroupBox Grid.Column="1" Margin="5">
-                    <GroupBox.Header>When headset is disconnected</GroupBox.Header>
+                    <GroupBox.Header>When plantronics device is disconnected</GroupBox.Header>
                     <StackPanel>
-                            <Label Content="{Binding DisconnectStatusKey}"></Label>
                             <StackPanel Orientation="Horizontal">
-                                <CheckBox IsChecked="{Binding DisconnectChangeStatus}">Change Status</CheckBox>
+                                <CheckBox IsChecked="{Binding DeviceDisconnectChangeStatus}">Change Status</CheckBox>
                                 <ComboBox ItemTemplate="{StaticResource StatusTemplate}" 
-                                          IsEnabled="{Binding DisconnectChangeStatus}" 
+                                          IsEnabled="{Binding DeviceDisconnectChangeStatus}" 
                                           ItemsSource="{Binding StatusList}"
-                                          SelectedValue="{Binding DisconnectStatus, Mode=TwoWay}"
+                                          SelectedValue="{Binding DeviceDisconnectStatus, Mode=TwoWay}"
                                           
                                           ></ComboBox>
                             </StackPanel>
@@ -97,41 +97,51 @@
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Grid.Column="1" Margin="5">
-                    <GroupBox.Header>When headset is connected</GroupBox.Header>
+                    <GroupBox.Header>When plantronics device is connected</GroupBox.Header>
                     <StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <CheckBox IsChecked="{Binding ConnectChangeStatus}">Change Status</CheckBox>
+                                <CheckBox IsChecked="{Binding DeviceConnectChangeStatus}">Change Status</CheckBox>
                                 <ComboBox ItemTemplate="{StaticResource StatusTemplate}" 
-                                          IsEnabled="{Binding ConnectChangeStatus}" 
+                                          IsEnabled="{Binding DeviceConnectChangeStatus}" 
                                           ItemsSource="{Binding StatusList}"
-                                          SelectedValue="{Binding ConnectStatus, Mode=TwoWay}" 
+                                          SelectedValue="{Binding DeviceConnectStatus, Mode=TwoWay}" 
                                           
                                           ></ComboBox>
                             </StackPanel>
-                            <CheckBox  IsChecked="{Binding ConnectNotification}">Show Notification</CheckBox>
+                            <CheckBox  IsChecked="{Binding DeviceConnectNotification}">Show Notification</CheckBox>
                         </StackPanel>
                 </GroupBox>
-                <!--
+                
                 <GroupBox Grid.Column="1" Margin="5">
-                    <GroupBox.Header>When headset is in range</GroupBox.Header>
+                    <GroupBox.Header>When headset is connected</GroupBox.Header>
                     <StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <CheckBox Checked="{Binding ConnectChangeStatus}">Change Status</CheckBox>
-                                <ComboBox IsEnabled="{Binding DisconnectChangeStatus}" ItemsSource="{Binding StatusList}" ></ComboBox>
+                                <CheckBox IsChecked="{Binding HeadsetConnectChangeStatus}">Change Status</CheckBox>
+                               <ComboBox ItemTemplate="{StaticResource StatusTemplate}" 
+                                          IsEnabled="{Binding HeadsetConnectChangeStatus}" 
+                                          ItemsSource="{Binding StatusList}"
+                                          SelectedValue="{Binding HeadsetConnectStatus, Mode=TwoWay}" 
+                                          
+                                          ></ComboBox>
                             </StackPanel>
-                            <CheckBox  Checked="{Binding ConnectNotification}">Show Notification</CheckBox>
+                            <CheckBox  IsChecked="{Binding HeadsetConnectNotification}">Show Notification</CheckBox>
                         </StackPanel>
                 </GroupBox>
                 <GroupBox Grid.Column="1" Margin="5">
-                    <GroupBox.Header>When headset is out of range</GroupBox.Header>
+                    <GroupBox.Header>When headset is disconnected</GroupBox.Header>
                     <StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <CheckBox Checked="{Binding DisconnectChangeStatus}">Change Status</CheckBox>
-                                <ComboBox IsEnabled="{Binding DisconnectChangeStatus}" ItemsSource="{Binding StatusList}" ></ComboBox>
+                                <CheckBox IsChecked="{Binding HeadsetDisconnectChangeStatus}">Change Status</CheckBox>
+                                  <ComboBox ItemTemplate="{StaticResource StatusTemplate}" 
+                                          IsEnabled="{Binding HeadsetDisconnectChangeStatus}" 
+                                          ItemsSource="{Binding StatusList}"
+                                          SelectedValue="{Binding HeadsetDisconnectStatus, Mode=TwoWay}" 
+                                          
+                                          ></ComboBox>
                             </StackPanel>
-                            <CheckBox  Checked="{Binding DisconnectNotification}">Show Notification</CheckBox>
+                            <CheckBox  IsChecked="{Binding HeadsetDisconnectNotification}">Show Notification</CheckBox>
                         </StackPanel>
-                </GroupBox>-->
+                </GroupBox>
             </StackPanel>
             </ScrollViewer>
             <!--

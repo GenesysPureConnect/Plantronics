@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PlantronicsClientAddIn.Status
 {
-	public interface IStatusManager
+	public interface ICicStatusService
 	{
 		void SetToAwayFromDesk();
 		void SetToAvailable();

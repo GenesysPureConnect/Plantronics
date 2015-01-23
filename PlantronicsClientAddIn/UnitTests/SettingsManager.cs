@@ -22,156 +22,156 @@ namespace UnitTests
         public void TestDisconnectStatusKey()
         {
             SettingsManager target = new SettingsManager();
-            target.DisconnectStatusKey = testKey;
+            target.DeviceDisconnectStatusKey = testKey;
 
             target = new SettingsManager();
 
-            Assert.AreEqual(testKey, target.DisconnectStatusKey);
+            Assert.AreEqual(testKey, target.DeviceDisconnectStatusKey);
         }
 
         [TestMethod]
         public void TestDisconnectChangeStatus()
         {
             SettingsManager target = new SettingsManager();
-            target.DisconnectChangeStatus = true;
+            target.DeviceDisconnectChangeStatus = true;
 
             target = new SettingsManager();
-            Assert.AreEqual(true, target.DisconnectChangeStatus);
-            target.DisconnectChangeStatus = false;
+            Assert.AreEqual(true, target.DeviceDisconnectChangeStatus);
+            target.DeviceDisconnectChangeStatus = false;
 
             target = new SettingsManager();
-            Assert.AreEqual(false, target.DisconnectChangeStatus);
+            Assert.AreEqual(false, target.DeviceDisconnectChangeStatus);
         }
 
          [TestMethod]
         public void TestDisconnectNotification()
         {
             SettingsManager target = new SettingsManager();
-            target.DisconnectNotification = true;
+            target.DeviceDisconnectNotification = true;
 
             target = new SettingsManager();
-            Assert.AreEqual(true, target.DisconnectNotification);
-            target.DisconnectNotification = false;
+            Assert.AreEqual(true, target.DeviceDisconnectNotification);
+            target.DeviceDisconnectNotification = false;
 
             target = new SettingsManager();
-            Assert.AreEqual(false, target.DisconnectNotification);
+            Assert.AreEqual(false, target.DeviceDisconnectNotification);
         }
 
          [TestMethod]
          public void TestConnectStatusKey()
          {
              SettingsManager target = new SettingsManager();
-             target.ConnectStatusKey = testKey;
+             target.DeviceConnectStatusKey = testKey;
 
              target = new SettingsManager();
 
-             Assert.AreEqual(testKey, target.ConnectStatusKey);
+             Assert.AreEqual(testKey, target.DeviceConnectStatusKey);
          }
 
          [TestMethod]
          public void TestConnectChangeStatus()
          {
              SettingsManager target = new SettingsManager();
-             target.ConnectChangeStatus = true;
+             target.DeviceConnectChangeStatus = true;
 
              target = new SettingsManager();
-             Assert.AreEqual(true, target.ConnectChangeStatus);
-             target.ConnectChangeStatus = false;
+             Assert.AreEqual(true, target.DeviceConnectChangeStatus);
+             target.DeviceConnectChangeStatus = false;
 
              target = new SettingsManager();
-             Assert.AreEqual(false, target.ConnectChangeStatus);
+             Assert.AreEqual(false, target.DeviceConnectChangeStatus);
          }
 
          [TestMethod]
          public void TestConnectNotification()
          {
              SettingsManager target = new SettingsManager();
-             target.ConnectNotification = true;
+             target.DeviceConnectNotification = true;
 
              target = new SettingsManager();
-             Assert.AreEqual(true, target.ConnectNotification);
-             target.ConnectNotification = false;
+             Assert.AreEqual(true, target.DeviceConnectNotification);
+             target.DeviceConnectNotification = false;
 
              target = new SettingsManager();
-             Assert.AreEqual(false, target.ConnectNotification);
+             Assert.AreEqual(false, target.DeviceConnectNotification);
          }
 
          [TestMethod]
          public void TestOutOfRangeStatusKey()
          {
              SettingsManager target = new SettingsManager();
-             target.OutOfRangeStatusKey = testKey;
+             target.HeadsetDisconnectStatusKey = testKey;
 
              target = new SettingsManager();
 
-             Assert.AreEqual(testKey, target.OutOfRangeStatusKey);
+             Assert.AreEqual(testKey, target.HeadsetDisconnectStatusKey);
          }
 
          [TestMethod]
          public void TestOutOfRangeChangeStatus()
          {
              SettingsManager target = new SettingsManager();
-             target.OutOfRangeChangeStatus = true;
+             target.HeadsetDisconnectChangeStatus = true;
 
              target = new SettingsManager();
-             Assert.AreEqual(true, target.OutOfRangeChangeStatus);
-             target.OutOfRangeChangeStatus = false;
+             Assert.AreEqual(true, target.HeadsetDisconnectChangeStatus);
+             target.HeadsetDisconnectChangeStatus = false;
 
              target = new SettingsManager();
-             Assert.AreEqual(false, target.OutOfRangeChangeStatus);
+             Assert.AreEqual(false, target.HeadsetDisconnectChangeStatus);
          }
 
          [TestMethod]
-         public void TestOutOfRangeNotification()
+         public void TestHeadsetDisonnectNotification()
          {
              SettingsManager target = new SettingsManager();
-             target.OutOfRangeNotification = true;
+             target.HeadsetDisconnectNotification = true;
 
              target = new SettingsManager();
-             Assert.AreEqual(true, target.OutOfRangeNotification);
-             target.OutOfRangeNotification = false;
+             Assert.AreEqual(true, target.HeadsetDisconnectNotification);
+             target.HeadsetDisconnectNotification = false;
 
              target = new SettingsManager();
-             Assert.AreEqual(false, target.OutOfRangeNotification);
+             Assert.AreEqual(false, target.HeadsetDisconnectNotification);
          }
 
          [TestMethod]
          public void TestInRangeStatusKey()
          {
              SettingsManager target = new SettingsManager();
-             target.InRangeStatusKey = testKey;
+             target.HeadsetConnectStatusKey = testKey;
 
              target = new SettingsManager();
 
-             Assert.AreEqual(testKey, target.InRangeStatusKey);
+             Assert.AreEqual(testKey, target.HeadsetConnectStatusKey);
          }
 
          [TestMethod]
          public void TestInRangeChangeStatus()
          {
              SettingsManager target = new SettingsManager();
-             target.InRangeChangeStatus = true;
+             target.HeadsetConnectChangeStatus = true;
 
              target = new SettingsManager();
-             Assert.AreEqual(true, target.InRangeChangeStatus);
-             target.InRangeChangeStatus = false;
+             Assert.AreEqual(true, target.HeadsetConnectChangeStatus);
+             target.HeadsetConnectChangeStatus = false;
 
              target = new SettingsManager();
-             Assert.AreEqual(false, target.InRangeChangeStatus);
+             Assert.AreEqual(false, target.HeadsetConnectChangeStatus);
          }
 
          [TestMethod]
          public void TestInRangeNotification()
          {
              SettingsManager target = new SettingsManager();
-             target.InRangeNotification = true;
+             target.HeadsetConnectNotification = true;
 
              target = new SettingsManager();
-             Assert.AreEqual(true, target.InRangeNotification);
-             target.InRangeNotification = false;
+             Assert.AreEqual(true, target.HeadsetConnectNotification);
+             target.HeadsetConnectNotification = false;
 
              target = new SettingsManager();
-             Assert.AreEqual(false, target.InRangeNotification);
+             Assert.AreEqual(false, target.HeadsetConnectNotification);
          }
     }
 }

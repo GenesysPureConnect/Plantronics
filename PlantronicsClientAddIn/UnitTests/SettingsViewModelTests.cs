@@ -20,9 +20,9 @@ namespace UnitTests
 
         }
 
-        private Moq.Mock<IStatusManager> StatusManager()
+        private Moq.Mock<ICicStatusService> StatusManager()
         {
-            var status = new Moq.Mock<IStatusManager>();
+            var status = new Moq.Mock<ICicStatusService>();
 
             status.Setup(s => s.GetSettableStatuses()).Returns(new List<Status>());
 
@@ -30,7 +30,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestDisconnectStatusKey()
+        public void TestDeviceDisconnectStatusKey()
         {
             var settings = SettingsManager();
             var status = StatusManager();
@@ -44,22 +44,22 @@ namespace UnitTests
                 actual = e.PropertyName;
             };
 
-            settings.SetupGet(s => s.DisconnectStatusKey).Returns(TestKey);
+            settings.SetupGet(s => s.DeviceDisconnectStatusKey).Returns(TestKey);
 
-            target.DisconnectStatus = new Status() { Key = TestKey }; ;
+            target.DeviceDisconnectStatus = new Status() { Key = TestKey }; ;
 
-            settings.VerifySet(s => s.DisconnectStatusKey = TestKey);
-            Assert.AreEqual(TestKey, target.DisconnectStatus.Key);
-            Assert.AreEqual("DisconnectStatus", actual);
+            settings.VerifySet(s => s.DeviceDisconnectStatusKey = TestKey);
+            Assert.AreEqual(TestKey, target.DeviceDisconnectStatus.Key);
+            Assert.AreEqual("DeviceDisconnectStatus", actual);
 
         }
 
         [TestMethod]
-        public void TestDisconnectChangeStatus()
+        public void TestDeviceDisconnectChangeStatus()
         {
             var settings = SettingsManager();
             var status = StatusManager();
-            settings.SetupGet(s => s.DisconnectChangeStatus).Returns(true);
+            settings.SetupGet(s => s.DeviceDisconnectChangeStatus).Returns(true);
 
             SettingsViewModel target = new SettingsViewModel(settings.Object, status.Object);
 
@@ -70,20 +70,20 @@ namespace UnitTests
                 actual = e.PropertyName;
             };
 
-            Assert.AreEqual(true, target.DisconnectChangeStatus);
-            target.DisconnectChangeStatus = false;
+            Assert.AreEqual(true, target.DeviceDisconnectChangeStatus);
+            target.DeviceDisconnectChangeStatus = false;
 
-            settings.VerifySet(s => s.DisconnectChangeStatus = false);
-          
-            Assert.AreEqual("DisconnectChangeStatus", actual);
+            settings.VerifySet(s => s.DeviceDisconnectChangeStatus = false);
+
+            Assert.AreEqual("DeviceDisconnectChangeStatus", actual);
         }
 
         [TestMethod]
-        public void TestDisconnectNotification()
+        public void TestDeviceDisconnectNotification()
         {
             var settings = SettingsManager();
             var status = StatusManager();
-            settings.SetupGet(s => s.DisconnectNotification).Returns(true);
+            settings.SetupGet(s => s.DeviceDisconnectNotification).Returns(true);
 
             SettingsViewModel target = new SettingsViewModel(settings.Object, status.Object);
 
@@ -94,16 +94,16 @@ namespace UnitTests
                 actual = e.PropertyName;
             };
 
-            Assert.AreEqual(true, target.DisconnectNotification);
-            target.DisconnectNotification = false;
+            Assert.AreEqual(true, target.DeviceDisconnectNotification);
+            target.DeviceDisconnectNotification = false;
 
-            settings.VerifySet(s => s.DisconnectNotification = false);
-          
-            Assert.AreEqual("DisconnectNotification", actual);
+            settings.VerifySet(s => s.DeviceDisconnectNotification = false);
+
+            Assert.AreEqual("DeviceDisconnectNotification", actual);
         }
 
         [TestMethod]
-        public void TestConnectStatusKey()
+        public void TestDeviceConnectStatus()
         {
             var settings = SettingsManager();
             var status = StatusManager();
@@ -117,21 +117,21 @@ namespace UnitTests
                 actual = e.PropertyName;
             };
 
-            settings.SetupGet(s => s.ConnectStatusKey).Returns(TestKey);
+            settings.SetupGet(s => s.DeviceConnectStatusKey).Returns(TestKey);
 
-            target.ConnectStatus = new Status() { Key = TestKey }; ;
+            target.DeviceConnectStatus = new Status() { Key = TestKey }; ;
 
-            settings.VerifySet(s => s.ConnectStatusKey = TestKey);
-            Assert.AreEqual(TestKey, target.ConnectStatus.Key);
-            Assert.AreEqual("ConnectStatus", actual);
+            settings.VerifySet(s => s.DeviceConnectStatusKey = TestKey);
+            Assert.AreEqual(TestKey, target.DeviceConnectStatus.Key);
+            Assert.AreEqual("DeviceConnectStatus", actual);
         }
 
         [TestMethod]
-        public void TestConnectChangeStatus()
+        public void TestDeviceConnectChangeStatus()
         {
             var settings = SettingsManager();
             var status = StatusManager();
-            settings.SetupGet(s => s.ConnectChangeStatus).Returns(true);
+            settings.SetupGet(s => s.DeviceConnectChangeStatus).Returns(true);
 
             SettingsViewModel target = new SettingsViewModel(settings.Object, status.Object);
 
@@ -142,21 +142,21 @@ namespace UnitTests
                 actual = e.PropertyName;
             };
 
-            Assert.AreEqual(true, target.ConnectChangeStatus);
-            
-            target.ConnectChangeStatus = false;
+            Assert.AreEqual(true, target.DeviceConnectChangeStatus);
 
-            settings.VerifySet(s => s.ConnectChangeStatus = false);
-            Assert.AreEqual("ConnectChangeStatus", actual);
+            target.DeviceConnectChangeStatus = false;
+
+            settings.VerifySet(s => s.DeviceConnectChangeStatus = false);
+            Assert.AreEqual("DeviceConnectChangeStatus", actual);
         }
 
         [TestMethod]
-        public void TestConnectNotification()
+        public void TestDeviceConnectNotification()
         {
             var settings = SettingsManager();
             var status = StatusManager();
 
-            settings.SetupGet(s => s.ConnectNotification).Returns(true);
+            settings.SetupGet(s => s.DeviceConnectNotification).Returns(true);
 
             SettingsViewModel target = new SettingsViewModel(settings.Object, status.Object);
 
@@ -167,20 +167,48 @@ namespace UnitTests
                 actual = e.PropertyName;
             };
 
-            Assert.AreEqual(true, target.ConnectNotification);
+            Assert.AreEqual(true, target.DeviceConnectNotification);
 
-            target.ConnectNotification = false;
+            target.DeviceConnectNotification = false;
 
-            settings.VerifySet(s => s.ConnectNotification = false);
-           
-            Assert.AreEqual("ConnectNotification", actual);
+            settings.VerifySet(s => s.DeviceConnectNotification = false);
+
+            Assert.AreEqual("DeviceConnectNotification", actual);
+        }
+
+      
+
+        [TestMethod]
+        public void TestHeadsetDisconnectChangeStatus()
+        {
+            var settings = SettingsManager();
+            var status = StatusManager();
+            settings.SetupGet(s => s.HeadsetDisconnectChangeStatus).Returns(true);
+
+            SettingsViewModel target = new SettingsViewModel(settings.Object, status.Object);
+
+            string actual = null;
+
+            target.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)
+            {
+                actual = e.PropertyName;
+            };
+
+            Assert.AreEqual(true, target.HeadsetDisconnectChangeStatus);
+
+            target.HeadsetDisconnectChangeStatus = false;
+
+            settings.VerifySet(s => s.HeadsetDisconnectChangeStatus = false);
+
+            Assert.AreEqual("HeadsetDisconnectChangeStatus", actual);
         }
 
         [TestMethod]
-        public void TestOutOfRangeStatusKey()
+        public void TestHeadsetDisconnectNotification()
         {
             var settings = SettingsManager();
             var status = StatusManager();
+            settings.SetupGet(s => s.HeadsetDisconnectNotification).Returns(true);
 
             SettingsViewModel target = new SettingsViewModel(settings.Object, status.Object);
 
@@ -191,62 +219,12 @@ namespace UnitTests
                 actual = e.PropertyName;
             };
 
-            settings.SetupGet(s => s.OutOfRangeStatusKey).Returns(TestKey);
+            Assert.AreEqual(true, target.HeadsetDisconnectNotification);
 
-            target.OutOfRangeStatus =  new Status() { Key = TestKey }; ;
+            target.HeadsetDisconnectNotification = false;
 
-            settings.VerifySet(s => s.OutOfRangeStatusKey = TestKey);
-            Assert.AreEqual(TestKey, target.OutOfRangeStatus.Key);
-            Assert.AreEqual("OutOfRangeStatus", actual);
-        }
-
-        [TestMethod]
-        public void TestOutOfRangeChangeStatus()
-        {
-            var settings = SettingsManager();
-            var status = StatusManager();
-            settings.SetupGet(s => s.OutOfRangeChangeStatus).Returns(true);
-
-            SettingsViewModel target = new SettingsViewModel(settings.Object, status.Object);
-
-            string actual = null;
-
-            target.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)
-            {
-                actual = e.PropertyName;
-            };
-
-            Assert.AreEqual(true, target.OutOfRangeChangeStatus);
-
-            target.OutOfRangeChangeStatus = false;
-
-            settings.VerifySet(s => s.OutOfRangeChangeStatus = false);
-           
-            Assert.AreEqual("OutOfRangeChangeStatus", actual);
-        }
-
-        [TestMethod]
-        public void TestOutOfRangeNotification()
-        {
-            var settings = SettingsManager();
-            var status = StatusManager();
-            settings.SetupGet(s => s.OutOfRangeNotification).Returns(true);
-
-            SettingsViewModel target = new SettingsViewModel(settings.Object, status.Object);
-
-            string actual = null;
-
-            target.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)
-            {
-                actual = e.PropertyName;
-            };
-
-            Assert.AreEqual(true, target.OutOfRangeNotification);
-
-            target.OutOfRangeNotification = false;
-
-            settings.VerifySet(s => s.OutOfRangeNotification = false);
-            Assert.AreEqual("OutOfRangeNotification", actual);
+            settings.VerifySet(s => s.HeadsetDisconnectNotification = false);
+            Assert.AreEqual("HeadsetDisconnectNotification", actual);
         }
     }
 }

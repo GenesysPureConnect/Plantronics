@@ -7,21 +7,21 @@ namespace PlantronicsClientAddIn.Settings
 {
     public interface ISettingsManager
     {
-        string DisconnectStatusKey { get; set; }
-        bool DisconnectChangeStatus { get; set; }
-        bool DisconnectNotification { get; set; }
+        string DeviceDisconnectStatusKey { get; set; }
+        bool DeviceDisconnectChangeStatus { get; set; }
+        bool DeviceDisconnectNotification { get; set; }
 
-        string ConnectStatusKey { get; set; }
-        bool ConnectChangeStatus { get; set; }
-        bool ConnectNotification { get; set; }
+        string DeviceConnectStatusKey { get; set; }
+        bool DeviceConnectChangeStatus { get; set; }
+        bool DeviceConnectNotification { get; set; }
 
-        string OutOfRangeStatusKey { get; set; }
-        bool OutOfRangeChangeStatus { get; set; }
-        bool OutOfRangeNotification { get; set; }
+        string HeadsetDisconnectStatusKey { get; set; }
+        bool HeadsetDisconnectChangeStatus { get; set; }
+        bool HeadsetDisconnectNotification { get; set; }
 
-        string InRangeStatusKey { get; set; }
-        bool InRangeChangeStatus { get; set; }
-        bool InRangeNotification { get; set; }
+        string HeadsetConnectStatusKey { get; set; }
+        bool HeadsetConnectChangeStatus { get; set; }
+        bool HeadsetConnectNotification { get; set; }
 
     }
 }

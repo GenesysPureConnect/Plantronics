@@ -43,6 +43,10 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>C:\Program Files (x86)\Plantronics\Spokes3G SDK\Interop.Plantronics.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework.10.0.0.0.Fakes">
+      <HintPath>FakesAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.10.0.0.0.Fakes.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
     </Reference>
@@ -67,8 +71,9 @@
     <Compile Include="SettingsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsViewModelTests.cs" />
-    <Compile Include="DeviceSettingsTests.cs" />
+    <Compile Include="StatusChangerTests.cs" />
     <Compile Include="StatusViewModelTests.cs" />
+    <Compile Include="MuteSyncManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PlantronicsClientAddIn.csproj">
@@ -77,6 +82,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

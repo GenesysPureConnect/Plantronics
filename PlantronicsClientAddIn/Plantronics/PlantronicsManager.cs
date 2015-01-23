@@ -19,14 +19,14 @@ namespace PlantronicsClientAddIn.Plantronics
    
         private Spokes _spokes;
 
-		private IStatusManager _statusManager;
+		private ICicStatusService _statusManager;
 		private IInteractionManager _interactionManager;
 		private ITraceContext _traceContext;
         private INotificationService _notificationService;
         private ISettingsManager _settingsManager;
-        private IDeviceStatus _deviceSettings;
+     
 
-		public PlantronicsManager (IStatusManager statusManager, 
+		public PlantronicsManager (ICicStatusService statusManager, 
                                     IInteractionManager interactionManager, 
                                     INotificationService notificationService,
                                     ISettingsManager settingsManager,
@@ -56,10 +56,19 @@ namespace PlantronicsClientAddIn.Plantronics
             _spokes.InRange += OnHeadsetInRange;
             _spokes.OutOfRange += OnHeadsetOutOfRange;
 
+            _spokes.Connected += _spokes_Connected;
+            
             _spokes.ButtonPress += OnDeviceButtonPress;
 
             _spokes.Connect("Interaction Client AddIn");
+
+            
 		}
+
+        void _spokes_Connected(object sender, ConnectedStateArgs e)
+        {
+            Debug.WriteLine("connected " + e.m_isInitialStateEvent.ToString());
+        }
 
         private void OnDeviceButtonPress(object sender, ButtonPressArgs e)
         {
@@ -77,12 +86,12 @@ namespace PlantronicsClientAddIn.Plantronics
             Debug.WriteLine("OnHeadsetOutOfRange " );
             _traceContext.Status("OnHeadsetOutOfRange " );
 
-            if (_settingsManager.OutOfRangeNotification)
+            if (_settingsManager.HeadsetDisconnectNotification)
             {
                 _notificationService.Notify("Headset out of range", "Headset", NotificationType.Warning, TimeSpan.FromSeconds(3));
             }
 
-            if (_settingsManager.OutOfRangeChangeStatus)
+            if (_settingsManager.HeadsetDisconnectChangeStatus)
             {
                 _statusManager.SetStatus(_settingsManager.OutOfRangeStatusKey);
             }
@@ -93,14 +102,14 @@ namespace PlantronicsClientAddIn.Plantronics
             Debug.WriteLine("OnHeadsetInRange ");
             _traceContext.Status("OnHeadsetInRange ");
 
-            if (_settingsManager.InRangeNotification)
+            if (_settingsManager.HeadsetConnectNotification)
             {
                 _notificationService.Notify("Headset in range", "Headset", NotificationType.Info, TimeSpan.FromSeconds(3));
             }
 
-            if (_settingsManager.InRangeChangeStatus)
+            if (_settingsManager.HeadsetConnectChangeStatus)
             {
-                _statusManager.SetStatus(_settingsManager.InRangeStatusKey);
+                _statusManager.SetStatus(_settingsManager.HeadsetConnectStatusKey);
             }
         }
 

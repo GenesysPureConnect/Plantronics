@@ -10,7 +10,7 @@ namespace PlantronicsClientAddIn.ViewModels
 {
     public class StatusViewModel : INotifyPropertyChanged
     {
-        private IDeviceStatus _deviceSettings;
+        private IDeviceManager _deviceManager;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -22,11 +22,15 @@ namespace PlantronicsClientAddIn.ViewModels
             }
         }
 
-        public StatusViewModel(IDeviceStatus deviceSettings)
+        public StatusViewModel(IDeviceManager deviceSettings)
         {
-            _deviceSettings = deviceSettings;
+            _deviceManager = deviceSettings;
             UpdateValues();
-            _deviceSettings.SettingsChanged +=OnSettingsChanged;
+            _deviceManager.HeadsetConnected +=OnSettingsChanged;
+            _deviceManager.HeadsetDisconnected += OnSettingsChanged;
+            _deviceManager.MuteChanged += OnSettingsChanged;
+            _deviceManager.PlantronicsDeviceAttached += OnSettingsChanged;
+            _deviceManager.PlantronicsDeviceDetached += OnSettingsChanged;
         }
 
         public StatusViewModel() : this(AddIn.DeviceSettings)
@@ -41,15 +45,15 @@ namespace PlantronicsClientAddIn.ViewModels
 
         private void UpdateValues()
         {
-            InternalName = _deviceSettings.InternalName;
-            ManufacturerName = _deviceSettings.ManufacturerName;
-            ProductName = _deviceSettings.ProductName;
-            VersionNumber = _deviceSettings.VersionNumber;
+            InternalName = _deviceManager.InternalName;
+            ManufacturerName = _deviceManager.ManufacturerName;
+            ProductName = _deviceManager.ProductName;
+            VersionNumber = _deviceManager.VersionNumber;
 
-            SerialNumber = _deviceSettings.SerialNumber;
-            ConnectionVisibility = _deviceSettings.IsConnected ? Visibility.Visible: Visibility.Hidden;
-            ErrorVisibility = !_deviceSettings.IsConnected ? Visibility.Visible : Visibility.Hidden;
-
+            SerialNumber = _deviceManager.SerialNumber;
+            ConnectionVisibility = _deviceManager.IsDeviceConnected ? Visibility.Visible: Visibility.Hidden;
+            ErrorVisibility = !_deviceManager.IsDeviceConnected ? Visibility.Visible : Visibility.Hidden;
+            MuteVisibility = _deviceManager.IsHeadsetMuted ? Visibility.Visible : Visibility.Hidden;
         }
 
         
@@ -152,5 +156,18 @@ namespace PlantronicsClientAddIn.ViewModels
             }
         }
 
+        private Visibility _muteVisibility;
+        public Visibility MuteVisibility
+        {
+            get
+            {
+                return _muteVisibility;
+            }
+            set
+            {
+                _muteVisibility = value;
+                RaisePropertyChanged("MuteVisibility");
+            }
+        }
     }
 }
