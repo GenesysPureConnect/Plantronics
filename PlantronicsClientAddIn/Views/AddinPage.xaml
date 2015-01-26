@@ -62,7 +62,13 @@
                     <TextBlock Grid.Row="4" Grid.Column="0">Version Number:</TextBlock>
                     <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding VersionNumber}"></TextBlock>
                 </Grid>
-                <Label Foreground="Red" Visibility="{Binding MuteVisibility}" >MUTED</Label>
+                <StackPanel Orientation="Horizontal" Visibility="{Binding MuteVisibility}" >
+                   
+                    <Image Source="../audio-volume-muted.png" Height="36" Width="36" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Muted" Foreground="Red" VerticalAlignment="Center" ></TextBlock>
+
+                </StackPanel>
+
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Column="1" Margin="5">

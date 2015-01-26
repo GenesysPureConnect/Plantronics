@@ -8,7 +8,7 @@ namespace PlantronicsClientAddIn.Interactions
         void PickupAlertingCall();
         void HoldCall();
         void DisconnectCall();
-        void PickupHeldCall();
+        bool PickupHeldCall();
 	}
 }
 

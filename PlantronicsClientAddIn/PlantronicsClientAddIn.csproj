@@ -121,4 +121,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="audio-volume-muted.png" />
+  </ItemGroup>
 </Project>

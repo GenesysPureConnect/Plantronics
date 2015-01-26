@@ -55,9 +55,10 @@ namespace PlantronicsClientAddIn.Plantronics
             _spokes.Disconnected += OnHeadsetDisconnected;
 
             _spokes.MuteChanged += OnMuteChanged;
+            _spokes.ButtonPress += OnButtonPress;
 
             _spokes.Connect("Interaction Client AddIn");
-            _spokes.ButtonPress += OnButtonPress;
+           
         }
 
         private void OnButtonPress(object sender, ButtonPressArgs e)

@@ -38,6 +38,11 @@ namespace PlantronicsClientAddIn.Interactions
                 call.Pickup();
                 return; //don't do anything else here
             }
+
+            if (PickupHeldCall())
+            {
+                return;
+            }
             
             //if there is not an alerting call, Disconnect a connected Call;
             call = FindCall(InteractionAttributeValues.State.Connected);
@@ -80,14 +85,17 @@ namespace PlantronicsClientAddIn.Interactions
             }
         }
 
-        public void PickupHeldCall()
+        public bool PickupHeldCall()
         {
             var calls = FindAllCalls(InteractionAttributeValues.State.Held);
 
             if (calls.Count == 1)
             {
                 calls[0].Pickup();
+                return true;
             }
+
+            return false;
         }
 
         private Interaction FindCall(string state)
