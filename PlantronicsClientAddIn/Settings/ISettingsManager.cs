@@ -10,18 +10,22 @@ namespace PlantronicsClientAddIn.Settings
         string DeviceDisconnectStatusKey { get; set; }
         bool DeviceDisconnectChangeStatus { get; set; }
         bool DeviceDisconnectNotification { get; set; }
+        bool ShouldLogOutOnDeviceDisconnect { get; set; }
 
         string DeviceConnectStatusKey { get; set; }
         bool DeviceConnectChangeStatus { get; set; }
         bool DeviceConnectNotification { get; set; }
+        
 
         string HeadsetDisconnectStatusKey { get; set; }
         bool HeadsetDisconnectChangeStatus { get; set; }
         bool HeadsetDisconnectNotification { get; set; }
+        bool ShouldLogOutOnHeadsetDisconnect { get; set; }
 
         string HeadsetConnectStatusKey { get; set; }
         bool HeadsetConnectChangeStatus { get; set; }
         bool HeadsetConnectNotification { get; set; }
+
 
     }
 }

@@ -140,6 +140,21 @@ namespace PlantronicsClientAddIn.ViewModels
             }
         }
 
+        private bool _shouldLogOutOnDeviceDisconnect;
+        public bool ShouldLogOutOnDeviceDisconnect
+        {
+            get
+            {
+                return _shouldLogOutOnDeviceDisconnect;
+            }
+            set
+            {
+                _settingsManager.ShouldLogOutOnDeviceDisconnect = value;
+                _shouldLogOutOnDeviceDisconnect = value;
+                RaisePropertyChanged("ShouldLogOutOnDeviceDisconnect");
+            }
+        }
+
         private Status.Status _deviceConnectStatus;
         public Status.Status DeviceConnectStatus
         {
@@ -227,6 +242,21 @@ namespace PlantronicsClientAddIn.ViewModels
                 _settingsManager.HeadsetDisconnectNotification = value;
                 _headsetDisconnectNotification = value;
                 RaisePropertyChanged("HeadsetDisconnectNotification");
+            }
+        }
+
+        private bool _shouldLogOutOnHeadsetDisconnect;
+        public bool ShouldLogOutOnHeadsetDisconnect
+        {
+            get
+            {
+                return _shouldLogOutOnHeadsetDisconnect;
+            }
+            set
+            {
+                _settingsManager.ShouldLogOutOnHeadsetDisconnect = value;
+                _shouldLogOutOnHeadsetDisconnect = value;
+                RaisePropertyChanged("ShouldLogOutOnHeadsetDisconnect");
             }
         }
 

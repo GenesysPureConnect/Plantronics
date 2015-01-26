@@ -49,8 +49,15 @@ namespace PlantronicsClientAddIn.Status
             var statuses = new List<Status>();
             var icStatuses = _filteredStatusList.GetList();
 
-            foreach (var icStatus in icStatuses[_userId])
+            var icStatusList = icStatuses[_userId].Where((s, x) => s.IsSelectableStatus).OrderBy(status => status.MessageText);
+
+            foreach (var icStatus in icStatusList)
             {
+                if (!icStatus.IsSelectableStatus)
+                {
+                    continue;
+                }
+
                 Bitmap bitmap = icStatus.Icon.ToBitmap();
                 IntPtr hBitmap = bitmap.GetHbitmap();
 
@@ -89,20 +96,27 @@ namespace PlantronicsClientAddIn.Status
 
         public void SetStatus(string statusId)
         {
-            _traceContext.Status("Setting status to " + statusId);
-            var statusDetails = _statusMessageList.GetList().FirstOrDefault(s => s.Id.ToLower() == statusId.ToLower());
-            if (statusDetails != null)
+            try
             {
-                UserStatusUpdate statusUpdate = new UserStatusUpdate(_peopleManager);
-                statusUpdate.UserId = _userId;
-                statusUpdate.StatusMessageDetails = statusDetails;
-                _traceContext.Status("Sending status update request");
-                statusUpdate.UpdateRequest();
+                _traceContext.Status("Setting status to " + statusId);
+                var statusDetails = _statusMessageList.GetList().FirstOrDefault(s => s.Id.ToLower() == statusId.ToLower());
+                if (statusDetails != null)
+                {
+                    UserStatusUpdate statusUpdate = new UserStatusUpdate(_peopleManager);
+                    statusUpdate.UserId = _userId;
+                    statusUpdate.StatusMessageDetails = statusDetails;
+                    _traceContext.Status("Sending status update request");
+                    statusUpdate.UpdateRequest();
+                }
+                else
+                {
+                    _traceContext.Warning("status message not found");
+                    _statusMessageList.GetList().ToList().ForEach(s => _traceContext.Status("Status: " + s.Id));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                _traceContext.Warning("status message not found");
-                _statusMessageList.GetList().ToList().ForEach(s => _traceContext.Status("Status: " + s.Id));
+                _traceContext.Exception(ex, "Unable to set status");
             }
         }
     }

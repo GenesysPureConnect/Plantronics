@@ -58,6 +58,20 @@ namespace UnitTests
         }
 
          [TestMethod]
+         public void TestShouldLogOutOnDeviceDisconnect()
+         {
+             SettingsManager target = new SettingsManager();
+             target.ShouldLogOutOnDeviceDisconnect = true;
+
+             target = new SettingsManager();
+             Assert.AreEqual(true, target.ShouldLogOutOnDeviceDisconnect);
+             target.ShouldLogOutOnDeviceDisconnect = false;
+
+             target = new SettingsManager();
+             Assert.AreEqual(false, target.ShouldLogOutOnDeviceDisconnect);
+         }
+
+         [TestMethod]
          public void TestConnectStatusKey()
          {
              SettingsManager target = new SettingsManager();
@@ -97,7 +111,7 @@ namespace UnitTests
          }
 
          [TestMethod]
-         public void TestOutOfRangeStatusKey()
+         public void TestHeadsetDisconnectStatusKey()
          {
              SettingsManager target = new SettingsManager();
              target.HeadsetDisconnectStatusKey = testKey;
@@ -108,7 +122,7 @@ namespace UnitTests
          }
 
          [TestMethod]
-         public void TestOutOfRangeChangeStatus()
+         public void TestHeadsetDisconnectChangeStatus()
          {
              SettingsManager target = new SettingsManager();
              target.HeadsetDisconnectChangeStatus = true;
@@ -136,7 +150,21 @@ namespace UnitTests
          }
 
          [TestMethod]
-         public void TestInRangeStatusKey()
+         public void TestShouldLogOutOnHeadsetDisconnect()
+         {
+             SettingsManager target = new SettingsManager();
+             target.ShouldLogOutOnHeadsetDisconnect = true;
+
+             target = new SettingsManager();
+             Assert.AreEqual(true, target.ShouldLogOutOnHeadsetDisconnect);
+             target.ShouldLogOutOnHeadsetDisconnect = false;
+
+             target = new SettingsManager();
+             Assert.AreEqual(false, target.ShouldLogOutOnHeadsetDisconnect);
+         }
+
+         [TestMethod]
+         public void TestHeadsetConnectStatusKey()
          {
              SettingsManager target = new SettingsManager();
              target.HeadsetConnectStatusKey = testKey;
@@ -147,7 +175,7 @@ namespace UnitTests
          }
 
          [TestMethod]
-         public void TestInRangeChangeStatus()
+         public void TestHeadsetConnectChangeStatus()
          {
              SettingsManager target = new SettingsManager();
              target.HeadsetConnectChangeStatus = true;
@@ -161,7 +189,7 @@ namespace UnitTests
          }
 
          [TestMethod]
-         public void TestInRangeNotification()
+         public void TestHeadsetConnectNotification()
          {
              SettingsManager target = new SettingsManager();
              target.HeadsetConnectNotification = true;

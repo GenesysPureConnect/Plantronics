@@ -70,6 +70,18 @@ namespace PlantronicsClientAddIn.Settings
             }
         }
 
+        public bool ShouldLogOutOnDeviceDisconnect
+        {
+            get
+            {
+                return GetBoolSetting("ShouldLogOutOnDeviceDisconnect", true);
+            }
+            set
+            {
+                SaveSetting("ShouldLogOutOnDeviceDisconnect", value);
+            }
+        }
+
         public string DeviceConnectStatusKey
         {
             get
@@ -139,6 +151,18 @@ namespace PlantronicsClientAddIn.Settings
             set
             {
                 SaveSetting("HeadsetDisconnectNotification", value);
+            }
+        }
+
+        public bool ShouldLogOutOnHeadsetDisconnect
+        {
+            get
+            {
+                return GetBoolSetting("ShouldLogOutOnHeadsetDisconnect", true);
+            }
+            set
+            {
+                SaveSetting("ShouldLogOutOnHeadsetDisconnect", value);
             }
         }
 

@@ -23,7 +23,7 @@ namespace UnitTests
             settingsManagerMock.SetupGet(s => s.HeadsetDisconnectStatusKey).Returns(STATUS_KEY);
             settingsManagerMock.SetupGet(s => s.HeadsetDisconnectChangeStatus).Returns(true);
 
-            var target = new StatusChanger(statusMock.Object, deviceManagerMock.Object, settingsManagerMock.Object);
+            var target = new StatusChanger(null, statusMock.Object, deviceManagerMock.Object, settingsManagerMock.Object);
 
             deviceManagerMock.Raise(d => d.HeadsetDisconnected += null, new Plantronics.UC.SpokesWrapper.ConnectedStateArgs(true, true));
 
@@ -40,7 +40,7 @@ namespace UnitTests
             settingsManagerMock.SetupGet(s => s.HeadsetConnectStatusKey).Returns(STATUS_KEY);
             settingsManagerMock.SetupGet(s => s.HeadsetConnectChangeStatus).Returns(true);
 
-            var target = new StatusChanger(statusMock.Object, deviceManagerMock.Object, settingsManagerMock.Object);
+            var target = new StatusChanger(null, statusMock.Object, deviceManagerMock.Object, settingsManagerMock.Object);
 
             deviceManagerMock.Raise(d => d.HeadsetConnected += null, new Plantronics.UC.SpokesWrapper.ConnectedStateArgs(true, true));
 
@@ -57,7 +57,7 @@ namespace UnitTests
             settingsManagerMock.SetupGet(s => s.DeviceDisconnectStatusKey).Returns(STATUS_KEY);
             settingsManagerMock.SetupGet(s => s.DeviceDisconnectChangeStatus).Returns(true);
 
-            var target = new StatusChanger(statusMock.Object, deviceManagerMock.Object, settingsManagerMock.Object);
+            var target = new StatusChanger(null, statusMock.Object, deviceManagerMock.Object, settingsManagerMock.Object);
 
             deviceManagerMock.Raise(d => d.PlantronicsDeviceDetached += null, new Plantronics.UC.SpokesWrapper.AttachedArgs(null));
 
@@ -74,7 +74,7 @@ namespace UnitTests
             settingsManagerMock.SetupGet(s => s.DeviceConnectStatusKey).Returns(STATUS_KEY);
             settingsManagerMock.SetupGet(s => s.DeviceConnectChangeStatus).Returns(true);
 
-            var target = new StatusChanger(statusMock.Object, deviceManagerMock.Object, settingsManagerMock.Object);
+            var target = new StatusChanger(null, statusMock.Object, deviceManagerMock.Object, settingsManagerMock.Object);
 
             deviceManagerMock.Raise(d => d.PlantronicsDeviceAttached += null, new Plantronics.UC.SpokesWrapper.AttachedArgs(null));
 

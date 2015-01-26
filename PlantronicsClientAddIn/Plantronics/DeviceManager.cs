@@ -19,6 +19,7 @@ namespace PlantronicsClientAddIn.Plantronics
         public event Spokes.ConnectedEventHandler HeadsetConnected;
         public event Spokes.DisconnectedEventHandler HeadsetDisconnected;
         public event Spokes.MuteChangedEventHandler MuteChanged;
+        public event EventHandler TalkButtonPressed;
 
         public bool IsHeadsetConnected
         {
@@ -56,6 +57,26 @@ namespace PlantronicsClientAddIn.Plantronics
             _spokes.MuteChanged += OnMuteChanged;
 
             _spokes.Connect("Interaction Client AddIn");
+            _spokes.ButtonPress += OnButtonPress;
+        }
+
+        private void OnButtonPress(object sender, ButtonPressArgs e)
+        {
+
+            _traceContext.Status(String.Format("{0} pressed", e.headsetButton));
+
+            switch (e.headsetButton)
+            {
+                case Interop.Plantronics.DeviceHeadsetButton.HeadsetButton_Talk:
+                    if (TalkButtonPressed != null)
+                    {
+                        TalkButtonPressed(this, EventArgs.Empty);
+                    }
+                    break;
+                
+                default:
+                    break;
+            }
         }
 
         private void OnMuteChanged(object sender, MuteChangedArgs e)

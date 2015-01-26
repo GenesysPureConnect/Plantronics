@@ -15,7 +15,7 @@
         <DataTemplate x:Key="StatusTemplate">
             <StackPanel Orientation="Horizontal">
                 <Image Source="{Binding Image}" Height="16" Width="16"></Image>
-                <Label Content="{Binding Text}"></Label>
+                <TextBlock Text="{Binding Text}"></TextBlock>
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
@@ -55,8 +55,8 @@
                     <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ProductName}"></TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="0">Manufacturer Name:</TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ManufacturerName}"></TextBlock>
-                    <TextBlock Grid.Row="2" Grid.Column="0">Internal Name:</TextBlock>
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding InternalName}"></TextBlock>
+                   <!-- <TextBlock Grid.Row="2" Grid.Column="0">Internal Name:</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding InternalName}"></TextBlock>-->
                     <TextBlock Grid.Row="3" Grid.Column="0">Serial Number:</TextBlock>
                     <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding SerialNumber}"></TextBlock>
                     <TextBlock Grid.Row="4" Grid.Column="0">Version Number:</TextBlock>
@@ -72,10 +72,12 @@
             <GroupBox.Resources>
                 <Style TargetType="CheckBox">
                     <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Height" Value="22"/>
                 </Style>
                 <Style TargetType="ComboBox">
                     <Setter Property="Width" Value="150px"/>
                     <Setter Property="Margin" Value="4"/>
+                    <Setter Property="Height" Value="22"/>
                 </Style>
             </GroupBox.Resources>
             <GroupBox.Header>Settings</GroupBox.Header>
@@ -94,7 +96,8 @@
                                           ></ComboBox>
                             </StackPanel>
                             <CheckBox  IsChecked="{Binding DisconnectNotification}">Show Notification</CheckBox>
-                    </StackPanel>
+                            <CheckBox  IsChecked="{Binding ShouldLogOutOnDeviceDisconnect}">Log Out</CheckBox>
+                        </StackPanel>
                 </GroupBox>
                 <GroupBox Grid.Column="1" Margin="5">
                     <GroupBox.Header>When plantronics device is connected</GroupBox.Header>
@@ -139,7 +142,8 @@
                                           
                                           ></ComboBox>
                             </StackPanel>
-                            <CheckBox  IsChecked="{Binding HeadsetDisconnectNotification}">Show Notification</CheckBox>
+                            <CheckBox  IsChecked="{Binding HeadsetDisconnectNotification}" >Show Notification</CheckBox>
+                            <CheckBox  IsChecked="{Binding ShouldLogOutOnHeadsetDisconnect}">Log Out</CheckBox>
                         </StackPanel>
                 </GroupBox>
             </StackPanel>

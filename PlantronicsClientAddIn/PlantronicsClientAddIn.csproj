@@ -67,6 +67,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interactions\HookSwitchSyncManager.cs" />
     <Compile Include="Interactions\InteractionManager.cs" />
     <Compile Include="Interactions\MuteSyncManager.cs" />
     <Compile Include="NotificationServer.cs" />

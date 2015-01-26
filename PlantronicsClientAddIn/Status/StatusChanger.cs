@@ -1,4 +1,5 @@
-﻿using ININ.InteractionClient.AddIn;
+﻿using ININ.IceLib.Connection;
+using ININ.InteractionClient.AddIn;
 using Plantronics.UC.SpokesWrapper;
 using PlantronicsClientAddIn.Plantronics;
 using PlantronicsClientAddIn.Settings;
@@ -14,12 +15,14 @@ namespace PlantronicsClientAddIn.Status
         private ISettingsManager _settingsManager;
         private IDeviceManager _deviceManager;
         private ICicStatusService _cicStatusService;
+        private Session _icSession = null;
 
-        public StatusChanger(ICicStatusService cicStatusService, IDeviceManager deviceManager, ISettingsManager settingsManager )
+        public StatusChanger(Session icSession, ICicStatusService cicStatusService, IDeviceManager deviceManager, ISettingsManager settingsManager )
         {
             _settingsManager = settingsManager;
             _deviceManager = deviceManager;
             _cicStatusService = cicStatusService;
+            _icSession = icSession;
 
             _deviceManager.PlantronicsDeviceAttached += OnPlantronicsDeviceAttached;
             _deviceManager.HeadsetConnected += OnHeadsetConnected;
@@ -28,23 +31,33 @@ namespace PlantronicsClientAddIn.Status
 
         }
 
-        void OnHeadsetDisconnected(object sender, ConnectedStateArgs e)
+        private void OnHeadsetDisconnected(object sender, ConnectedStateArgs e)
         {
             if (_settingsManager.HeadsetDisconnectChangeStatus)
             {
                 _cicStatusService.SetStatus(_settingsManager.HeadsetDisconnectStatusKey);
             }
+
+            if (_settingsManager.ShouldLogOutOnHeadsetDisconnect && _icSession != null)
+            {
+                _icSession.Disconnect();
+            }
         }
 
-        void OnPlantronicsDeviceDetached(object sender, EventArgs e)
+        private void OnPlantronicsDeviceDetached(object sender, EventArgs e)
         {
             if (_settingsManager.DeviceDisconnectChangeStatus)
             {
                 _cicStatusService.SetStatus(_settingsManager.DeviceDisconnectStatusKey);
             }
+
+            if (_settingsManager.ShouldLogOutOnDeviceDisconnect && _icSession != null)
+            {
+                _icSession.Disconnect();
+            }
         }
 
-        void OnHeadsetConnected(object sender, ConnectedStateArgs e)
+        private void OnHeadsetConnected(object sender, ConnectedStateArgs e)
         {
             if (_settingsManager.HeadsetConnectChangeStatus)
             {
@@ -52,7 +65,7 @@ namespace PlantronicsClientAddIn.Status
             }
         }
 
-        void OnPlantronicsDeviceAttached(object sender, AttachedArgs e)
+        private void OnPlantronicsDeviceAttached(object sender, AttachedArgs e)
         {
             if (_settingsManager.DeviceConnectChangeStatus)
             {

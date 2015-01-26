@@ -31,6 +31,8 @@ namespace PlantronicsClientAddIn.Plantronics
 
         event Spokes.MuteChangedEventHandler MuteChanged;
 
+        event EventHandler TalkButtonPressed;
+
         bool IsHeadsetConnected{get;}
         bool IsHeadsetMuted { get; }
         bool IsDeviceConnected { get; }
