@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -71,6 +72,7 @@
     <Compile Include="Interactions\InteractionManager.cs" />
     <Compile Include="Interactions\MuteSyncManager.cs" />
     <Compile Include="NotificationServer.cs" />
+    <Compile Include="OutboundEventNotificationService.cs" />
     <Compile Include="Plantronics\DeviceManager.cs" />
     <Compile Include="Plantronics\IDeviceManager.cs" />
     <Compile Include="Plantronics\SpokesWrapper3.0.cs" />

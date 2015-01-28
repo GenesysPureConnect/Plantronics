@@ -22,6 +22,7 @@ namespace PlantronicsClientAddIn
         private static NotificationServer s_notificationServer = null;
         private static MuteSyncManager s_muteManager = null;
         private static HookSwitchSyncManager s_hookSwitchManager = null;
+        private static OutboundEventNotificationService s_outboundEventNotificationService = null;
 
         public static ISettingsManager SettingsManager
         {
@@ -76,6 +77,8 @@ namespace PlantronicsClientAddIn
             s_notificationServer = new NotificationServer(s_deviceManager, s_settingsManager, s_notificationService);
             s_muteManager = new MuteSyncManager((IInteractionSelector)serviceProvider.GetService(typeof(IInteractionSelector)), s_deviceManager);
             s_hookSwitchManager = new HookSwitchSyncManager(s_interactionManager, s_deviceManager);
+
+            s_outboundEventNotificationService = new OutboundEventNotificationService(s_session, s_statusManager, s_deviceManager);
 
             s_traceContext.Always("Plantronics AddIn Loaded");
 		}

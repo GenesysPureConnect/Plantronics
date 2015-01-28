@@ -29,6 +29,8 @@ namespace PlantronicsClientAddIn.Status
         private readonly ITraceContext _traceContext;
         private readonly string _userId;
 
+        public event EventHandler UserStatusChanged;
+
         public CicStatusService(Session session, ITraceContext traceContext)
         {
             _userId = session.UserId;
@@ -36,12 +38,21 @@ namespace PlantronicsClientAddIn.Status
             _peopleManager = PeopleManager.GetInstance(session);
             _userStatusList = new UserStatusList(_peopleManager);
             _userStatusList.StartWatching(new[] { _userId });
+            _userStatusList.WatchedObjectsChanged += OnUserStatusChanged;
 
             _statusMessageList = new StatusMessageList(_peopleManager);
             _statusMessageList.StartWatching();
-
+            
             _filteredStatusList = new FilteredStatusMessageList(_peopleManager);
             _filteredStatusList.StartWatching(new[] { _userId });
+        }
+
+        private void OnUserStatusChanged(object sender, WatchedObjectsEventArgs<UserStatusProperty> e)
+        {
+            if (UserStatusChanged != null)
+            {
+                UserStatusChanged(this, EventArgs.Empty);
+            }
         }
 
         public IList<Status> GetSettableStatuses()
@@ -77,6 +88,11 @@ namespace PlantronicsClientAddIn.Status
             }
 
             return statuses;
+        }
+
+        public UserStatus GetStatus()
+        {
+            return _userStatusList.GetUserStatus(_userId);
         }
 
         public void SetToAwayFromDesk()

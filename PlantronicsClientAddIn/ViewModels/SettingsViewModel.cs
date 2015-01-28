@@ -62,6 +62,7 @@ namespace PlantronicsClientAddIn.ViewModels
             {
                 this._deviceDisconnectStatus = disconnectStatus;
             }
+            this._shouldLogOutOnDeviceDisconnect = _settingsManager.ShouldLogOutOnDeviceDisconnect;
             
             this._headsetDisconnectChangeStatus = _settingsManager.HeadsetDisconnectChangeStatus;
             this._headsetDisconnectNotification = _settingsManager.HeadsetDisconnectNotification;
@@ -70,6 +71,7 @@ namespace PlantronicsClientAddIn.ViewModels
             {
                 this._headsetDisconnectStatus = headsetDisconnectStatus;
             }
+            this._shouldLogOutOnHeadsetDisconnect = _settingsManager.ShouldLogOutOnHeadsetDisconnect;
 
             this._headsetConnectChangeStatus = _settingsManager.HeadsetConnectChangeStatus;
             this._headsetConnectNotification = _settingsManager.HeadsetConnectNotification;
