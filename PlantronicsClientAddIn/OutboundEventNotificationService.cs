@@ -80,7 +80,7 @@ namespace PlantronicsClientAddIn
                 return;
             }
 
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "/statuschange");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
 
@@ -98,7 +98,7 @@ namespace PlantronicsClientAddIn
                     headsetConnected = _deviceManager.IsHeadsetConnected,
                     device = _deviceManager.IsDeviceConnected ? _deviceManager.ProductName : String.Empty,
                     serial = _deviceManager.IsDeviceConnected ? _deviceManager.SerialNumber : String.Empty,
-
+                    isMuted = _deviceManager.IsDeviceConnected ? _deviceManager.IsHeadsetMuted : false,
                 });
 
                 streamWriter.Write(json);
