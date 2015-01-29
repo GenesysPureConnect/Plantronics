@@ -29,6 +29,9 @@ Interaction Desktop Supervisor AddIn
 --------------------------------
 The Interaction Desktop Supervisor AddIn provides a view for supervisors to see their agents and the headsets that the agents are using.
 
+Interaction Desktop Auto Start
+==============================
+The Interaction Desktop Auto Start application will automatically start the Interaction Desktop Client when a Plantronics device is conected or headset is connected.  
 
 Installing
 ==========
