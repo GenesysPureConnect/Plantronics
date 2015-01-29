@@ -1,32 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Installer" Language="1033" Version="1.0.0.0" Manufacturer="" UpgradeCode="eff3f453-060b-4b5a-8436-0a98cef22bdc">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+  <Product Id="*" Name="Plantronics Integration" Language="1033" Version="1.0.0.0" Manufacturer="Interactive Intelligence Open Source" UpgradeCode="eff3f453-060b-4b5a-8436-0a98cef22bdc">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version is already installed." />
-		<MediaTemplate />
+    <MajorUpgrade DowngradeErrorMessage="A newer version is already installed." />
+    <MediaTemplate />
 
-		<Feature Id="ProductFeature" Title="Installer" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature>
-	</Product>
+    <Property Id="CLIENTINSTALLPATH">
+      <RegistrySearch Id="ClientInstallPath"
+                      Root="HKLM"
+                      Key="SOFTWARE\Interactive Intelligence"
+                      Name="Value"
+                      Type="raw"/>
+    </Property>
 
-	<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="Installer" />
-			</Directory>
-		</Directory>
-	</Fragment>
 
-	<Fragment>
-		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			 <Component Id="ProductComponent"> 
-				<!-- TODO: Insert files, registry keys, and other resources here. -->
-      <File Source="$(var.ClientAutoStart.TargetPath)" />
-         <File Source="$(var.PlantronicsClientAddIn.TargetPath)" />
-			 </Component> 
-		</ComponentGroup>
-	</Fragment>
+    <Condition Message="The Interaction Desktop Client must be installed first">
+      <![CDATA[CLIENTINSTALLPATH]]>
+    </Condition>
+
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="CLIENTINSTALLPATH">
+        <Directory Id="USERAPPSFOLDER" Name="ICUserApps" >
+          <Directory Id="ADDINFOLDER" Name="AddIns" />
+        </Directory>
+      </Directory>
+    
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="AUTOSTARTDIRECTORY" Name="Client Auto Start"/>
+      </Directory>
+    </Directory>
+
+    <UIRef Id="UserInterface"/>
+
+    <DirectoryRef Id="ADDINFOLDER">
+      <Component Id="PlantronicsSupervisorClientAddIn.d" Guid="5FF6D4D4-34C6-4E2D-A652-741F24290AA5">
+        <File Source="$(var.PlantronicsSupervisorClientAddIn.TargetPath)" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="ADDINFOLDER">
+      <Component Id="PlantronicsClientAddIn.d" Guid="CDB2AF57-042C-4A00-ACA0-2548B8E8F40A">
+        <File Source="$(var.PlantronicsClientAddIn.TargetPath)" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="AUTOSTARTDIRECTORY">
+      <Component Id="ClientAutoStart.e" Guid="E3C3369C-133C-4252-8060-5BF03D0B4972">
+        <File Source="$(var.ClientAutoStart.TargetPath)" />
+      </Component>
+    </DirectoryRef>
+
+    <Feature Id="SupervisorAddIn" Title="Supervisor AddIn" Level="1" Description="AddIn to view headset information for agents.">
+      <ComponentRef Id="PlantronicsSupervisorClientAddIn.d"/>
+    </Feature>
+
+    <Feature Id="ClientAddIn" Title="Client AddIn" Level="1" >
+      <ComponentRef Id="PlantronicsClientAddIn.d"/>
+    </Feature>
+
+    <Feature Id="ClientAutoStart" Title="Interaction Desktop Auto Start" Level="1">
+      <ComponentRef Id="ClientAutoStart.e"/>
+    </Feature>
+
+  </Product>
 </Wix>

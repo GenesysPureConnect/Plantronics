@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlantronicsClientAddIn", "PlantronicsClientAddIn\PlantronicsClientAddIn.csproj", "{3FCDE130-DDEF-465A-8A70-7C2EF801541C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "PlantronicsClientAddIn\UnitTests\UnitTests.csproj", "{775CF7C4-A4BD-4EC6-A530-85889AEF4729}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientAutoStart", "ClientAutoStart\ClientAutoStart.csproj", "{27E5C2AA-C3A3-4EA1-BF6A-533522B37860}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "Installer\Installer.wixproj", "{ED8C9AD0-87A2-4BA5-8E71-AF3D876EA250}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Plantronics Integration", "Installer\Plantronics Integration.wixproj", "{ED8C9AD0-87A2-4BA5-8E71-AF3D876EA250}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlantronicsSupervisorClientAddIn", "PlantronicsSupervisorClientAddIn\PlantronicsSupervisorClientAddIn.csproj", "{655E608D-C7FA-4FDE-8FA8-178DFF2F881D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +61,16 @@ Global
 		{ED8C9AD0-87A2-4BA5-8E71-AF3D876EA250}.Release|Mixed Platforms.Build.0 = Release|x86
 		{ED8C9AD0-87A2-4BA5-8E71-AF3D876EA250}.Release|x86.ActiveCfg = Release|x86
 		{ED8C9AD0-87A2-4BA5-8E71-AF3D876EA250}.Release|x86.Build.0 = Release|x86
+		{655E608D-C7FA-4FDE-8FA8-178DFF2F881D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{655E608D-C7FA-4FDE-8FA8-178DFF2F881D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{655E608D-C7FA-4FDE-8FA8-178DFF2F881D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{655E608D-C7FA-4FDE-8FA8-178DFF2F881D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{655E608D-C7FA-4FDE-8FA8-178DFF2F881D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{655E608D-C7FA-4FDE-8FA8-178DFF2F881D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{655E608D-C7FA-4FDE-8FA8-178DFF2F881D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{655E608D-C7FA-4FDE-8FA8-178DFF2F881D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{655E608D-C7FA-4FDE-8FA8-178DFF2F881D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{655E608D-C7FA-4FDE-8FA8-178DFF2F881D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
