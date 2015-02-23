@@ -4,7 +4,7 @@
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version is already installed." />
-    <MediaTemplate />
+    <MediaTemplate EmbedCab="yes" />
 
     <Property Id="CLIENTINSTALLPATH">
       <RegistrySearch Id="ClientInstallPath"
@@ -13,12 +13,11 @@
                       Name="Value"
                       Type="raw"/>
     </Property>
-
-
+    
+    
     <Condition Message="The Interaction Desktop Client must be installed first">
       <![CDATA[CLIENTINSTALLPATH]]>
     </Condition>
-
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="CLIENTINSTALLPATH">
@@ -29,8 +28,25 @@
     
       <Directory Id="ProgramFilesFolder">
         <Directory Id="AUTOSTARTDIRECTORY" Name="Client Auto Start"/>
+     
+        <Directory Id="PLANTRONICS" Name="Plantronics">
+          <Directory Id="SPOKES3G" Name="Spokes3G"/>
+        </Directory>
       </Directory>
+
     </Directory>
+
+
+    <Property Id="SPOKESVERSION">
+      <DirectorySearch Id="SpokesHubVersion" Path="C:\Program Files (x86)\Plantronics\Spokes3G">
+        <FileSearch Name="PLTHub.exe" MinVersion="3.4.50921.12980"/>
+      </DirectorySearch>
+    </Property>
+
+    <Condition Message="Plantronics Hub v3.4 or greater must be installed. ">
+      <![CDATA[SPOKESVERSION]]>
+    </Condition>
+
 
     <UIRef Id="UserInterface"/>
 

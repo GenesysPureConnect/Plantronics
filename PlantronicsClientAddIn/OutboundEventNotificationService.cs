@@ -1,13 +1,12 @@
 ﻿using ININ.IceLib.Connection;
 using ININ.IceLib.Connection.Extensions;
+using ININ.InteractionClient.AddIn;
 using PlantronicsClientAddIn.Plantronics;
 using PlantronicsClientAddIn.Status;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
+using System.Threading;
 using System.Web.Script.Serialization;
 
 namespace PlantronicsClientAddIn
@@ -21,11 +20,13 @@ namespace PlantronicsClientAddIn
         private ICicStatusService _statusService;
         private IDeviceManager _deviceManager;
         private ServerParameters _serverParams;
+        private ITraceContext _traceContext;
 
-        public OutboundEventNotificationService(Session session, ICicStatusService statusService, IDeviceManager deviceManager)
+        public OutboundEventNotificationService(Session session, ICicStatusService statusService, IDeviceManager deviceManager, ITraceContext traceContext)
         {
             _deviceManager = deviceManager;
             _session = session;
+            _traceContext = traceContext;
             _statusService = statusService;
             _statusService.UserStatusChanged += OnUserStatusChanged;
 
@@ -74,43 +75,53 @@ namespace PlantronicsClientAddIn
 
         private void PostToWebService()
         {
-            var url = GetServerParameter(WebServerUrlParam);
-            if (String.IsNullOrEmpty(url))
-            {
-                return;
-            }
-
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "/statuschange");
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            {
-                bool isConnected = _session.ConnectionState == ConnectionState.Up;
-
-                string json = new JavaScriptSerializer().Serialize(new
+            ThreadPool.QueueUserWorkItem(new WaitCallback(delegate(object state){
+                try
                 {
-                    userId = _session.UserId,
-                    station = isConnected ? _session.GetStationInfo().Id : String.Empty,
-                    status = isConnected ? _statusService.GetStatus().StatusMessageDetails.MessageText : String.Empty,
-                    loggedIn = isConnected ,
-                    onPhone = isConnected ?  _statusService.GetStatus().OnPhone : false,
-                    headsetConnected = _deviceManager.IsHeadsetConnected,
-                    device = _deviceManager.IsDeviceConnected ? _deviceManager.ProductName : String.Empty,
-                    serial = _deviceManager.IsDeviceConnected ? _deviceManager.SerialNumber : String.Empty,
-                    isMuted = _deviceManager.IsDeviceConnected ? _deviceManager.IsHeadsetMuted : false,
-                });
 
-                streamWriter.Write(json);
-                streamWriter.Flush();
-                streamWriter.Close();
+                    var url = GetServerParameter(WebServerUrlParam);
+                    if (String.IsNullOrEmpty(url))
+                    {
+                        return;
+                    }
 
-                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
+                    var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "/statuschange");
+                    httpWebRequest.ContentType = "application/json";
+                    httpWebRequest.Method = "POST";
+
+                    using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                    {
+                        bool isConnected = _session.ConnectionState == ConnectionState.Up;
+
+                        string json = new JavaScriptSerializer().Serialize(new
+                        {
+                            userId = _session.UserId,
+                            station = isConnected ? _session.GetStationInfo().Id : String.Empty,
+                            status = isConnected ? _statusService.GetStatus().StatusMessageDetails.MessageText : String.Empty,
+                            loggedIn = isConnected,
+                            onPhone = isConnected ? _statusService.GetStatus().OnPhone : false,
+                            headsetConnected = _deviceManager.IsHeadsetConnected,
+                            device = _deviceManager.IsDeviceConnected ? _deviceManager.ProductName : String.Empty,
+                            serial = _deviceManager.IsDeviceConnected ? _deviceManager.SerialNumber : String.Empty,
+                            isMuted = _deviceManager.IsDeviceConnected ? _deviceManager.IsHeadsetMuted : false,
+                        });
+
+                        streamWriter.Write(json);
+                        streamWriter.Flush();
+                        streamWriter.Close();
+
+                        var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                        using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                        {
+                            var result = streamReader.ReadToEnd();
+                        }
+                    }
                 }
-            }
+                catch (Exception ex)
+                {
+                    _traceContext.Exception(ex, "exception posting status change to web service. ");
+                }
+            }));
         }
     }
 }

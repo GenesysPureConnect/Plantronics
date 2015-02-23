@@ -38,6 +38,9 @@
     <Reference Include="ININ.IceLib">
       <HintPath>..\External\ININ.IceLib.dll</HintPath>
     </Reference>
+    <Reference Include="ININ.IceLib.People">
+      <HintPath>..\External\ININ.IceLib.People.dll</HintPath>
+    </Reference>
     <Reference Include="ININ.InteractionClient.Addin">
       <HintPath>C:\Program Files (x86)\Interactive Intelligence\ICUserApps\ININ.InteractionClient.Addin.dll</HintPath>
     </Reference>

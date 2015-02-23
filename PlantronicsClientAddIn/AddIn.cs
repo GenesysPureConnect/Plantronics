@@ -78,7 +78,7 @@ namespace PlantronicsClientAddIn
             s_muteManager = new MuteSyncManager((IInteractionSelector)serviceProvider.GetService(typeof(IInteractionSelector)), s_deviceManager);
             s_hookSwitchManager = new HookSwitchSyncManager(s_interactionManager, s_deviceManager);
 
-            s_outboundEventNotificationService = new OutboundEventNotificationService(s_session, s_statusManager, s_deviceManager);
+            s_outboundEventNotificationService = new OutboundEventNotificationService(s_session, s_statusManager, s_deviceManager, s_traceContext);
 
             s_traceContext.Always("Plantronics AddIn Loaded");
 		}

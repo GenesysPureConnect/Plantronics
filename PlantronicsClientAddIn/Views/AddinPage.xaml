@@ -101,7 +101,7 @@
                                           
                                           ></ComboBox>
                             </StackPanel>
-                            <CheckBox  IsChecked="{Binding DisconnectNotification}">Show Notification</CheckBox>
+                            <CheckBox  IsChecked="{Binding DeviceDisconnectNotification}">Show Notification</CheckBox>
                             <CheckBox  IsChecked="{Binding ShouldLogOutOnDeviceDisconnect}">Log Out</CheckBox>
                         </StackPanel>
                 </GroupBox>
