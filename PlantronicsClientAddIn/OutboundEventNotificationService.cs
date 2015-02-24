@@ -85,7 +85,12 @@ namespace PlantronicsClientAddIn
                         return;
                     }
 
-                    var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "/statuschange");
+                    if (!url.EndsWith("/"))
+                    {
+                        url += "/";
+                    }
+
+                    var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "statuschange");
                     httpWebRequest.ContentType = "application/json";
                     httpWebRequest.Method = "POST";
 
