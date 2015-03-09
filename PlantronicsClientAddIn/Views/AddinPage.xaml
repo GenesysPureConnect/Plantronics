@@ -15,7 +15,7 @@
         <DataTemplate x:Key="StatusTemplate">
             <StackPanel Orientation="Horizontal">
                 <Image Source="{Binding Image}" Height="16" Width="16"></Image>
-                <TextBlock Text="{Binding Text}"></TextBlock>
+                <TextBlock Text="{Binding Text}" Margin="7,0,0,0"></TextBlock>
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
@@ -89,6 +89,24 @@
             <GroupBox.Header>Settings</GroupBox.Header>
             <ScrollViewer>
             <StackPanel>
+
+                    <GroupBox Grid.Column="1" Margin="5">
+                        <GroupBox.Header>When plantronics device is connected</GroupBox.Header>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding DeviceConnectChangeStatus}">Change Status</CheckBox>
+                                <ComboBox ItemTemplate="{StaticResource StatusTemplate}" 
+                                          IsEnabled="{Binding DeviceConnectChangeStatus}" 
+                                          ItemsSource="{Binding StatusList}"
+                                          SelectedValue="{Binding DeviceConnectStatus, Mode=TwoWay}" 
+                                          
+                                          ></ComboBox>
+                            </StackPanel>
+                            <CheckBox  IsChecked="{Binding DeviceConnectNotification}">Show Notification</CheckBox>
+                        </StackPanel>
+                    </GroupBox>
+
+                    
                 <GroupBox Grid.Column="1" Margin="5">
                     <GroupBox.Header>When plantronics device is disconnected</GroupBox.Header>
                     <StackPanel>
@@ -105,22 +123,7 @@
                             <CheckBox  IsChecked="{Binding ShouldLogOutOnDeviceDisconnect}">Log Out</CheckBox>
                         </StackPanel>
                 </GroupBox>
-                <GroupBox Grid.Column="1" Margin="5">
-                    <GroupBox.Header>When plantronics device is connected</GroupBox.Header>
-                    <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox IsChecked="{Binding DeviceConnectChangeStatus}">Change Status</CheckBox>
-                                <ComboBox ItemTemplate="{StaticResource StatusTemplate}" 
-                                          IsEnabled="{Binding DeviceConnectChangeStatus}" 
-                                          ItemsSource="{Binding StatusList}"
-                                          SelectedValue="{Binding DeviceConnectStatus, Mode=TwoWay}" 
-                                          
-                                          ></ComboBox>
-                            </StackPanel>
-                            <CheckBox  IsChecked="{Binding DeviceConnectNotification}">Show Notification</CheckBox>
-                        </StackPanel>
-                </GroupBox>
-                
+             
                 <GroupBox Grid.Column="1" Margin="5">
                     <GroupBox.Header>When headset is connected</GroupBox.Header>
                     <StackPanel>
