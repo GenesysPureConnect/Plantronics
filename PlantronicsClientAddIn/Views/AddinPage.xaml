@@ -34,10 +34,10 @@
                 <vm:StatusViewModel/>
             </GroupBox.DataContext>
 
-            <GroupBox.Header>Headset Status</GroupBox.Header>
+            <GroupBox.Header>Device Status</GroupBox.Header>
                 
             <StackPanel>
-                <Label Foreground="Red" Visibility="{Binding ErrorVisibility}" >No Headset Detected</Label>
+                <Label Foreground="Red" Visibility="{Binding ErrorVisibility}" >No Plantronics Device Detected</Label>
                 <Grid Visibility="{Binding ConnectionVisibility}">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -91,7 +91,7 @@
             <StackPanel>
 
                     <GroupBox Grid.Column="1" Margin="5">
-                        <GroupBox.Header>When plantronics device is connected</GroupBox.Header>
+                        <GroupBox.Header>When Plantronics device is connected</GroupBox.Header>
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <CheckBox IsChecked="{Binding DeviceConnectChangeStatus}">Change Status</CheckBox>
@@ -108,7 +108,7 @@
 
                     
                 <GroupBox Grid.Column="1" Margin="5">
-                    <GroupBox.Header>When plantronics device is disconnected</GroupBox.Header>
+                    <GroupBox.Header>When Plantronics device is disconnected</GroupBox.Header>
                     <StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <CheckBox IsChecked="{Binding DeviceDisconnectChangeStatus}">Change Status</CheckBox>

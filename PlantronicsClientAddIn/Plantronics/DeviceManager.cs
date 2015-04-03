@@ -20,6 +20,7 @@ namespace PlantronicsClientAddIn.Plantronics
         public event Spokes.DisconnectedEventHandler HeadsetDisconnected;
         public event Spokes.MuteChangedEventHandler MuteChanged;
         public event EventHandler TalkButtonPressed;
+        public event EventHandler TalkButtonHeld;
 
         public bool IsHeadsetConnected
         {
@@ -74,7 +75,13 @@ namespace PlantronicsClientAddIn.Plantronics
                         TalkButtonPressed(this, EventArgs.Empty);
                     }
                     break;
-                
+                case Interop.Plantronics.DeviceHeadsetButton.HeadsetButton_VolumeUpHeld:
+                    //When the DA80 talk button is held down, the event that is raised is actually a VolumeUpHeld
+                    if (TalkButtonHeld != null)
+                    {
+                        TalkButtonHeld(this, EventArgs.Empty);
+                    }
+                    break;
                 default:
                     break;
             }
