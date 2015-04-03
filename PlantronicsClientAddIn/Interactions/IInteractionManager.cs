@@ -1,3 +1,4 @@
+using ININ.InteractionClient.AddIn;
 using System;
 
 namespace PlantronicsClientAddIn.Interactions
@@ -9,6 +10,7 @@ namespace PlantronicsClientAddIn.Interactions
         void HoldCall();
         void DisconnectCall();
         bool PickupHeldCall();
+        void ToggleMute(IInteraction interaction);
 	}
 }
 

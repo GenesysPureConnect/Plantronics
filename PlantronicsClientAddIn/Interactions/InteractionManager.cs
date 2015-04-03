@@ -65,6 +65,21 @@ namespace PlantronicsClientAddIn.Interactions
 
         }
 
+        public void ToggleMute(IInteraction interaction)
+        {
+            try
+            {
+                var icelibInteraction = _interactionManager.CreateInteraction(new InteractionId(interaction.InteractionId));
+
+                if (icelibInteraction != null)
+                {
+                    icelibInteraction.Mute(!icelibInteraction.IsMuted);
+                }
+            }
+            catch { }
+        }
+
+
         public void DisconnectCall()
         {
             //if there is not an alerting call, Disconnect a connected Call;

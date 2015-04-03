@@ -75,7 +75,7 @@ namespace PlantronicsClientAddIn
 
             s_statusChanger = new StatusChanger(s_session, s_statusManager, s_deviceManager, s_settingsManager);
             s_notificationServer = new NotificationServer(s_deviceManager, s_settingsManager, s_notificationService);
-            s_muteManager = new MuteSyncManager((IInteractionSelector)serviceProvider.GetService(typeof(IInteractionSelector)), s_deviceManager);
+            s_muteManager = new MuteSyncManager((IInteractionSelector)serviceProvider.GetService(typeof(IInteractionSelector)), s_deviceManager, s_interactionManager, s_traceContext);
             s_hookSwitchManager = new HookSwitchSyncManager(s_interactionManager, s_deviceManager);
 
             s_outboundEventNotificationService = new OutboundEventNotificationService(s_session, s_statusManager, s_deviceManager, s_traceContext);
