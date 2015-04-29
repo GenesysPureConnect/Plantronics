@@ -5,12 +5,11 @@ namespace PlantronicsClientAddIn.Interactions
 {
 	public interface IInteractionManager
 	{
-		void PickupOrDisconnectCall();
-        void PickupAlertingCall();
-        void HoldCall();
-        void DisconnectCall();
-        bool PickupHeldCall();
-        void ToggleMute(IInteraction interaction);
+		void PickupOrHoldCall(string callId);
+        void HoldCall(string callId);
+        void PickupCall(string callId);
+        void DisconnectCall(string callid);
+        void MuteInteraction(string callId, bool muteOn);
 	}
 }
 

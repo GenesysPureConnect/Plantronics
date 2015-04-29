@@ -21,6 +21,12 @@ namespace PlantronicsClientAddIn.Plantronics
         public event Spokes.MuteChangedEventHandler MuteChanged;
         public event EventHandler TalkButtonPressed;
         public event EventHandler TalkButtonHeld;
+        public event Spokes.CallEndedEventHandler CallEndedByDevice;
+        public event Spokes.CallAnsweredEventHandler CallAnsweredByDevice;
+        public event Spokes.OnCallEventHandler OnCall;
+
+
+        public string CurrentCallId { get; set; }
 
         public bool IsHeadsetConnected
         {
@@ -58,23 +64,58 @@ namespace PlantronicsClientAddIn.Plantronics
             _spokes.MuteChanged += OnMuteChanged;
             _spokes.ButtonPress += OnButtonPress;
 
+            _spokes.CallAnswered += OnCallAnswered;
+            _spokes.CallEnded += OnCallEnded;
+
+            _spokes.OnCall += OnDeviceCall;
+            
             _spokes.Connect("Interaction Client AddIn");
-           
+           // _spokes.
+
+        }
+
+        private void OnDeviceCall(object sender, OnCallArgs e)
+        {
+            _traceContext.Status(String.Format("DeviceManager.OnDeviceCall {0}", e.CallId));
+            if (OnCall != null)
+            {
+                OnCall(this,e);
+            }
+        }
+
+        private void OnCallEnded(object sender, CallEndedArgs e)
+        {
+            _traceContext.Status(String.Format("DeviceManager.OnCallEnded {0}", e.CallId));
+            if (CallEndedByDevice != null)
+            {
+                CallEndedByDevice(this, e);
+            }
+        }
+
+        private void OnCallAnswered(object sender, CallAnsweredArgs e)
+        {
+            _traceContext.Status(String.Format("DeviceManager.OnCallAnswered {0}", e.CallId));
+            
+            if (CallAnsweredByDevice != null)
+            {
+                CallAnsweredByDevice(this, e);
+            }
         }
 
         private void OnButtonPress(object sender, ButtonPressArgs e)
         {
-
-            _traceContext.Status(String.Format("{0} pressed", e.headsetButton));
+            _traceContext.Status(String.Format("DeviceManager.OnButtonPress {0} pressed", e.headsetButton));
 
             switch (e.headsetButton)
             {
+                    /*
                 case Interop.Plantronics.DeviceHeadsetButton.HeadsetButton_Talk:
                     if (TalkButtonPressed != null)
                     {
                         TalkButtonPressed(this, EventArgs.Empty);
                     }
-                    break;
+
+                    break;*/
                 case Interop.Plantronics.DeviceHeadsetButton.HeadsetButton_VolumeUpHeld:
                     //When the DA80 talk button is held down, the event that is raised is actually a VolumeUpHeld
                     if (TalkButtonHeld != null)
@@ -89,6 +130,7 @@ namespace PlantronicsClientAddIn.Plantronics
 
         private void OnMuteChanged(object sender, MuteChangedArgs e)
         {
+            _traceContext.Status(String.Format("DeviceManager.OnMuteChanged {0}", e.m_muteon));
             if (MuteChanged != null)
             {
                 MuteChanged(this, e);
@@ -199,6 +241,51 @@ namespace PlantronicsClientAddIn.Plantronics
         {
             _spokes.Disconnect();
             _spokes = null;
+        }
+
+
+        public void IncomingCall(string callId)
+        {
+            _spokes.IncomingCall(GetIntValueOfCallId(callId));
+        }
+
+        public void OutgoingCall(string callId)
+        {
+            _spokes.OutgoingCall(GetIntValueOfCallId(callId));
+        }
+
+        public void CallAnswered(string callId)
+        {
+            CurrentCallId = callId;
+            _spokes.AnswerCall(GetIntValueOfCallId(callId));
+        }
+
+        public void CallEnded(string callId)
+        {
+            CurrentCallId = String.Empty;
+            _spokes.EndCall(GetIntValueOfCallId(callId));
+        }
+
+        public void CallResumed(string callId)
+        {
+            CurrentCallId = callId;
+            _spokes.ResumeCall(GetIntValueOfCallId(callId));
+        }
+
+        public void CallHeld(string callId)
+        {
+            _spokes.HoldCall(GetIntValueOfCallId(callId));
+        }
+
+        private int GetIntValueOfCallId(string callId)
+        {
+            if (callId.Length < 10)
+            {
+                return Int32.Parse(callId);
+            }
+
+            var trimmed = callId.Substring(2);
+            return Int32.Parse(trimmed);
         }
     }
 }

@@ -31,6 +31,12 @@ namespace PlantronicsClientAddIn.Plantronics
 
         event Spokes.MuteChangedEventHandler MuteChanged;
 
+        event Spokes.CallEndedEventHandler CallEndedByDevice;
+        
+        event Spokes.CallAnsweredEventHandler CallAnsweredByDevice;
+
+        event Spokes.OnCallEventHandler OnCall;
+
         /// <summary>
         /// Event is raised when the talk button is momentarily pressed.
         /// </summary>
@@ -51,6 +57,16 @@ namespace PlantronicsClientAddIn.Plantronics
         string SerialNumber { get; }
         ushort VersionNumber { get; }
 
+        string CurrentCallId { get; set; }
+
         void ToggleMute();
+
+        void IncomingCall(string callId);
+        void OutgoingCall(string callId);
+        void CallAnswered(string callId);
+        void CallEnded(string callId);
+        void CallResumed(string callId);
+        void CallHeld(string callId);
+
     }
 }

@@ -26,93 +26,90 @@ namespace PlantronicsClientAddIn.Interactions
             _myInteractionsQueue = _queueService.GetMyInteractions(new[] { InteractionAttributes.State });
         }
 
-        public void PickupOrDisconnectCall()
+        public void PickupOrHoldCall(string callId)
         {
-            _traceContext.Status("looking for a call that is alerting or connected");
-            Interaction call = null;
-
-            //first try to find an alerting CALL, and pick that up
-            call = FindCall(InteractionAttributeValues.State.Alerting);
-            if (call != null)
-            {
-                call.Pickup();
-                return; //don't do anything else here
-            }
-
-            if (PickupHeldCall())
-            {
-                return;
-            }
-            
-            //if there is not an alerting call, Disconnect a connected Call;
-            call = FindCall(InteractionAttributeValues.State.Connected);
-            if (call != null)
-            {
-                call.Disconnect();
-            }
-        }
-
-        public void PickupAlertingCall()
-        {
-            Interaction call = null;
-
-            //first try to find an alerting CALL, and pick that up
-            call = FindCall(InteractionAttributeValues.State.Alerting);
-            if (call != null)
-            {
-                call.Pickup();
-            }
-
-        }
-
-        public void ToggleMute(IInteraction interaction)
-        {
+            _traceContext.Status(String.Format("InteractionManager.PickupOrHoldCall {0}", callId));
             try
             {
-                var icelibInteraction = _interactionManager.CreateInteraction(new InteractionId(interaction.InteractionId));
+                var interaction = GetInteraction(callId);
 
-                if (icelibInteraction != null)
+                if (interaction != null)
                 {
-                    icelibInteraction.Mute(!icelibInteraction.IsMuted);
+                    if (interaction.IsConnected)
+                    {
+                        interaction.Hold(true);
+                    }
+                    else
+                    {
+                        interaction.Pickup();
+                    }
                 }
             }
             catch { }
         }
 
-
-        public void DisconnectCall()
+        public void MuteInteraction(string callId, bool muteOn)
         {
-            //if there is not an alerting call, Disconnect a connected Call;
-            var call = FindCall(InteractionAttributeValues.State.Connected);
-            if (call != null)
+            _traceContext.Status(String.Format("InteractionManager.MuteInteraction {0}", callId));
+            try
             {
-                call.Disconnect();
+                var interaction = GetInteraction(callId);
+
+                if (interaction != null)
+                {
+                    interaction.Mute(muteOn);
+                }
             }
+            catch { }
+            
         }
 
-        public void HoldCall()
+        public void PickupCall(string callId)
         {
-            var calls = FindAllCalls(InteractionAttributeValues.State.Connected);
-
-            if (calls.Count > 0)
+            _traceContext.Status(String.Format("InteractionManager.PickupCall {0}", callId));
+            try
             {
-                calls[0].Hold(true);
+                var interaction = GetInteraction(callId);
+
+                if (interaction != null)
+                {
+                    interaction.Pickup();
+                }
             }
+            catch { }
         }
 
-        public bool PickupHeldCall()
+        public void DisconnectCall(string callId)
         {
-            var calls = FindAllCalls(InteractionAttributeValues.State.Held);
-
-            if (calls.Count == 1)
+            _traceContext.Status(String.Format("InteractionManager.Disconnect {0}", callId));
+            try
             {
-                calls[0].Pickup();
-                return true;
-            }
+                var interaction = GetInteraction(callId);
 
-            return false;
+                if (interaction != null)
+                {
+                    interaction.Disconnect();
+                }
+            }
+            catch { }
         }
 
+        public void HoldCall(string callId)
+        {
+            _traceContext.Status(String.Format("InteractionManager.HoldCall {0}", callId));
+           
+            try
+            {
+                var interaction = GetInteraction(callId);
+
+                if (interaction != null)
+                {
+                    interaction.Hold(true);
+                }
+            }
+            catch { }
+        }
+        /*
         private Interaction FindCall(string state)
         {
             foreach (var interaction in _myInteractionsQueue.Interactions)
@@ -143,6 +140,11 @@ namespace PlantronicsClientAddIn.Interactions
             }
 
             return calls;
+        }
+        */
+        private Interaction GetInteraction(string callId)
+        {
+            return _interactionManager.CreateInteraction(new InteractionId(callId));
         }
     }
 }

@@ -6,6 +6,7 @@ using PlantronicsClientAddIn.Interactions;
 using ININ.IceLib.Connection;
 using System.Diagnostics;
 using PlantronicsClientAddIn.Settings;
+using PlantronicsClientAddIn.Connection;
 
 namespace PlantronicsClientAddIn
 {
@@ -20,8 +21,9 @@ namespace PlantronicsClientAddIn
         private static IDeviceManager s_deviceManager = null;
         private static StatusChanger s_statusChanger = null;
         private static NotificationServer s_notificationServer = null;
-        private static MuteSyncManager s_muteManager = null;
-        private static HookSwitchSyncManager s_hookSwitchManager = null;
+        private static InteractionSyncManager s_hookSwitchManager = null;
+        private static IConnection s_connection;
+
         private static OutboundEventNotificationService s_outboundEventNotificationService = null;
 
         public static ISettingsManager SettingsManager
@@ -48,8 +50,6 @@ namespace PlantronicsClientAddIn
             }
         }
 
-
-
 		public void Load (IServiceProvider serviceProvider)
 		{
             try
@@ -58,10 +58,11 @@ namespace PlantronicsClientAddIn
 
                 //must have the icelib sdk license to get the session as a service
                 s_session = (Session)serviceProvider.GetService(typeof(Session));
-              
+                s_connection = new Connection.Connection(s_session);
             }
             catch (ArgumentNullException)
             {
+                s_traceContext.Error("unable to get Icelib Session, is the ICELIB SDK License available?");
                 Debug.Fail("unable to get service.  Is the ICELIB SDK licence available?");
                 throw;
             }
@@ -75,8 +76,8 @@ namespace PlantronicsClientAddIn
 
             s_statusChanger = new StatusChanger(s_session, s_statusManager, s_deviceManager, s_settingsManager);
             s_notificationServer = new NotificationServer(s_deviceManager, s_settingsManager, s_notificationService);
-            s_muteManager = new MuteSyncManager((IInteractionSelector)serviceProvider.GetService(typeof(IInteractionSelector)), s_deviceManager, s_interactionManager, s_traceContext);
-            s_hookSwitchManager = new HookSwitchSyncManager(s_interactionManager, s_deviceManager);
+       
+            s_hookSwitchManager = new InteractionSyncManager(s_interactionManager, s_deviceManager, (IQueueService)serviceProvider.GetService(typeof(IQueueService)), s_traceContext, s_connection);
 
             s_outboundEventNotificationService = new OutboundEventNotificationService(s_session, s_statusManager, s_deviceManager, s_traceContext);
 
@@ -85,6 +86,11 @@ namespace PlantronicsClientAddIn
 
 		public void Unload ()
 		{
+            if (s_hookSwitchManager != null)
+            {
+                s_hookSwitchManager.Teardown();
+            }
+
             s_deviceManager.Dispose();
             s_deviceManager = null;
 		}

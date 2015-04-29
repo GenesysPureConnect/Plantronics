@@ -39,6 +39,32 @@ using Interop.Plantronics;
  * 
  * VERSION HISTORY:
  * ********************************************************************************
+ * Version 1.5.33:
+ * Date: 25th Feb 2015
+ * Tested with Plantronics Hub / SDK version(s): 3.4 nightly
+ * Changed by: Lewis Collins
+ *   Changes:
+ *     - Fixing HeadsetConnectedState typo in SDK call
+ *       (had an extra n)
+ *
+ * Version 1.5.32:
+ * Date: 24th Feb 2015
+ * Tested with Plantronics Hub / SDK version(s): 3.2 release SDK version
+ * Changed by: Lewis Collins
+ *   Changes:
+ *     - Hiding with conditional newDASeries the ICOMDeviceSettingsExt member, which is
+ *       only usable on 3.4+ SDKs and is used to get the initial connected state of new
+ *       DA Series.
+ *
+ * Version 1.5.31:
+ * Date: 9th Feb 2015
+ * Tested with Plantronics Hub / SDK version(s): 3.4.50921.12982 (22/01/2015 pre-release for DA Series)
+ * Changed by: Lewis Collins
+ *   Changes:
+ *     - Adding Calisto P240 dial handling, via IDeviceListener.BaseButtonPressed DialedKey, etc.
+ *     - Removed some un-needed IDeviceEvents events, relying instead on IDeviceListener versions
+ *       (Talk button, mute, etc)
+ *
  * Version 1.5.30:
  * Date: 23rd Jan 2015
  * Tested with Plantronics Hub / SDK version(s): 3.4.50921.12982 (22/01/2015 pre-release for DA Series)
@@ -562,10 +588,12 @@ namespace Plantronics.UC.SpokesWrapper
     public class BaseButtonPressArgs : EventArgs
     {
         public DeviceBaseButton baseButton;
+        public short dialedKey;
 
-        public BaseButtonPressArgs(DeviceBaseButton baseButton)
+        public BaseButtonPressArgs(DeviceBaseButton baseButton, short dialedKey)
         {
             this.baseButton = baseButton;
+            this.dialedKey = dialedKey;
         }
     }
 
@@ -790,7 +818,9 @@ namespace Plantronics.UC.SpokesWrapper
         static ICOMATDCommand m_atdCommand;
         static ICOMHostCommand m_hostCommand;
         static ICOMHostCommandExt m_hostCommandExt;
+#if doubloon || newDASeries
         static ICOMDeviceSettingsExt m_deviceSettingsExt;
+#endif
         public static string m_devicename = "";
         #endregion
 
@@ -1428,6 +1458,7 @@ namespace Plantronics.UC.SpokesWrapper
                 {
                     m_sessionManagerEvents.onCallStateChanged += m_sessionComManager_CallStateChanged;
                     m_sessionManagerEvents.onDeviceStateChanged += m_sessionComManager_DeviceStateChanged;
+                    
                 }
                 else
                     success = false;
@@ -1645,6 +1676,8 @@ namespace Plantronics.UC.SpokesWrapper
                     break;
                 case COMDeviceEventType.DeviceEventType_HeadsetButtonPressed:
                     DebugPrint(MethodInfo.GetCurrentMethod().Name, "DeviceEventType_HeadsetButtonPressed " + e.HeadsetButton.ToString());
+                    OnButtonPress(new ButtonPressArgs(e.HeadsetButton, m_activeDevice.HostCommand.AudioState,
+                        m_activeDevice.HostCommand.mute));
                     break;
                 case COMDeviceEventType.DeviceEventType_HeadsetStateChanged:
                 default:
@@ -1656,7 +1689,7 @@ namespace Plantronics.UC.SpokesWrapper
         private void DeviceListener_BaseButtonPressed(COMDeviceListenerEventArgs e)
         {
             DebugPrint(MethodInfo.GetCurrentMethod().Name, String.Format("BaseButtonPressed: {0}", e.BaseButton.ToString()));
-            OnBaseButtonPress(new BaseButtonPressArgs(e.BaseButton));
+            OnBaseButtonPress(new BaseButtonPressArgs(e.BaseButton, e.DialedKey));
         }
 
         // Respond to various base state changes by updating our knowledge of multiline active/held states...
@@ -1832,7 +1865,7 @@ namespace Plantronics.UC.SpokesWrapper
                             OnLineActiveChanged(new LineActiveChangedArgs(false));
                             break;
 
-//#if doubloon
+#if doubloon || newDASeries
                         // NEW CC events
                         case DeviceHeadsetStateChange.HeadsetStateChange_Connected:
                             OnConnected(new ConnectedStateArgs(true, false));
@@ -1840,7 +1873,7 @@ namespace Plantronics.UC.SpokesWrapper
                         case DeviceHeadsetStateChange.HeadsetStateChange_Disconnected:
                             OnDisconnected(new ConnectedStateArgs(true, false));
                             break;
-//#endif
+#endif
                         default:
                             break;
                     }
@@ -1958,9 +1991,9 @@ namespace Plantronics.UC.SpokesWrapper
                 case DeviceHeadsetButton.HeadsetButton_Flash:
                     OnCallSwitched(EventArgs.Empty);
                     break;
-                case DeviceHeadsetButton.HeadsetButton_Mute:
-                    OnMuteChanged(new MuteChangedArgs(e.mute));
-                    break;
+                //case DeviceHeadsetButton.HeadsetButton_Mute:  // Not needed, now relying on IDeviceListener event for mute change
+                //    OnMuteChanged(new MuteChangedArgs(e.mute));
+                //    break;
             }
 
             OnButtonPress(new ButtonPressArgs(e.ButtonPressed, e.AudioState, e.mute));
@@ -2012,12 +2045,12 @@ namespace Plantronics.UC.SpokesWrapper
                 if (m_deviceComEvents != null)
                 {
                     // Attach to device events
-                    m_deviceComEvents.onButtonPressed += m_deviceComEvents_Handler;
+                    //m_deviceComEvents.onButtonPressed += m_deviceComEvents_Handler;  // not needed, instead rely on IDeviceListenerEvents.onHeadsetButtonPressed
                     m_deviceComEvents.onAudioStateChanged += m_deviceComEvents_Handler;
                     m_deviceComEvents.onFlashButtonPressed += m_deviceComEvents_Handler;
                     m_deviceComEvents.onMuteStateChanged += m_deviceComEvents_Handler;
                     m_deviceComEvents.onSmartButtonPressed += m_deviceComEvents_Handler;
-                    m_deviceComEvents.onTalkButtonPressed += m_deviceComEvents_Handler;
+                    //m_deviceComEvents.onTalkButtonPressed += m_deviceComEvents_Handler; // not needed, instead rely on IDeviceListenerEvents.onHeadsetButtonPressed
 
                     // LC 11-7-2013 TT: 23171   Cannot receive OLMP/Bladerunner responses from headset - need to expose Device.DataReceived event to COM
                     // Try adding onDataReceived event handler
@@ -2072,8 +2105,10 @@ namespace Plantronics.UC.SpokesWrapper
                 m_hostCommandExt = m_activeDevice.HostCommand as ICOMHostCommandExt;
                 if (m_hostCommandExt == null) DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: Error: unable to obtain host command ext interface");
 
+#if doubloon || newDASeries
                 m_deviceSettingsExt = m_activeDevice.HostCommand as ICOMDeviceSettingsExt;
                 if (m_deviceSettingsExt == null) DebugPrint(MethodInfo.GetCurrentMethod().Name, "Spokes: Error: unable to obtain device settings ext interface");
+#endif
 
                 UpdateOtherDeviceCapabilities();
 
@@ -2302,10 +2337,14 @@ namespace Plantronics.UC.SpokesWrapper
                 if (m_hostCommandExt != null)
                 {
                     m_lastconnected = true; // if settings interface is not available, assume connected
+                    /*
+#if doubloon || newDASeries
                     if (m_deviceSettingsExt != null)
                     {
-                        m_lastconnected = m_deviceSettingsExt.HeadsetConnnectedState;
+                        m_lastconnected = m_deviceSettingsExt.HeadsetConnectedState;
                     }
+#endif
+                     */
                     connected = m_lastconnected;
                     if (connected) OnConnected(new ConnectedStateArgs(true, true));
                     else OnDisconnected(new ConnectedStateArgs(false, true));
@@ -2466,12 +2505,12 @@ namespace Plantronics.UC.SpokesWrapper
                     //be.BaseEventReceived -= be_BaseEventReceived;
 
                     // unregister device event handlers
-                    m_deviceComEvents.onButtonPressed -= m_deviceComEvents_Handler;
+                    //m_deviceComEvents.onButtonPressed -= m_deviceComEvents_Handler; // not needed, instead rely on IDeviceListenerEvents.onHeadsetButtonPressed
                     m_deviceComEvents.onAudioStateChanged -= m_deviceComEvents_Handler;
                     m_deviceComEvents.onFlashButtonPressed -= m_deviceComEvents_Handler;
                     m_deviceComEvents.onMuteStateChanged -= m_deviceComEvents_Handler;
                     m_deviceComEvents.onSmartButtonPressed -= m_deviceComEvents_Handler;
-                    m_deviceComEvents.onTalkButtonPressed -= m_deviceComEvents_Handler;
+                    //m_deviceComEvents.onTalkButtonPressed -= m_deviceComEvents_Handler; // not needed, instead rely on IDeviceListenerEvents.onHeadsetButtonPressed
 
                     //m_deviceComEvents.onDataReceived -= m_deviceComEvents_onDataReceived;  // commenting out this as it locks up on exit
 

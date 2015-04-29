@@ -3,7 +3,7 @@ Plantronics Client Add-In
 
 Features
 --------
- - Client view with Plantronics Headset device information
+ - Client view with Plantronics device information
 	 - Product Name
 	 - Manufacturer Name
 	 - Serial Number
