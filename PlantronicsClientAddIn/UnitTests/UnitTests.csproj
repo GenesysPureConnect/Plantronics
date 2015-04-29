@@ -80,7 +80,6 @@
     <Compile Include="StatusChangerTests.cs" />
     <Compile Include="StatusViewModelTests.cs" />
     <Compile Include="MuteSyncManagerTests.cs" />
-    <Compile Include="HookSwitchSyncManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PlantronicsClientAddIn.csproj">
